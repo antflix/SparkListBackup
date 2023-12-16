@@ -2,8 +2,6 @@
 import SwiftUI
 import ContactsUI
 struct ContactPickerViewController: UIViewControllerRepresentable {
-    @EnvironmentObject var dataManager: DataManager
-
     @Binding var selectedContactName: String // Binding to update selected contact name
     @Binding var selectedContactPhoneNumber: String // Binding to update selected contact phone number
 
