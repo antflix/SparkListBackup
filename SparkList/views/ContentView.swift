@@ -46,7 +46,7 @@ struct ContentView: View {
                                     Image(systemName: "person")
                                 }
                                 .popover(isPresented: $isContactsPresented, arrowEdge: .top) {
-//                                    ContactsView()
+                                    ContactsView()
                                 }
                                 Divider()
                                 HStack {
