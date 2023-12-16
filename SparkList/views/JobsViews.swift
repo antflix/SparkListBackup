@@ -1,0 +1,205 @@
+import SwiftUI
+
+@available(iOS 17.0, *)
+struct JobsView: View {
+    
+    @State private var searchText = ""
+    @State private var jobs = [[String]]()
+    @EnvironmentObject var dataManager: DataManager
+    @State private var selectedRow: Int? = nil
+    @Environment(\.colorScheme) var colorScheme
+    private let apiURL = "https://app.antflix.net/api/joblist"
+    @State private var showingPopover: [Bool] = [] // Add state for showing popover
+    @State private var isEmployeeViewActive = false
+    @State private var animationsRunning = false
+
+    func resetEmployeeData() {
+            dataManager.employeeData = [:] // Resetting employeeData to an empty dictionary
+        }
+  var filteredJobs: [[String]] {
+    if searchText.isEmpty {
+      return jobs
+    } else {
+      return jobs.filter { job in
+        let jobName = job[1].lowercased()
+        return jobName.contains(searchText.lowercased())
+      }
+    }
+  }
+
+  var body: some View {
+    VStack {
+      // Header
+      HStack {
+          ZStack(alignment: .topTrailing) {
+              Text("Job Name").font(Font.custom("Quicksand", size: 25).bold())
+                  .frame(maxWidth: .infinity * 0.90, alignment: .leading)
+                  .padding()
+              Text("Job Date").font(Font.custom("Quicksand", size: 25).bold())
+                  .frame(maxWidth: .infinity * 0.15, alignment: .trailing)
+                  .padding()
+          }
+      }
+      .background(Color.blue)
+      .foregroundColor(.white)
+      .font(.headline)
+        ScrollView {
+            @State var showingPopover = [Bool](repeating: false, count: filteredJobs.count)
+            darkmode()
+            ForEach(0..<filteredJobs.count, id: \.self) { index in
+          let job = filteredJobs[index]
+          HStack {
+            Text(job[1])
+              .frame(maxWidth: .infinity * 0.90, alignment: .leading)
+              .lineLimit(1)
+            Text(job[2])
+            Spacer()
+            Button(action: {
+              showingPopover[index].toggle()
+            }) {
+              Image(systemName: "info.circle")
+                .foregroundColor(.blue)
+            }
+            .popover(isPresented: $showingPopover[index]) {
+              VStack {
+                // Define your popover content here
+                Spacer()
+                Text("Job Name-").font(.largeTitle).underline(Bool(true))
+                Text("\(job[1])").foregroundStyle(Color.blue).font(.title)
+
+                Spacer()
+
+                Text("Job #-").font(.largeTitle).underline(Bool(true))
+                Text("\(job[0])").foregroundStyle(Color.blue).font(.title)
+                Spacer()
+
+                Text("Date Created").font(.largeTitle).underline(Bool(true))
+                Text("\(job[2])").foregroundStyle(Color.blue).font(.title)
+                Spacer()
+
+              }
+            }
+          }
+          .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+          .font(colorScheme == .dark ? .headline : .headline)
+          .padding(5)
+          .frame(maxWidth: .infinity * 0.85, alignment: .leading)
+          .background(
+            selectedRow == jobs.firstIndex(of: job) ? Color.blue.opacity(0.3) : Color.clear
+          )
+          .onTapGesture {
+            selectedRow = jobs.firstIndex(of: job)
+            let selectedJobID = job[0]
+            dataManager.selectedJobID = selectedJobID
+            isEmployeeViewActive = true
+          }
+        }
+         
+          NavigationLink(destination: EmployeeView().environmentObject(dataManager), isActive: $isEmployeeViewActive) {
+          EmptyView()
+          // This NavigationLink activates when isEmployeeViewActive becomes true
+        }
+      }
+      .background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.5))
+        
+      
+      .foregroundColor(Color.black)
+      .onAppear {
+        // Initialize the showingPopover array based on the number of jobs
+        fetchData()
+        showingPopover = Array(repeating: false, count: jobs.count)
+          resetEmployeeData() // Call the function to reset employee data when the view appears
+          animationsRunning = true
+
+      }.background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.5))
+        
+      Spacer()
+      SearchBar(text: $searchText)
+            .background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.5))
+                    
+      //                NavigationLink(destination: EmployeeView()) {
+      //                    Text("Next")
+      //                }
+    }.background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.5))
+      
+  }
+
+  // Function to fetch data from API
+  // Function to fetch data from API
+    private func fetchData() {
+        if let cachedJobs = UserDefaults.standard.array(forKey: "CachedJobs") as? [[String]] {
+            if !isDataStale() {
+                self.jobs = cachedJobs
+                return
+            }
+        }
+        
+        guard let url = URL(string: apiURL) else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let data = data {
+                if let decodedData = try? JSONSerialization.jsonObject(with: data, options: [])
+                    as? [[String]]
+                {
+                    DispatchQueue.main.async {
+                        self.jobs = decodedData  // Update jobs array with fetched data
+                        UserDefaults.standard.set(decodedData, forKey: "CachedJobs")
+                        UserDefaults.standard.set(Date(), forKey: "LastRefreshDate")
+                    }
+                }
+            } else {
+                print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }.resume()
+    }
+    
+  // Function to determine background color based on color scheme
+  // Function to determine background color based on color scheme
+  private func backgroundBasedOnColorScheme() -> Color {
+    if colorScheme == .dark {
+      return (Color(white: 3.0, opacity: 0.1))
+    } else {
+      return Color.white  // Change this to your desired light mode color
+    }
+  }
+
+  private func isDataStale() -> Bool {
+    if let lastRefreshDate = UserDefaults.standard.object(forKey: "LastRefreshDate") as? Date {
+      let currentDate = Date()
+      let calendar = Calendar.current
+      if let difference = calendar.dateComponents([.hour], from: lastRefreshDate, to: currentDate)
+        .hour, difference >= 24
+      {
+        return true
+      }
+    }
+    return false
+  }
+
+  // Custom Search Bar
+  struct SearchBar: View {
+    @Binding var text: String
+
+    var body: some View {
+      VStack {
+        TextField("Search", text: $text).font(Font.custom("Quicksand", size: 25).bold())
+          .textFieldStyle(DefaultTextFieldStyle())
+
+        
+          
+
+      }          .background(Color("Color 7"))
+
+    }
+
+  }
+
+}
+
+@available(iOS 17.0, *)
+struct JobsView_Previews: PreviewProvider {
+  static var previews: some View {
+    JobsView()
+      .environmentObject(DataManager())
+  }
+}
