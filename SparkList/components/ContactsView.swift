@@ -1,6 +1,6 @@
 import SwiftUI
 import ContactsUI
-struct ContactPickerView: View {
+struct ContactView: View {
     @State private var isContactPickerPresented = false // State variable to present contact picker
     @State private var selectedContactName = "" // State variable to store selected contact name
     @State private var selectedContactPhoneNumber = "" // State variable to store selected contact phone number
