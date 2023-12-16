@@ -47,7 +47,7 @@ struct PreViews: View {
 
         
     
-        let smsURLString = "sms:/open?addresses=\(dataManager.selectedPhoneNumber)&body=\(dataManager.allSMSs)"
+        let smsURLString = "sms:/open?addresses=\(dataManager.selectedPhoneNumber)&body=\(dataManager.allSMSs)\n\(dataManager.selectedPhoneNumber)"
         //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
         return VStack {
             HStack {
