@@ -20,6 +20,9 @@ class DataManager: ObservableObject {
     @Published var selectedPhoneNumber2: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber2") ?? ""
     @Published var employeeData: [String: String] = [:]
     @Published var isDarkMode: Bool
+    static var selectedContactName: String = "" // Global variable to store selected contact name
+    static var selectedContactPhoneNumber: String = "" // Global variable to store selected contact phone number
+
     
     init() {
         self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
