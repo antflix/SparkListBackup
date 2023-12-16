@@ -21,9 +21,10 @@ class DataManager: ObservableObject {
     @Published var employeeData: [String: String] = [:]
     @Published var isDarkMode: Bool
     static var selectedContactName: String = "" // Global variable to store selected contact name
-    static var selectedContactPhoneNumber: String = "" // Global variable to store selected contact phone number
-    static var selectedContactPhoneNumber2: String = "" // Global variable to store selected contact phone number
-
+    @Published var selectedContactPhoneNumber = ""
+    @Published var selectedContactPhoneNumber2 = ""
+    @Published var selectedContactName = ""
+    @Published var selectedContactName2 = ""
 
     
     init() {

@@ -1,12 +1,15 @@
 import SwiftUI
 import ContactsUI
-// ContactPickerViewController.swift
+
 struct ContactPickerViewController: UIViewControllerRepresentable {
+    @EnvironmentObject var dataManager: DataManager // Access the DataManager
+
     @Binding var selectedContactName: String
     @Binding var selectedContactPhoneNumber: String
     @Binding var selectedContactName2: String // Additional binding for second contact name
     @Binding var selectedContactPhoneNumber2: String // Additional binding for second contact phone number
 
+ 
     func makeUIViewController(context: Context) -> CNContactPickerViewController {
         let picker = CNContactPickerViewController()
         picker.delegate = context.coordinator
@@ -16,28 +19,29 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: CNContactPickerViewController, context: Context) {}
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(parent: self)
-    }
+         Coordinator(parent: self, dataManager: dataManager)
+     }
 
-    class Coordinator: NSObject, CNContactPickerDelegate {
-        let parent: ContactPickerViewController
+     class Coordinator: NSObject, CNContactPickerDelegate {
+         let parent: ContactPickerViewController
+         var dataManager: DataManager
 
-        init(parent: ContactPickerViewController) {
-            self.parent = parent
-        }
+         init(parent: ContactPickerViewController, dataManager: DataManager) {
+             self.parent = parent
+             self.dataManager = dataManager
+         }
 
-        func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-            let fullName = CNContactFormatter.string(from: contact, style: .fullName) ?? ""
-            let phoneNumbers = contact.phoneNumbers.first?.value.stringValue ?? ""
-            
-            // Save the first selected contact's details
-            if self.parent.selectedContactName.isEmpty {
-                self.parent.selectedContactName = fullName
-                self.parent.selectedContactPhoneNumber = phoneNumbers
-            } else { // Save the second selected contact's details
-                self.parent.selectedContactName2 = fullName
-                self.parent.selectedContactPhoneNumber2 = phoneNumbers
-            }
-        }
-    }
-}
+           func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+               let fullName = CNContactFormatter.string(from: contact, style: .fullName) ?? ""
+               let phoneNumbers = contact.phoneNumbers.first?.value.stringValue ?? ""
+
+               if self.dataManager.selectedContactName.isEmpty {
+                   self.dataManager.selectedContactName = fullName
+                   self.dataManager.selectedContactPhoneNumber = phoneNumbers
+               } else {
+                   self.dataManager.selectedContactName2 = fullName
+                   self.dataManager.selectedContactPhoneNumber2 = phoneNumbers
+               }
+           }
+       }
+   }

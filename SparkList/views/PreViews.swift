@@ -32,12 +32,12 @@ struct PreViews: View {
         
         // Update savedData to show all stored SMS bodies
         dataManager.allSMSs = dataManager.allSMSBodies.joined(separator: "\n\n")
-        if !DataManager.selectedContactPhoneNumber2.isEmpty {
-            dataManager.selectedPhoneNumber = "\(DataManager.selectedContactPhoneNumber), \(DataManager.selectedContactPhoneNumber2)"}
-        else {
-            dataManager.selectedPhoneNumber = "\(DataManager.selectedContactPhoneNumber)"
-        }
-    }
+        if !dataManager.selectedContactPhoneNumber2.isEmpty {
+            dataManager.selectedPhoneNumber = "\(dataManager.selectedContactPhoneNumber), \(dataManager.selectedContactPhoneNumber2)"
+           } else {
+               dataManager.selectedPhoneNumber = "\(dataManager.selectedContactPhoneNumber)"
+           }
+       }
     
     var body: some View {
 //        let sortedOutput = SMSGenerator.sortedFormat(dataManager: dataManager)
@@ -47,7 +47,7 @@ struct PreViews: View {
 
         
     
-        let smsURLString = "sms:/open?addresses=\(dataManager.selectedPhoneNumber)&body=\(dataManager.allSMSs)\n\(dataManager.selectedPhoneNumber)\n\(DataManager.selectedContactPhoneNumber), \(DataManager.selectedContactPhoneNumber2)"
+        let smsURLString = "sms:/open?addresses=\(dataManager.selectedPhoneNumber)&body=\(dataManager.allSMSs)\n\(dataManager.selectedPhoneNumber)\n\(dataManager.selectedContactPhoneNumber), \(dataManager.selectedContactPhoneNumber2)"
         //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
         return VStack {
             HStack {
