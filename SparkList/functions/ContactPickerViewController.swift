@@ -1,13 +1,15 @@
-// ContactPickerViewController.swift
 import SwiftUI
 import ContactsUI
+// ContactPickerViewController.swift
 struct ContactPickerViewController: UIViewControllerRepresentable {
-    @Binding var selectedContactName: String // Binding to update selected contact name
-    @Binding var selectedContactPhoneNumber: String // Binding to update selected contact phone number
+    @Binding var selectedContactName: String
+    @Binding var selectedContactPhoneNumber: String
+    @Binding var selectedContactName2: String // Additional binding for second contact name
+    @Binding var selectedContactPhoneNumber2: String // Additional binding for second contact phone number
 
     func makeUIViewController(context: Context) -> CNContactPickerViewController {
         let picker = CNContactPickerViewController()
-        picker.delegate = context.coordinator // Set delegate to coordinator
+        picker.delegate = context.coordinator
         return picker
     }
 
@@ -25,17 +27,17 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
         }
 
         func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-            // Update selected contact name and phone number when a contact is selected
             let fullName = CNContactFormatter.string(from: contact, style: .fullName) ?? ""
             let phoneNumbers = contact.phoneNumbers.first?.value.stringValue ?? ""
             
-            // Save selected contact's name and phone number to DataManager
-            DataManager.selectedContactName = fullName
-            DataManager.selectedContactPhoneNumber = phoneNumbers
-
-            // Update the bindings to display the selected contact's details in the ContactPickerView
-            self.parent.selectedContactName = fullName
-            self.parent.selectedContactPhoneNumber = phoneNumbers
+            // Save the first selected contact's details
+            if self.parent.selectedContactName.isEmpty {
+                self.parent.selectedContactName = fullName
+                self.parent.selectedContactPhoneNumber = phoneNumbers
+            } else { // Save the second selected contact's details
+                self.parent.selectedContactName2 = fullName
+                self.parent.selectedContactPhoneNumber2 = phoneNumbers
+            }
         }
     }
 }

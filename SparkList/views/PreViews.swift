@@ -18,7 +18,7 @@ struct PreViews: View {
     @State private var customPhoneNumber2: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber2") ?? ""
     @State private var showAlert = false
     @State private var settingsPopover = false // Create a state variable to control popover visibility//    @Binding var isSettingsViewPresented: Bool
-    
+//    @State private var recipient: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
     // To save the formatted data for later use:
     @State private var savedData: String = "" // State variable to store the formatted data
     
@@ -32,17 +32,24 @@ struct PreViews: View {
         
         // Update savedData to show all stored SMS bodies
         dataManager.allSMSs = dataManager.allSMSBodies.joined(separator: "\n\n")
+        if !DataManager.selectedContactPhoneNumber2.isEmpty {
+            dataManager.selectedPhoneNumber = "\(DataManager.selectedContactPhoneNumber), \(DataManager.selectedContactPhoneNumber2)"}
+        else {
+            dataManager.selectedPhoneNumber = "\(DataManager.selectedContactPhoneNumber)"
+        }
     }
     
     var body: some View {
 //        let sortedOutput = SMSGenerator.sortedFormat(dataManager: dataManager)
 //        let smsBodyWithDate = SMSGenerator.generateSMSURL(
 //            sortedOutput: sortedOutput, dataManger: dataManager)
-        let recipients = "\(DataManager.selectedContactPhoneNumber), \(dataManager.selectedPhoneNumber2)"
+       
+
         
-        let smsURLString = "sms:\(recipients)&body=\(dataManager.allSMSs)"
+    
+        let smsURLString = "sms:/open?addresses=\(dataManager.selectedPhoneNumber)&body=\(dataManager.allSMSs)"
         //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
-        VStack {
+        return VStack {
             HStack {
                 Text("Text Preview").font(Font.custom("Quicksand", size: 30).bold())
                     .frame(maxWidth: .infinity * 0.90, alignment: .leading)
