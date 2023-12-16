@@ -22,6 +22,7 @@ struct PreViews: View {
     // To save the formatted data for later use:
     @State private var savedData: String = "" // State variable to store the formatted data
     
+    
     func generateSMSBody() {
         let sortedOutput = SMSGenerator.sortedFormat(dataManager: dataManager)
         let smsBodyWithDate = SMSGenerator.generateSMSURL(
@@ -37,7 +38,7 @@ struct PreViews: View {
 //        let sortedOutput = SMSGenerator.sortedFormat(dataManager: dataManager)
 //        let smsBodyWithDate = SMSGenerator.generateSMSURL(
 //            sortedOutput: sortedOutput, dataManger: dataManager)
-        let recipients = "\(dataManager.selectedPhoneNumber), \(dataManager.selectedPhoneNumber2)"
+        let recipients = "\(DataManager.selectedContactPhoneNumber), \(dataManager.selectedPhoneNumber2)"
         
         let smsURLString = "sms:\(recipients)&body=\(dataManager.allSMSs)"
         //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
