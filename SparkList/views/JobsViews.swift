@@ -2,20 +2,21 @@ import SwiftUI
 
 @available(iOS 17.0, *)
 struct JobsView: View {
-    
+    @EnvironmentObject var dataManager: DataManager
+
     @State private var searchText = ""
     @State private var jobs = [[String]]()
-    @EnvironmentObject var dataManager: DataManager
     @State private var selectedRow: Int? = nil
     @Environment(\.colorScheme) var colorScheme
     private let apiURL = "https://app.antflix.net/api/joblist"
     @State private var showingPopover: [Bool] = [] // Add state for showing popover
     @State private var isEmployeeViewActive = false
     @State private var animationsRunning = false
+    
+    
 
-    func resetEmployeeData() {
-            dataManager.employeeData = [:] // Resetting employeeData to an empty dictionary
-        }
+
+   
   var filteredJobs: [[String]] {
     if searchText.isEmpty {
       return jobs
@@ -27,6 +28,11 @@ struct JobsView: View {
     }
   }
 
+    init() {
+            // Initialize showingPopover in the init() method after filteredJobs is available
+            let initialShowPopover = [Bool](repeating: false, count: filteredJobs.count)
+            _showingPopover = State(initialValue: initialShowPopover)
+        }
   var body: some View {
     VStack {
       // Header
@@ -44,7 +50,6 @@ struct JobsView: View {
       .foregroundColor(.white)
       .font(.headline)
         ScrollView {
-            @State var showingPopover = [Bool](repeating: false, count: filteredJobs.count)
             darkmode()
             ForEach(0..<filteredJobs.count, id: \.self) { index in
           let job = filteredJobs[index]
@@ -152,7 +157,9 @@ struct JobsView: View {
             }
         }.resume()
     }
-    
+    func resetEmployeeData() {
+            dataManager.employeeData = [:] // Resetting employeeData to an empty dictionary
+        }
   // Function to determine background color based on color scheme
   // Function to determine background color based on color scheme
   private func backgroundBasedOnColorScheme() -> Color {
