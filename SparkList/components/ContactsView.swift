@@ -15,20 +15,22 @@ struct ContactsView: View {
                     Text("Time Contact?").font(Font.custom("Quicksand", size: 30).bold())
                         .frame( alignment: .center)
                     
-                    Text("Same crew, Same Hours").font(Font.custom("Quicksand", size: 12).bold())
+                    Text("Who do you need to turn time into?").font(Font.custom("Quicksand", size: 12).bold())
                         .frame(maxWidth: .infinity * 0.90, alignment: .center)
                         .foregroundStyle(Color.black)
-              
-                
-               
+
                 }
-                .buttonStyle(PlainButtonStyle())
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .font(.headline)
             }
             
             // 1 is empty
             // 2 is empty
             if dataManager.selectedContactName.isEmpty && dataManager.selectedContactName2.isEmpty {
-                Text("No Contacts Selected. Please choose 1 or 2 contacts to send your time to.")
+                Text("No Contacts Selected. ")
+                    .foregroundStyle(Color.red)
                     .font(Font.custom("Quicksand", size: 20).bold())
                     .frame(maxWidth: .infinity * 0.90, alignment: .center)
                     .padding()
@@ -44,6 +46,7 @@ struct ContactsView: View {
                 
                     .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
                                     symbolAnimation)
+                Text("Please choose 1 or 2 contacts to send your time to.")
                 Spacer()
                 
                 //add contact 1

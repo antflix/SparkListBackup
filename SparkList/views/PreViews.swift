@@ -44,7 +44,9 @@ struct PreViews: View {
 //        let smsBodyWithDate = SMSGenerator.generateSMSURL(
 //            sortedOutput: sortedOutput, dataManger: dataManager)
        
-
+        if let contact2 = dataManager.selectedContact2 {
+            
+        }
         
     
         let smsURLString = "sms:/open?addresses=\(dataManager.selectedPhoneNumber)&body=\(dataManager.allSMSs)\n\(dataManager.selectedPhoneNumber)\n\(dataManager.selectedContactPhoneNumber), \(dataManager.selectedContactPhoneNumber2)"
