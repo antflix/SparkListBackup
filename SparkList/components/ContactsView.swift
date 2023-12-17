@@ -135,8 +135,9 @@ struct ContactsView: View {
 
                 }
                 //   1 clear button
-                
+                Spacer()
                 Divider()
+                Spacer()
                     .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                     .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
                     .background(Color("Color 1"))
