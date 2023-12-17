@@ -99,11 +99,6 @@ struct ContactsView: View {
     }
 }
 #Preview{
-    if #available(iOS 17.0, *) {
-        ContactsView()
-           
-    } else {
-        // Fallback on earlier versions
-    }
+   Contacts
 
 }
