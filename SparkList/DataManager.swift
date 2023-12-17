@@ -81,7 +81,10 @@ class DataManager: ObservableObject {
         UserDefaults.standard.removeObject(forKey: "CustomPhoneNumber")
         UserDefaults.standard.removeObject(forKey: "CustomPhoneNumber2")
     }
-    
+    func ClearContact1() {
+            dataManager.selectedContactPhoneNumber = ""
+        dataManager.selectedContactName = ""
+        }
     //
     //
     //
