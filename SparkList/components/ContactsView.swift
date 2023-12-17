@@ -64,7 +64,9 @@ struct ContactsView: View {
                     
                 }
                 .padding()
-                
+                if let contact1 = dataManager.selectedContact1 {
+                    ContactCardView(contact: contact1)
+                }
                 //add contact2
                 Button(action: {
                     self.isContact2PickerPresented = true
@@ -86,6 +88,9 @@ struct ContactsView: View {
                            
                 }
                 .padding()
+                if let contact2 = dataManager.selectedContact2 {
+                    ContactCardView(contact: contact2)
+                }
             }
             //  1 is not empty
             // 2 is empty
@@ -128,6 +133,9 @@ struct ContactsView: View {
                             
                 }
                 .padding()
+                if let contact2 = dataManager.selectedContact2 {
+                    ContactCardView(contact: contact2)
+                }
             }
             
             // 1 is empty
@@ -154,6 +162,9 @@ struct ContactsView: View {
                             
                 }
                 .padding()
+                if let contact1 = dataManager.selectedContact1 {
+                    ContactCardView(contact: contact1)
+                }
 //                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
 //                      Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
                 //2 contact card
