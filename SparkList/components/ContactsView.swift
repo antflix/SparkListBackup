@@ -13,13 +13,13 @@ struct ContactsView: View {
             HStack {
                 Text("Time Contacts?").font(Font.custom("Quicksand", size: 26).bold())
                     .frame(maxWidth: .infinity * 0.90, alignment: .center)
-
+                
             }.padding()
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .font(.headline)
             Spacer()
-
+            
             
             // 1 is empty
             // 2 is empty
@@ -37,11 +37,11 @@ struct ContactsView: View {
                         symbolAnimation.toggle()
                     }
                     .foregroundStyle(Color.red, Color.yellow)
-
+                
                     .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
-                        symbolAnimation)
+                                    symbolAnimation)
                 Spacer()
-
+                
                 //add contact 1
                 Button(action: {
                     self.isContact1PickerPresented = true
@@ -49,18 +49,18 @@ struct ContactsView: View {
                     Image(systemName: "person.fill.questionmark")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(Color.red, Color.green)
-
+                    
                     Text("Select Contact 1")
-
+                    
                 }.padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
                 }
                 .sheet(isPresented: $isContact1PickerPresented) {
                     
-                        ContactPickerViewController()
-                        
+                    ContactPickerViewController()
+                    
                     
                 }
                 .padding()
@@ -74,44 +74,62 @@ struct ContactsView: View {
                     Image(systemName: "person.fill.questionmark")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(Color.red, Color.green)
-
+                    
                     Text("Select Contact 2")
-
+                    
                 }.padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
                 }
                 .sheet(isPresented: $isContact2PickerPresented) {
-                 
-                        ContactPickerViewController()
-                           
+                    
+                    ContactPickerViewController()
+                    
                 }
                 .padding()
-                if let contact2 = dataManager.selectedContact2 {
-                    ContactCardView(contact: contact2)
-                }
+          
             }
             //  1 is not empty
             // 2 is empty
-            if !dataManager.selectedContactName.isEmpty && dataManager.selectedContactName2.isEmpty {
-//                Text("Selected Contact 1: \(dataManager.selectedContactName)")
-//                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
-                
+            if !dataManager.selectedContactName.isEmpty || !dataManager.selectedContactName2.isEmpty {
+                //                Text("Selected Contact 1: \(dataManager.selectedContactName)")
+                //                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
+                Button(action: {
+                    self.isContact1PickerPresented = true
+                }) { HStack {
+                    Image(systemName: "person.fill.questionmark")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(Color.red, Color.green)
+                    
+                    Text("Select Contact 1")
+                    
+                }.padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                .sheet(isPresented: $isContact1PickerPresented) {
+                    
+                    ContactPickerViewController()
+                    
+                    
+                }
+                .padding()
                 //  1 contact card
                 if let contact1 = dataManager.selectedContact1 {
                     ContactCardView(contact: contact1)
+                    Button("Clear Contact 1") {
+                        dataManager.clearFirstContact()
+                    }.padding()
+                        .foregroundColor(.white)
+                        .background(Color.red)
+                        .cornerRadius(8)
+                        .padding()
                 }
                 //   1 clear button
-                Button("Clear Contact 1") {
-                    dataManager.clearFirstContact()
-                }
-                .padding()
-                .foregroundColor(.white)
-                .background(Color.red)
-                .cornerRadius(8)
-                .padding()
-
+                
+                
                 //2 add contact button
                 Button(action: {
                     self.isContact2PickerPresented = true
@@ -119,103 +137,33 @@ struct ContactsView: View {
                     Image(systemName: "person.fill.questionmark")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(Color.red, Color.green)
-
+                    
                     Text("Select Contact 2")
-
+                    
                 }.padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
                 }
                 .sheet(isPresented: $isContact2PickerPresented) {
                     
-                        ContactPickerViewController()
-                            
+                    ContactPickerViewController()
+                    
                 }
                 .padding()
                 if let contact2 = dataManager.selectedContact2 {
                     ContactCardView(contact: contact2)
+                    Button("Clear Contact 2") {
+                        dataManager.clearSecondContact()
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.red)
+                    .cornerRadius(8)
+                    .padding()
                 }
             }
             
-            // 1 is empty
-            // 2 is not empty
-            if dataManager.selectedContactName.isEmpty && !dataManager.selectedContactName2.isEmpty {
-                //1 add button
-                Button(action: {
-                    self.isContact1PickerPresented = true
-                }) { HStack {
-                    Image(systemName: "person.fill.questionmark")
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(Color.red, Color.green)
-
-                    Text("Select Contact 1")
-
-                }.padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(8)
-                }
-                .sheet(isPresented: $isContact1PickerPresented) {
-                    
-                        ContactPickerViewController()
-                            
-                }
-                .padding()
-                if let contact1 = dataManager.selectedContact1 {
-                    ContactCardView(contact: contact1)
-                }
-//                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
-//                      Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
-                //2 contact card
-                if let contact2 = dataManager.selectedContact2 {
-                    ContactCardView(contact: contact2)
-                }
-                //2 clear button
-                Button("Clear Contact 2") {
-                    dataManager.clearSecondContact()
-                }
-                .padding()
-                .foregroundColor(.white)
-                .background(Color.red)
-                .cornerRadius(8)
-                .padding()
-            }
-            //1 is not empty
-            //2 is not empty/
-            if !dataManager.selectedContactName.isEmpty && !dataManager.selectedContactName2.isEmpty {
-//                Text("Selected Contact 1: \(dataManager.selectedContactName)")
-//                Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
-                //1 contact card
-                if let contact1 = dataManager.selectedContact1 {
-                    ContactCardView(contact: contact1)
-                }
-                //1  clear
-                Button("Clear Contact 1") {
-                    dataManager.clearFirstContact()
-                }
-                .padding()
-                .foregroundColor(.white)
-                .background(Color.red)
-                .cornerRadius(8)
-                .padding()
-//                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
-//                Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
-                //2 contact card
-                if let contact2 = dataManager.selectedContact2 {
-                    ContactCardView(contact: contact2)
-                }
-                //2 clear
-                Button("Clear Contact 2") {
-                    dataManager.clearSecondContact()
-                }
-                .padding()
-                .foregroundColor(.white)
-                .background(Color.red)
-                .cornerRadius(8)
-                .padding()
-            }
-      
         }
         .background(EllipticalGradient(colors: [Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
     }
