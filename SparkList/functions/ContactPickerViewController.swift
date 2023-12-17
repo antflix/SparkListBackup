@@ -31,7 +31,7 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
             if dataManager.selectedContactName.isEmpty {
                 dataManager.selectedContactName = fullName
                 dataManager.selectedContactPhoneNumber = phoneNumbers
-                dataManager.selectedCo
+                dataManager.contact1 = contact.
             } else {
                 dataManager.selectedContactName2 = fullName
                 dataManager.selectedContactPhoneNumber2 = phoneNumbers
