@@ -119,18 +119,19 @@ struct ContactsView: View {
                     .padding()
                 }
                 //  1 contact card
-                if let contact1 = dataManager.selectedContact1 {
-                    ContactCardView(contact: contact1)
-                    Button("Clear Contact 1") {
-                        dataManager.clearFirstContact()
-                    }.padding()
-                        .foregroundColor(.white)
-                        .background(Color.red)
-                        .cornerRadius(8)
-                        .padding()
+                else {
+                    if let contact1 = dataManager.selectedContact1 {
+                        ContactCardView(contact: contact1)
+                        Button("Clear Contact 1") {
+                            dataManager.clearFirstContact()
+                        }.padding()
+                            .foregroundColor(.white)
+                            .background(Color.red)
+                            .cornerRadius(8)
+                            .padding()
+                    }
+                    //   1 clear button
                 }
-                //   1 clear button
-                
                 
                 //2 add contact button
                 if dataManager.selectedContactName2.isEmpty  {
@@ -155,16 +156,18 @@ struct ContactsView: View {
                     }
                     .padding()
                 }
-                if let contact2 = dataManager.selectedContact2 {
-                    ContactCardView(contact: contact2)
-                    Button("Clear Contact 2") {
-                        dataManager.clearSecondContact()
+                else {
+                    if let contact2 = dataManager.selectedContact2 {
+                        ContactCardView(contact: contact2)
+                        Button("Clear Contact 2") {
+                            dataManager.clearSecondContact()
+                        }
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.red)
+                        .cornerRadius(8)
+                        .padding()
                     }
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.red)
-                    .cornerRadius(8)
-                    .padding()
                 }
             }
             
