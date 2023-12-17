@@ -32,6 +32,17 @@ struct PreViews: View {
         
         // Update savedData to show all stored SMS bodies
         dataManager.allSMSs = dataManager.allSMSBodies.joined(separator: "\n\n")
+        
+        if let contact1 = dataManager.selectedContact1 {
+            if let phoneNumber = contact1.phoneNumbers.first?.value.stringValue {
+                dataManager.selectedContactPhoneNumber = phoneNumber
+            }
+        }
+        if let contact2 = dataManager.selectedContact2 {
+            if let phoneNumber2 = contact2.phoneNumbers.first?.value.stringValue {
+                dataManager.selectedContactPhoneNumber2 = phoneNumber2
+            }
+        }
         if !dataManager.selectedContactPhoneNumber2.isEmpty {
             dataManager.selectedPhoneNumber = "\(dataManager.selectedContactPhoneNumber), \(dataManager.selectedContactPhoneNumber2)"
            } else {
@@ -43,16 +54,7 @@ struct PreViews: View {
 //        let sortedOutput = SMSGenerator.sortedFormat(dataManager: dataManager)
 //        let smsBodyWithDate = SMSGenerator.generateSMSURL(
 //            sortedOutput: sortedOutput, dataManger: dataManager)
-        if let contact1 = dataManager.selectedContact1 {
-            if let phoneNumber = contact1.phoneNumbers.first?.value.stringValue {
-                dataManager.selectedContactPhoneNumber = phoneNumber
-            }
-        }
-        if let contact2 = dataManager.selectedContact2 {
-            if let phoneNumber2 = contact2.phoneNumbers.first?.value.stringValue {
-                dataManager.selectedContactPhoneNumber2 = phoneNumber2
-            }
-        }
+        
         
     
         let smsURLString = "sms:/open?addresses=\(dataManager.selectedPhoneNumber)&body=\(dataManager.allSMSs)\n\(dataManager.selectedPhoneNumber)\n\(dataManager.selectedContactPhoneNumber), \(dataManager.selectedContactPhoneNumber2)"
