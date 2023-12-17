@@ -49,7 +49,9 @@ struct ContentView: View {
                     EmployeeView()
                         .environmentObject(dataManager)
                         .navigationBarTitleDisplayMode(.inline)
-
+                        .toolbar {
+                            MyToolbarItems()
+                        }
 //                        .navigationBarBackButtonHidden(true)// Pass
 //                        .navigationBarHidden(true)
                 }
@@ -59,7 +61,9 @@ struct ContentView: View {
                     EmployeesViews()
                         .environmentObject(dataManager)
                         .navigationBarTitleDisplayMode(.inline)
-
+                        .toolbar {
+                            MyToolbarItems()
+                        }
 //                        .navigationBarBackButtonHidden(true)// Pass DataManager to EmployeesViews
 //                        .navigationBarItems(leading: EmptyView())
 //                        .navigationBarHidden(true)
@@ -72,6 +76,9 @@ struct ContentView: View {
                     PreViews()
                         .environmentObject(dataManager)
                         .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            MyToolbarItems()
+                        }
 //                        .navigationBarBackButtonHidden(true)
 //                        .navigationBarItems(leading: EmptyView())
 //                        .navigationBarHidden(true)
