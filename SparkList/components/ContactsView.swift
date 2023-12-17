@@ -22,13 +22,16 @@ struct ContactsView: View {
                 if !dataManager.selectedContactName.isEmpty {
                     Text("Selected Contact 1: \(dataManager.selectedContactName)")
                     Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
+                    Button(action: ClearContact1())
 
                     if !dataManager.selectedContactName2.isEmpty {
                         Text("Selected Contact 2: \(dataManager.selectedContactName2)")
                         Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
+                        
                       
                            
                     }
+                    
                 }
                 else {
                     Text("No Contacts Selected. Please Choose someone to send your time to.")
@@ -98,6 +101,9 @@ struct ContactsView: View {
                     }
                     .padding()
                 }
+            }
+            if !dataManager.selectedContactName.isEmpty || !dataManager.selectedContactName2.isEmpty {
+                Text("")
             }
 
  
