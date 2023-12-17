@@ -93,8 +93,11 @@ struct ContactsView: View {
                 
             }
             if !dataManager.selectedContactName.isEmpty && dataManager.selectedContactName2.isEmpty {
-                Text("Selected Contact 1: \(dataManager.selectedContactName)")
-                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
+//                Text("Selected Contact 1: \(dataManager.selectedContactName)")
+//                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
+                if let contact1 = dataManager.selectedContact1 {
+                    ProfileInfoView(contact: contact1)
+                }
                                    Button("Clear Contact 1") {
                                        dataManager.clearFirstContact()
                                    }
@@ -156,9 +159,12 @@ struct ContactsView: View {
                                    }
                                }
                                .padding()
-                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
-                      Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
-                      Button("Clear Contact 1") {
+//                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
+//                      Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
+                if let contact2 = dataManager.selectedContact2 {
+                    ProfileInfoView(contact: contact2)
+                }
+                      Button("Clear Contact 2") {
                           dataManager.clearSecondContact()
                       }
                       .padding()
@@ -182,9 +188,12 @@ struct ContactsView: View {
                 .background(Color.red)
                 .cornerRadius(8)
                 .padding()
-                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
-                Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
-                Button("Clear Contact 1") {
+//                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
+//                Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
+                if let contact2 = dataManager.selectedContact2 {
+                    ProfileInfoView(contact: contact2)
+                }
+                Button("Clear Contact 2") {
                     dataManager.clearSecondContact()
                 }
                 .padding()
