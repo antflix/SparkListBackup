@@ -96,6 +96,9 @@ struct ContactsView: View {
                 //                Text("Selected Contact 1: \(dataManager.selectedContactName)")
                 //                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
                 VStack{
+                    if let contact1 = dataManager.selectedContact1 {
+                        ContactCardView(contact: contact1)
+                    }
                     HStack{
                         Button(action: {
                             self.isContact1PickerPresented = true
@@ -129,15 +132,19 @@ struct ContactsView: View {
                             .cornerRadius(8)
                             .padding()}
                     }
-                    if let contact1 = dataManager.selectedContact1 {
-                        ContactCardView(contact: contact1)
-                    }
+
                 }
                 //   1 clear button
                 
                 Divider()
+                    .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
+                    .background(Color("Color 1"))
                 //2 add contact button
                 VStack{
+                    if let contact2 = dataManager.selectedContact2 {
+                        ContactCardView(contact: contact2)
+                    }
                     HStack{
                         Button(action: {
                             self.isContact2PickerPresented = true
@@ -171,9 +178,7 @@ struct ContactsView: View {
                             .padding()}
                         
                     }
-                    if let contact2 = dataManager.selectedContact2 {
-                        ContactCardView(contact: contact2)
-                    }
+                    
                 }
             }
             
