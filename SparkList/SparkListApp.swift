@@ -7,20 +7,60 @@
 import SwiftUI
 import UserNotifications
 import ContactsUI
+import AVFoundation
+
 class AppDelegate: NSObject, UIApplicationDelegate {
-// Implement the app lifecycle methods as needed
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    // Perform any setup tasks here
-    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+    // Implement the app lifecycle methods as needed
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        // Perform any setup tasks here
+        
+        // Request notification permissions
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if granted {
                 print("Notification permission granted")
             } else {
                 print("Notification permission denied")
             }
         }
-    return true
+        
+        // Configure audio session
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to configure AVAudioSession: \(error.localizedDescription)")
+        }
+        
+        return true
+    }
 }
-}
+//
+//
+//
+//class AppDelegate: NSObject, UIApplicationDelegate {
+//// Implement the app lifecycle methods as needed
+//func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+//    // Perform any setup tasks here
+//    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+//            if granted {
+//                print("Notification permission granted")
+//            } else {
+//                print("Notification permission denied")
+//            }
+//        }
+//    do {
+//        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
+//        try AVAudioSession.sharedInstance().setActive(true)
+//    } catch {
+//        print("Failed to configure AVAudioSession: \(error.localizedDescription)")
+//    }
+//    return true
+//
+//    // Inside AppDelegate or a relevant initialization part of your code
+//    
+//}
+//}
 let dataManager = DataManager()
 
 @available(iOS 17.0, *)
