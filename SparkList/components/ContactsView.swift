@@ -13,10 +13,44 @@ struct ContactsView: View {
                     self.isContact1PickerPresented = true
                 }) {
                     Text("Select Contact 1")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
                 }
                 .sheet(isPresented: $isContact1PickerPresented) {
-                    ContactPickerViewController()
-                        .environmentObject(dataManager)
+                    NavigationView {
+                        ContactPickerViewController()
+                            .environmentObject(dataManager)
+                            .navigationBarItems(trailing: Button("Close") {
+                                self.isContact1PickerPresented = false
+                            })
+                            .navigationBarTitle("Select Contact 1")
+                    }
+                }
+                .padding()
+
+                if !dataManager.selectedContactName.isEmpty {
+                    Button(action: {
+                        self.isContact2PickerPresented = true
+                    }) {
+                        Text("Select Contact 2")
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                    }
+                    .sheet(isPresented: $isContact2PickerPresented) {
+                        NavigationView {
+                            ContactPickerViewController()
+                                .environmentObject(dataManager)
+                                .navigationBarItems(trailing: Button("Close") {
+                                    self.isContact2PickerPresented = false
+                                })
+                                .navigationBarTitle("Select Contact 2")
+                        }
+                    }
+                    .padding()
                 }
             }
 
@@ -24,24 +58,15 @@ struct ContactsView: View {
                 Text("Selected Contact 1: \(dataManager.selectedContactName)")
                 Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)")
 
-                if dataManager.selectedContactName2.isEmpty {
-                    Button(action: {
-                        self.isContact2PickerPresented = true
-                    }) {
-                        Text("Select Contact 2")
-                    }
-                    .sheet(isPresented: $isContact2PickerPresented) {
-                        ContactPickerViewController()
-                            .environmentObject(dataManager)
-                    }
+                if !dataManager.selectedContactName2.isEmpty {
+                    Text("Selected Contact 2: \(dataManager.selectedContactName2)")
+                    Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
                 }
-            }
-
-            if !dataManager.selectedContactName2.isEmpty {
-                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
-                Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
             }
         }
         .padding()
     }
+}
+#Preview{
+    ContactsView()
 }
