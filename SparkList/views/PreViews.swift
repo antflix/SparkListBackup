@@ -43,9 +43,15 @@ struct PreViews: View {
 //        let sortedOutput = SMSGenerator.sortedFormat(dataManager: dataManager)
 //        let smsBodyWithDate = SMSGenerator.generateSMSURL(
 //            sortedOutput: sortedOutput, dataManger: dataManager)
-       
+        if let contact1 = dataManager.selectedContact1 {
+            if let phoneNumber = contact1.phoneNumbers.first?.value.stringValue {
+                dataManager.selectedContactPhoneNumber = phoneNumber
+            }
+        }
         if let contact2 = dataManager.selectedContact2 {
-            
+            if let phoneNumber2 = contact2.phoneNumbers.first?.value.stringValue {
+                dataManager.selectedContactPhoneNumber2 = phoneNumber2
+            }
         }
         
     
