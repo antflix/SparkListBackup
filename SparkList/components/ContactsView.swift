@@ -14,7 +14,7 @@ struct ContactsView: View {
                 self.isContactPickerPresented = true
             }
             .sheet(isPresented: $isContactPickerPresented) {
-                ContactPickerViewController(selectedContactName: $dataManager.selectedContactName, selectedContactPhoneNumber: $dataManager.selectedContactPhoneNumber, selectedContactName2: $dataManager.selectedContactName2, selectedContactPhoneNumber2: $dataManager.selectedContactPhoneNumber2) // Update to include additional bindings
+                ContactPickerViewController() // Update to include additional bindings
             }
 
             if !dataManager.selectedContactName.isEmpty && !dataManager.selectedContactPhoneNumber.isEmpty {
