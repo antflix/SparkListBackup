@@ -9,8 +9,32 @@ struct ContactsView: View {
     var body: some View {
         VStack {
             if dataManager.selectedContactName.isEmpty || dataManager.selectedContactName2.isEmpty {
-                HStack{
-                    Text("Who do you turn in tie to? ").font(.title2).padding()}.background(Color("Color 1"))
+                HStack {
+                    Text("Who do you turn time into?").font(Font.custom("Quicksand", size: 26).bold())
+                        .frame(maxWidth: .infinity * 0.90, alignment: .center)
+                    
+                }.padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .font(.headline)
+                if !dataManager.selectedContactName.isEmpty {
+                    Text("Selected Contact 1: \(dataManager.selectedContactName)")
+                    Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
+
+                    if !dataManager.selectedContactName2.isEmpty {
+                        Text("Selected Contact 2: \(dataManager.selectedContactName2)")
+                        Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
+                      
+                           
+                    }
+                }
+                else {
+                    Text("No Contacts Selected. Please Choose someone send your time to.")
+                        .padding()
+                    Image(systemName: "person.crop.circle.badge.xmark")
+                        
+                }
+                
                 Spacer()
                 Button(action: {
                     self.isContact1PickerPresented = true
@@ -57,17 +81,9 @@ struct ContactsView: View {
                 }
             }
 
-            if !dataManager.selectedContactName.isEmpty {
-                Text("Selected Contact 1: \(dataManager.selectedContactName)")
-                Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
-
-                if !dataManager.selectedContactName2.isEmpty {
-                    Text("Selected Contact 2: \(dataManager.selectedContactName2)")
-                    Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
-                }
-            }
+ 
         }
-        .padding()
+        .background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
     }
 }
 #Preview{
