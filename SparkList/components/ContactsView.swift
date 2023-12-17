@@ -321,26 +321,33 @@ struct ProfileInfoView: View {
 }
 
 struct ContactCardView: View {
-    var contact: CNContact
-
-    @State private var isProfileInfoPresented = false
+    var contact: CNContact // Assuming you have a CNContact object passed to this view
 
     var body: some View {
         VStack {
-            Button(action: {
-                isProfileInfoPresented.toggle()
-            }) {
-                Text("\(contact.givenName) \(contact.familyName)")
-                    .font(.title)
-                    .foregroundColor(.black)
+            if let imageData = contact.thumbnailImageData, let image = UIImage(data: imageData) {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                    .padding()
             }
-            .sheet(isPresented: $isProfileInfoPresented) {
-                ProfileInfoView(contact: contact)
-            }
-            .padding()
 
-            // Other contact info or buttons if needed...
+            Text("\(contact.givenName) \(contact.familyName)")
+                .font(.title)
+                .foregroundColor(.black)
+
+            if let phoneNumber = contact.phoneNumbers.first?.value.stringValue {
+                Text("Phone Number: \(phoneNumber)")
+                    .font(.body)
+                    .foregroundColor(.gray)
+                    .padding(.bottom)
+            }
+
+            // Add more contact information if needed
         }
+        .padding()
         .background(Color.white)
         .cornerRadius(10)
         .shadow(radius: 5)
