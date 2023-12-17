@@ -270,11 +270,11 @@ struct ContactsView: View {
     }
 }
 struct ProfileInfoView: View {
-    var contact: DataManager // Assuming you have a ContactModel structure to hold contact details
+    @EnvironmentObject var dataManager: DataManager // Access the DataManager
 
     var body: some View {
         VStack {
-            if let image = contact.photo {
+            if let image = datacontact.photo {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
