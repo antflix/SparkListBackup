@@ -39,7 +39,7 @@ struct ContentView: View {
                     
                     JobsView()
                         .toolbar {
-                            toolbar()
+                            MyT
                         }
 //                        .navigationBarBackButtonHidden(true)// Pass
 //                        .navigationBarHidden(true)
