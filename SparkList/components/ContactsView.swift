@@ -35,7 +35,7 @@ struct ContactsView: View {
                         Text("Selected Contact 2: \(dataManager.selectedContactName2)")
                         Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
                         Button("Clear Contact 1") {
-                                           dataManager.clearFirstContact()
+                                           dataManager.clearSecondContact()
                                        }
                                        .padding()
                                        .foregroundColor(.white)
