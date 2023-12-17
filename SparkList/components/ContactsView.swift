@@ -284,39 +284,31 @@ struct ProfileInfoView: View {
     var body: some View {
         VStack {
             // Card-style view to display contact information
-            CardView(contact: contact)
+            ContactCardView(contact: contact)
         }
     }
 }
+struct ContactCardView: View {
+    var contact: CNContact
 
-struct CardView: View {
-    var contact: CNContact // Directly using CNContact from DataManager
+    @State private var isProfileInfoPresented = false
 
     var body: some View {
         VStack {
-            if let imageData = contact.imageData, let image = UIImage(data: imageData) {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-                    .padding()
+            Button(action: {
+                isProfileInfoPresented.toggle()
+            }) {
+                Text("\(contact.givenName) \(contact.familyName)")
+                    .font(.title)
+                    .foregroundColor(.black)
             }
-
-            Text(contact.givenName + " " + contact.familyName)
-                .font(.title)
-                .foregroundColor(.black)
-            
-            if let phoneNumber = contact.phoneNumbers.first?.value.stringValue {
-                Text(phoneNumber)
-                    .font(.body)
-                    .foregroundColor(.gray)
-                    .padding(.bottom)
+            .sheet(isPresented: $isProfileInfoPresented) {
+                ProfileInfoView(contact: contact)
             }
+            .padding()
 
-            // Add more contact information as needed
+            // Other contact info or buttons if needed...
         }
-        .padding()
         .background(Color.white)
         .cornerRadius(10)
         .shadow(radius: 5)
