@@ -42,8 +42,8 @@ struct ContentView: View {
                             ToolbarItemGroup(placement: .bottomBar) {
                                 Button(action: {
                                     isContactsPresented.toggle()
-                                }) {if dataManager.
-                                    Image(systemName: "person.fill.badge.plus")
+                                }) {
+                                    Image(systemName: "person")
                                 }
                                 .popover(isPresented: $isContactsPresented, arrowEdge: .top) {
                                     ContactsView()
