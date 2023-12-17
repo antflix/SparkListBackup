@@ -1,6 +1,8 @@
 // ContactPickerView.swift
 import SwiftUI
 struct ContactsView: View {
+    @EnvironmentObject var dataManager: DataManager // Access the DataManager
+
     @State private var isContactPickerPresented = false
     @State private var selectedContactName = ""
     @State private var selectedContactPhoneNumber = ""
@@ -17,12 +19,12 @@ struct ContactsView: View {
             }
 
             if !selectedContactName.isEmpty && !selectedContactPhoneNumber.isEmpty {
-                Text("Selected Contact 1: \(selectedContactName)")
-                Text("Phone Number 1: \(selectedContactPhoneNumber)")
+                Text("Selected Contact 1: \(dataManager.selectedContactName)")
+                Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)")
             }
             if !selectedContactName2.isEmpty && !selectedContactPhoneNumber2.isEmpty {
-                Text("Selected Contact 2: \(selectedContactName2)")
-                Text("Phone Number 2: \(selectedContactPhoneNumber2)")
+                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
+                Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
             }
         }
     }
