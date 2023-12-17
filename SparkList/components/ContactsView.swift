@@ -274,7 +274,7 @@ struct ProfileInfoView: View {
 
     var body: some View {
         VStack {
-            if let image = dataManager.SelectedCon.photo {
+            if let image = dataManager.selectedContact1.photo {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
