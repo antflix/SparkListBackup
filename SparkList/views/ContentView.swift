@@ -42,12 +42,8 @@ struct ContentView: View {
                             ToolbarItemGroup(placement: .bottomBar) {
                                 Button(action: {
                                     isContactsPresented.toggle()
-                                }) {if !dataManager.selectedContactPhoneNumber.isEmpty {
+                                }) {if dataManager.
                                     Image(systemName: "person.fill.badge.plus")
-                                }
-                                    else {
-                                    Image(systemName: "person.fill.badge.plus")
-                                    }
                                 }
                                 .popover(isPresented: $isContactsPresented, arrowEdge: .top) {
                                     ContactsView()
