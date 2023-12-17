@@ -169,8 +169,8 @@ struct ContactsView: View {
                 
             }
             if !dataManager.selectedContactName.isEmpty && !dataManager.selectedContactName2.isEmpty {
-                Text("Selected Contact 1: \(dataManager.selectedContactName)")
-                Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
+//                Text("Selected Contact 1: \(dataManager.selectedContactName)")
+//                Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
                 Button("Clear Contact 1") {
                     dataManager.clearFirstContact()
                 }
