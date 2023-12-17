@@ -112,7 +112,7 @@ struct ContactsView: View {
         
     }
     func ClearContact1() {
-            dataManager.employeeData = [:] // Resetting employeeData to an empty dictionary
+            dataManager.selectedContactPhoneNumber = [:] // Resetting employeeData to an empty dictionary
         }
 }
 @available(iOS 17.0, *)
