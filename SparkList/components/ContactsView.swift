@@ -95,27 +95,29 @@ struct ContactsView: View {
             if !dataManager.selectedContactName.isEmpty || !dataManager.selectedContactName2.isEmpty {
                 //                Text("Selected Contact 1: \(dataManager.selectedContactName)")
                 //                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
-                Button(action: {
-                    self.isContact1PickerPresented = true
-                }) { HStack {
-                    Image(systemName: "person.fill.questionmark")
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(Color.red, Color.green)
-                    
-                    Text("Select Contact 1")
-                    
-                }.padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
+                if !dataManager.selectedContactName.isEmpty {
+                    Button(action: {
+                        self.isContact1PickerPresented = true
+                    }) { HStack {
+                        Image(systemName: "person.fill.questionmark")
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(Color.red, Color.green)
+                        
+                        Text("Select Contact 1")
+                        
+                    }.padding()
+                            .foregroundColor(.white)
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                    }
+                    .sheet(isPresented: $isContact1PickerPresented) {
+                        
+                        ContactPickerViewController()
+                        
+                        
+                    }
+                    .padding()
                 }
-                .sheet(isPresented: $isContact1PickerPresented) {
-                    
-                    ContactPickerViewController()
-                    
-                    
-                }
-                .padding()
                 //  1 contact card
                 if let contact1 = dataManager.selectedContact1 {
                     ContactCardView(contact: contact1)
@@ -131,26 +133,28 @@ struct ContactsView: View {
                 
                 
                 //2 add contact button
-                Button(action: {
-                    self.isContact2PickerPresented = true
-                }) { HStack {
-                    Image(systemName: "person.fill.questionmark")
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(Color.red, Color.green)
-                    
-                    Text("Select Contact 2")
-                    
-                }.padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
+                if !dataManager.selectedContactName2.isEmpty  {
+                    Button(action: {
+                        self.isContact2PickerPresented = true
+                    }) { HStack {
+                        Image(systemName: "person.fill.questionmark")
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(Color.red, Color.green)
+                        
+                        Text("Select Contact 2")
+                        
+                    }.padding()
+                            .foregroundColor(.white)
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                    }
+                    .sheet(isPresented: $isContact2PickerPresented) {
+                        
+                        ContactPickerViewController()
+                        
+                    }
+                    .padding()
                 }
-                .sheet(isPresented: $isContact2PickerPresented) {
-                    
-                    ContactPickerViewController()
-                    
-                }
-                .padding()
                 if let contact2 = dataManager.selectedContact2 {
                     ContactCardView(contact: contact2)
                     Button("Clear Contact 2") {
