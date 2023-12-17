@@ -99,6 +99,6 @@ struct ContactsView: View {
     }
 }
 #Preview{
-   Contacts
+   ContactsView()
 
 }
