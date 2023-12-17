@@ -95,7 +95,7 @@ struct ContactsView: View {
             if !dataManager.selectedContactName.isEmpty || !dataManager.selectedContactName2.isEmpty {
                 //                Text("Selected Contact 1: \(dataManager.selectedContactName)")
                 //                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
-                if !dataManager.selectedContactName.isEmpty {
+                if dataManager.selectedContactName.isEmpty {
                     Button(action: {
                         self.isContact1PickerPresented = true
                     }) { HStack {
@@ -133,7 +133,7 @@ struct ContactsView: View {
                 
                 
                 //2 add contact button
-                if !dataManager.selectedContactName2.isEmpty  {
+                if dataManager.selectedContactName2.isEmpty  {
                     Button(action: {
                         self.isContact2PickerPresented = true
                     }) { HStack {
