@@ -69,4 +69,6 @@ struct ContactsView: View {
 }
 #Preview{
     ContactsView()
+        .environmentObject(DataManager())
+
 }
