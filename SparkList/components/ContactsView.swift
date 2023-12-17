@@ -18,8 +18,7 @@ struct ContactsView: View {
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .font(.headline)
-            Spacer()
-            
+
             
             // 1 is empty
             // 2 is empty
@@ -135,12 +134,13 @@ struct ContactsView: View {
                         }//contact 1 HStack
                         
                     }//contact 1 vstack
+                    .padding()
                     //   1 clear button
                     VStack{
                         Spacer()
                         Divider()
-                            
-                            .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
+                            .font(Font.custom("Quicksand", size: 20).bold())
+                            .frame(maxWidth: .infinity * 0.90, alignment: .center)
                             .background(Color("Color 1"))
                         Spacer()
                     }
@@ -184,7 +184,7 @@ struct ContactsView: View {
                             
                         } //2nd contack hstack
                         
-                    } //2nd contact vstack
+                    }.padding() //2nd contact vstack
                 }//vstack wrapped around both contacts code
             }//if statement for both contacts
         }//vstack wrapped
@@ -218,13 +218,22 @@ struct ContactCardView: View {
     var body: some View {
         VStack {
             if let imageData = contact.thumbnailImageData, let image = UIImage(data: imageData) {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-                    .padding()
-            }
+                           Image(uiImage: image)
+                               .resizable()
+                               .aspectRatio(contentMode: .fit)
+                               .frame(width: 75, height: 75)
+                               .clipShape(Circle())
+                               .padding()
+                       } else {
+                           // Placeholder image when contact has no picture
+                           Image(systemName: "person.circle.fill")
+                               .resizable()
+                               .aspectRatio(contentMode: .fit)
+                               .frame(width: 75, height: 75)
+                               .clipShape(Circle())
+                               .padding()
+                               .foregroundColor(.gray) // Adjust placeholder color as needed
+                       }
 
             Text("\(contact.givenName) \(contact.familyName)")
                 .font(.title)
