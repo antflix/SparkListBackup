@@ -99,7 +99,7 @@ struct ContactsView: View {
     }
 }
 @available(iOS 17.0, *)
-struct PreViews_Previews: PreviewProvider {
+struct ContactsView_Previews: PreviewProvider {
     static var previews: some View {
         PreViews()
             .environmentObject(DataManager())
