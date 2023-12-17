@@ -31,32 +31,39 @@ struct ContactsView: View {
                     }
                 }
                 else {
-                    Text("No Contacts Selected. Please Choose someone send your time to.")
+                    Text("No Contacts Selected. Please Choose someone to send your time to.")
                         .padding()
                     Image(systemName: "person.crop.circle.badge.xmark")
+                        .aspectRatio(contentMode: .fit)
+                        .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                        .font(Font.custom("Quicksand", size: 86).bold())
                         .symbolRenderingMode(.palette)
                         .onAppear(){
                             symbolAnimation.toggle()
                         }
-                        .foregroundStyle(Color.yellow, Color.orange, Color.yellow)
+                        .foregroundStyle(Color.red, Color.yellow)
                         
                         .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
                                         symbolAnimation)
 
-                        .font(.largeTitle)
+                        
                         
                 }
                 
                 Spacer()
                 Button(action: {
                     self.isContact1PickerPresented = true
-                }) {
+                }) {HStack{
+                    Image(systemName: "person.fill.questionmark")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(Color.red, Color.green)
+
                     Text("Select Contact 1")
-                        .padding()
+                     
+                }   .padding()
                         .foregroundColor(.white)
                         .background(Color.blue)
-                        .cornerRadius(8)
-                }
+                        .cornerRadius(8)}
                 .sheet(isPresented: $isContact1PickerPresented) {
                     NavigationView {
                         ContactPickerViewController()
