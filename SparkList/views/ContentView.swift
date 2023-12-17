@@ -43,7 +43,7 @@ struct ContentView: View {
                                 Button(action: {
                                     isContactsPresented.toggle()
                                 }) {
-                                    Image(systemName: "person")
+                                    Image(systemName: "person.fill.badge.plus")
                                 }
                                 .popover(isPresented: $isContactsPresented, arrowEdge: .top) {
                                     ContactsView()
