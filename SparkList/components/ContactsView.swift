@@ -19,12 +19,12 @@ struct ContactsView: View {
             }
 
             if !selectedContactName.isEmpty && !selectedContactPhoneNumber.isEmpty {
-                Text("Selected Contact 1: \(dataManager.selectedContactName)")
-                Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)")
+                Text("Selected Contact 1: \(selectedContactName)")
+                Text("Phone Number 1: \(selectedContactPhoneNumber)")
             }
             if !selectedContactName2.isEmpty && !selectedContactPhoneNumber2.isEmpty {
-                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
-                Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
+                Text("Selected Contact 2: \(selectedContactName2)")
+                Text("Phone Number 2: \(selectedContactPhoneNumber2)")
             }
         }
     }
