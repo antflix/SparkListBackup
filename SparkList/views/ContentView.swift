@@ -44,6 +44,17 @@ struct ContentView: View {
                                     isContactsPresented.toggle()
                                 }) {if !dataManager.selectedContactPhoneNumber.isEmpty {
                                     Image(systemName: "person.fill.badge.plus")
+                                        .aspectRatio(contentMode: .fit)
+                                        .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                                        .font(Font.custom("Quicksand", size: 86).bold())
+                                        .symbolRenderingMode(.palette)
+                                        .onAppear(){
+                                            symbolAnimation.toggle()
+                                        }
+                                        .foregroundStyle(Color.red, Color.yellow)
+                                        
+                                        .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
+                                                        symbolAnimation)
                                 }
                                     else {
                                     Image(systemName: "person.badge.clock")
