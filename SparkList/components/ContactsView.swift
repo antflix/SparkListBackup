@@ -9,6 +9,9 @@ struct ContactsView: View {
     var body: some View {
         VStack {
             if dataManager.selectedContactName.isEmpty || dataManager.selectedContactName2.isEmpty {
+                HStack{
+                    Text("Who do you turn in tie to? ").font(.title2).padding()}.background(Color("Color 1"))
+                Spacer()
                 Button(action: {
                     self.isContact1PickerPresented = true
                 }) {
