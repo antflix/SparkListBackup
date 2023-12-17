@@ -303,7 +303,7 @@ struct ContactsView: View {
             .padding()
         }
     }
-}
+
 @available(iOS 17.0, *)
 struct ContactsView_Previews: PreviewProvider {
     static var previews: some View {
