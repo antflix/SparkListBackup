@@ -59,9 +59,10 @@ struct JobsView: View {
               .lineLimit(1)
             Text(job[2])
             Spacer()
-            Button(action: {
-              showingPopover[index].toggle()
-            }) {
+              Button(action: {
+                  if index < showingPopover.count {
+                      showingPopover[index].toggle()
+                  }}) {
               Image(systemName: "info.circle")
                 .foregroundColor(.blue)
             }
