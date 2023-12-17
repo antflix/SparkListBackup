@@ -51,7 +51,7 @@ struct ContentView: View {
                                         .onAppear(){
                                             symbolAnimation.toggle()
                                         }
-                                        .foregroundStyle(Color.red, Color.yellow)
+                                        .dforegroundStyle(Color.red, Color.yellow)
                                         
                                         .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
                                                         symbolAnimation)
