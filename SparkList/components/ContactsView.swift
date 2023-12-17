@@ -113,7 +113,7 @@ struct ContactsView: View {
     }
     func ClearContact1() {
             dataManager.selectedContactPhoneNumber = ""
-        dataManager.selected
+        dataManager.selectedContactName -
         }
 }
 @available(iOS 17.0, *)
