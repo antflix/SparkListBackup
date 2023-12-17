@@ -28,14 +28,33 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
             let phoneNumbers = contact.phoneNumbers.first?.value.stringValue ?? ""
 
             // Update DataManager directly when a contact is selected
-            if dataManager.selectedContactName.isEmpty {
+            if dataManager.selectedContact1 == nil {
                 dataManager.selectedContactName = fullName
                 dataManager.selectedContactPhoneNumber = phoneNumbers
+                dataManager.selectedContact1 = contact
+
             } else {
                 dataManager.selectedContactName2 = fullName
                 dataManager.selectedContactPhoneNumber2 = phoneNumbers
+                dataManager.selectedContact2 = contact
+
             }
         }
     }
 }
 
+class Coordinator: NSObject, CNContactPickerDelegate {
+    var dataManager: DataManager
+
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
+    }
+
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+        if dataManager.selectedContact1 == nil {
+            dataManager.selectedContact1 = contact
+        } else {
+            dataManager.selectedContact2 = contact
+        }
+    }
+}
