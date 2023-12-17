@@ -22,7 +22,14 @@ struct ContactsView: View {
                 if !dataManager.selectedContactName.isEmpty {
                     Text("Selected Contact 1: \(dataManager.selectedContactName)")
                     Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
-                    Button(action: ClearContact1())
+                    Button("Clear Contact 1") {
+                                       dataManager.clearFirstContact()
+                                   }
+                                   .padding()
+                                   .foregroundColor(.white)
+                                   .background(Color.red)
+                                   .cornerRadius(8)
+                                   .padding()
 
                     if !dataManager.selectedContactName2.isEmpty {
                         Text("Selected Contact 2: \(dataManager.selectedContactName2)")
