@@ -56,7 +56,7 @@ struct ContactsView: View {
 
             if !dataManager.selectedContactName.isEmpty {
                 Text("Selected Contact 1: \(dataManager.selectedContactName)")
-                Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)")
+                Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
 
                 if !dataManager.selectedContactName2.isEmpty {
                     Text("Selected Contact 2: \(dataManager.selectedContactName2)")
