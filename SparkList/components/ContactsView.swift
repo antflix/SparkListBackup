@@ -99,7 +99,11 @@ struct ContactsView: View {
     }
 }
 #Preview{
-    ContactsView()
-        .environmentObject(DataManager())
+    if #available(iOS 17.0, *) {
+        ContactsView()
+            .environmentObject(DataManager())
+    } else {
+        // Fallback on earlier versions
+    }
 
 }
