@@ -11,14 +11,19 @@ struct ContactsView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Time Contacts?").font(Font.custom("Quicksand", size: 26).bold())
-                    .frame(maxWidth: .infinity * 0.90, alignment: .center)
+                VStack {
+                    Text("Time Contact?").font(Font.custom("Quicksand", size: 30).bold())
+                        .frame( alignment: .center)
+                    
+                    Text("Same crew, Same Hours").font(Font.custom("Quicksand", size: 12).bold())
+                        .frame(maxWidth: .infinity * 0.90, alignment: .center)
+                        .foregroundStyle(Color.black)
+              
                 
-            }.padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .font(.headline)
-
+               
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
             
             // 1 is empty
             // 2 is empty
