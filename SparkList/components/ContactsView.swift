@@ -1,5 +1,6 @@
 import SwiftUI
 import ContactsUI
+@available(iOS 17.0, *)
 struct ContactsView: View {
     @EnvironmentObject var dataManager: DataManager // Access the DataManager
     @State private var symbolAnimation = false
