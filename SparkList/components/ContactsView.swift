@@ -172,8 +172,7 @@ struct ContactsView: View {
 //                Text("Selected Contact 1: \(dataManager.selectedContactName)")
 //                Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
                 if let contact1 = dataManager.selectedContact1 {
-                                ProfileInfoView(contact: contact1)
-                            }
+                               ProfileInfoView(contact: contact1)
                 Button("Clear Contact 1") {
                     dataManager.clearFirstContact()
                 }
@@ -269,36 +268,39 @@ struct ContactsView: View {
         .background(EllipticalGradient(colors: [Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
     }
 }
-struct ProfileInfoView: View {
-    var contact: DataManager // Assuming you have a ContactModel structure to hold contact details
+    struct ProfileInfoView: View {
+        var contact: CNContact // Directly using CNContact from DataManager
 
-    var body: some View {
-        VStack {
-            if let image = contact.photo {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-                    .padding()
+        var body: some View {
+            VStack {
+                if let imageData = contact.imageData, let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .padding()
+                }
+
+                Text(contact.givenName + " " + contact.familyName)
+                    .font(.title)
+                    .foregroundColor(.black)
+                
+                if let phoneNumber = contact.phoneNumbers.first?.value.stringValue {
+                    Text(phoneNumber)
+                        .font(.body)
+                        .foregroundColor(.gray)
+                        .padding(.bottom)
+                }
+
+                // Add more contact information as needed
             }
-
-            Text(contact.name)
-                .font(.title)
-                .foregroundColor(.black)
-            
-            Text(contact.phoneNumber)
-                .font(.body)
-                .foregroundColor(.gray)
-                .padding(.bottom)
-
-            // Add more contact information as needed
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
+            .padding()
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
-        .padding()
     }
 }
 @available(iOS 17.0, *)
