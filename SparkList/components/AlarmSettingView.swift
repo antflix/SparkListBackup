@@ -75,13 +75,13 @@ struct AlarmSettingView: View {
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
-        let request = UNNotificationRequest(identifier: "newAlarm", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "newAlarm1", content: content, trigger: trigger)
         
         center.add(request) { error in
             if let error = error {
                 print("Error scheduling notification: \(error.localizedDescription)")
             } else {
-                print("Notification scheduled successfully")
+                print("Notification has been ran")
                 // Call function to play sound at the selected time
                 playSoundAtTime(time)
             }
@@ -90,7 +90,7 @@ struct AlarmSettingView: View {
 
     func cancelAlarm() {
         let center = UNUserNotificationCenter.current()
-        center.removePendingNotificationRequests(withIdentifiers: ["newAlarm"])
+        center.removePendingNotificationRequests(withIdentifiers: ["newAlarm1"])
     }
 
     func playSoundAtTime(_ time: Date) {
