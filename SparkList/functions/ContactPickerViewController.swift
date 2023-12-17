@@ -11,10 +11,15 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
 
  
     func makeUIViewController(context: Context) -> CNContactPickerViewController {
-        let picker = CNContactPickerViewController()
-        picker.delegate = context.coordinator
-        return picker
-    }
+           let picker = CNContactPickerViewController()
+           picker.delegate = context.coordinator
+
+           // Modify the appearance of the contact picker
+           picker.navigationBar.tintColor = UIColor.systemBlue // Change navigation bar tint color
+           picker.view.backgroundColor = UIColor.white // Set background color
+
+           return picker
+       }
 
     func updateUIViewController(_ uiViewController: CNContactPickerViewController, context: Context) {}
 
