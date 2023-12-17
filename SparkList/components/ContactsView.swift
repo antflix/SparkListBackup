@@ -20,6 +20,9 @@ struct ContactsView: View {
                 .font(.headline)
             Spacer()
 
+            
+            // 1 is empty
+            // 2 is empty
             if dataManager.selectedContactName.isEmpty && dataManager.selectedContactName2.isEmpty {
                 Text("No Contacts Selected. Please choose 1 or 2 contacts to send your time to.")
                     .font(Font.custom("Quicksand", size: 20).bold())
@@ -39,6 +42,7 @@ struct ContactsView: View {
                         symbolAnimation)
                 Spacer()
 
+                //add contact 1
                 Button(action: {
                     self.isContact1PickerPresented = true
                 }) { HStack {
@@ -64,6 +68,8 @@ struct ContactsView: View {
                     }
                 }
                 .padding()
+                
+                //add contact2
                 Button(action: {
                     self.isContact2PickerPresented = true
                 }) { HStack {
@@ -90,12 +96,17 @@ struct ContactsView: View {
                 }
                 .padding()
             }
+            //  1 is not empty
+            // 2 is empty
             if !dataManager.selectedContactName.isEmpty && dataManager.selectedContactName2.isEmpty {
 //                Text("Selected Contact 1: \(dataManager.selectedContactName)")
 //                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
+                
+                //  1 contact card
                 if let contact1 = dataManager.selectedContact1 {
-                    ProfileInfoView(contact: contact1)
+                    ContactCardView(contact: contact1)
                 }
+                //   1 clear button
                 Button("Clear Contact 1") {
                     dataManager.clearFirstContact()
                 }
@@ -105,6 +116,7 @@ struct ContactsView: View {
                 .cornerRadius(8)
                 .padding()
 
+                //2 add contact button
                 Button(action: {
                     self.isContact2PickerPresented = true
                 }) { HStack {
@@ -131,7 +143,11 @@ struct ContactsView: View {
                 }
                 .padding()
             }
+            
+            // 1 is empty
+            // 2 is not empty
             if dataManager.selectedContactName.isEmpty && !dataManager.selectedContactName2.isEmpty {
+                //1 add button
                 Button(action: {
                     self.isContact1PickerPresented = true
                 }) { HStack {
@@ -159,9 +175,11 @@ struct ContactsView: View {
                 .padding()
 //                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
 //                      Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
+                //2 contact card
                 if let contact2 = dataManager.selectedContact2 {
-                    ProfileInfoView(contact: contact2)
+                    ContactCardView(contact: contact2)
                 }
+                //2 clear button
                 Button("Clear Contact 2") {
                     dataManager.clearSecondContact()
                 }
@@ -171,12 +189,16 @@ struct ContactsView: View {
                 .cornerRadius(8)
                 .padding()
             }
+            //1 is not empty
+            //2 is not empty/
             if !dataManager.selectedContactName.isEmpty && !dataManager.selectedContactName2.isEmpty {
 //                Text("Selected Contact 1: \(dataManager.selectedContactName)")
 //                Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
+                //1 contact card
                 if let contact1 = dataManager.selectedContact1 {
-                    ProfileInfoView(contact: contact1)
+                    ContactCardView(contact: contact1)
                 }
+                //1  clear
                 Button("Clear Contact 1") {
                     dataManager.clearFirstContact()
                 }
@@ -187,9 +209,11 @@ struct ContactsView: View {
                 .padding()
 //                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
 //                Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
+                //2 contact card
                 if let contact2 = dataManager.selectedContact2 {
-                    ProfileInfoView(contact: contact2)
+                    ContactCardView(contact: contact2)
                 }
+                //2 clear
                 Button("Clear Contact 2") {
                     dataManager.clearSecondContact()
                 }
