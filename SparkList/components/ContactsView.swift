@@ -118,15 +118,16 @@ struct ContactsView: View {
                     } else {
                         if let contact1 = dataManager.selectedContact1 {
                             ContactCardView(contact: contact1)
+                            Button("Clear Contact 1") {
+                                dataManager.clearFirstContact()
+                            }.padding()
+                                .foregroundColor(.white)
+                                .background(Color.red)
+                                .cornerRadius(8)
+                                .padding()
                             
                         }
-                        Button("Clear Contact 1") {
-                            dataManager.clearFirstContact()
-                        }.padding()
-                            .foregroundColor(.white)
-                            .background(Color.red)
-                            .cornerRadius(8)
-                            .padding()
+                      
                     }
                     
                     // Display Contact 2 related logic
