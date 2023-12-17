@@ -138,10 +138,9 @@ struct ContactsView: View {
                     //   1 clear button
                     VStack{
                         Spacer()
-                        Divider()
-                            .font(Font.custom("Quicksand", size: 20).bold())
-                            .frame(maxWidth: .infinity * 0.90, alignment: .center)
-                            .background(Color("Color 1"))
+                        Divider().frame(height: 2.0).background(
+                            Color("Color 2")
+                        ).padding(.horizontal)
                         Spacer()
                     }
                         
