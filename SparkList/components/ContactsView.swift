@@ -305,9 +305,18 @@ struct ProfileInfoView: View {
 
     var body: some View {
         VStack {
-            // Card-style view to display contact information
-            ContactCardView(contact: contact)
+            // Display detailed contact information
+            Text("\(contact.givenName) \(contact.familyName)")
+                .font(.title)
+                .foregroundColor(.black)
+            
+            // Display additional contact details...
         }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 5)
+        .padding()
     }
 }
 
