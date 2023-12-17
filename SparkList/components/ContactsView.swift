@@ -58,14 +58,10 @@ struct ContactsView: View {
                     .cornerRadius(8)
                 }
                 .sheet(isPresented: $isContact1PickerPresented) {
-                    NavigationView {
+                    
                         ContactPickerViewController()
-                            .environmentObject(dataManager)
-                            .navigationBarItems(trailing: Button("Close") {
-                                self.isContact1PickerPresented = false
-                            })
-                            .navigationBarTitle("Select Contact 1")
-                    }
+                        
+                    
                 }
                 .padding()
                 
@@ -85,14 +81,9 @@ struct ContactsView: View {
                     .cornerRadius(8)
                 }
                 .sheet(isPresented: $isContact2PickerPresented) {
-                    NavigationView {
+                 
                         ContactPickerViewController()
-                            .environmentObject(dataManager)
-                            .navigationBarItems(trailing: Button("Close") {
-                                self.isContact2PickerPresented = false
-                            })
-                            .navigationBarTitle("Select Contact 2")
-                    }
+                           
                 }
                 .padding()
             }
@@ -132,14 +123,9 @@ struct ContactsView: View {
                     .cornerRadius(8)
                 }
                 .sheet(isPresented: $isContact2PickerPresented) {
-                    NavigationView {
+                    
                         ContactPickerViewController()
-                            .environmentObject(dataManager)
-                            .navigationBarItems(trailing: Button("Close") {
-                                self.isContact2PickerPresented = false
-                            })
-                            .navigationBarTitle("Select Contact 2")
-                    }
+                            
                 }
                 .padding()
             }
@@ -163,14 +149,9 @@ struct ContactsView: View {
                     .cornerRadius(8)
                 }
                 .sheet(isPresented: $isContact1PickerPresented) {
-                    NavigationView {
+                    
                         ContactPickerViewController()
-                            .environmentObject(dataManager)
-                            .navigationBarItems(trailing: Button("Close") {
-                                self.isContact1PickerPresented = false
-                            })
-                            .navigationBarTitle("Select Contact 1")
-                    }
+                            
                 }
                 .padding()
 //                Text("Selected Contact 2: \(dataManager.selectedContactName2)")
@@ -223,78 +204,7 @@ struct ContactsView: View {
                 .cornerRadius(8)
                 .padding()
             }
-            //   if !dataManager.selectedContactName.isEmpty {
-//                    Text("Selected Contact 1: \(dataManager.selectedContactName)")
-//                    Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
-//                    Button("Clear Contact 1") {
-//                        dataManager.clearFirstContact()
-//                    }
-//                    .padding()
-//                    .foregroundColor(.white)
-//                    .background(Color.red)
-//                    .cornerRadius(8)
-//                    .padding()
-//                }
-//                if !dataManager.selectedContactName2.isEmpty {
-//                    Text("Selected Contact 2: \(dataManager.selectedContactName2)")
-//                    Text("Phone Number 2: \(dataManager.selectedContactPhoneNumber2)")
-//                    Button("Clear Contact 1") {
-//                        dataManager.clearSecondContact()
-//                    }
-//                    .padding()
-//                    .foregroundColor(.white)
-//                    .background(Color.red)
-//                    .cornerRadius(8)
-//                    .padding()
-//                } else {
-//                    Text("No Contacts Selected. Please Choose someone to send your time to.")
-//                        .padding()
-//                    Image(systemName: "person.crop.circle.badge.xmark")
-//                        .aspectRatio(contentMode: .fit)
-//                        .padding(/*@START_MENU_TOKEN@*/ .all/*@END_MENU_TOKEN@*/)
-//                        .font(Font.custom("Quicksand", size: 86).bold())
-//                        .symbolRenderingMode(.palette)
-//                        .onAppear {
-//                            symbolAnimation.toggle()
-//                        }
-//                        .foregroundStyle(Color.red, Color.yellow)
-//
-//                        .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
-//                            symbolAnimation)
-//
-//
-//                Spacer()
-//                Button(action: {
-//                    self.isContact1PickerPresented = true
-//                }) { HStack {
-//                    Image(systemName: "person.fill.questionmark")
-//                        .symbolRenderingMode(.palette)
-//                        .foregroundStyle(Color.red, Color.green)
-//
-//                    Text("Select Contact 1")
-//
-//                }.padding()
-//                    .foregroundColor(.white)
-//                    .background(Color.blue)
-//                    .cornerRadius(8)
-//                }
-//                .sheet(isPresented: $isContact1PickerPresented) {
-//                    NavigationView {
-//                        ContactPickerViewController()
-//                            .environmentObject(dataManager)
-//                            .navigationBarItems(trailing: Button("Close") {
-//                                self.isContact1PickerPresented = false
-//                            })
-//                            .navigationBarTitle("Select Contact 1")
-//                    }
-//                }
-//                .padding()
-//
-//                    if !dataManager.selectedContactName.isEmpty {
-//
-//                    }
-//            }
-//
+      
         }
         .background(EllipticalGradient(colors: [Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
     }
