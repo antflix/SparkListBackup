@@ -103,7 +103,7 @@ struct AlarmSettingView: View {
         // Schedule the audio playback after the time difference
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(difference)) {
             do {
-                guard let soundURL = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3") else {
+                guard let soundURL = Bundle.main.url(forResource: "alarm", withExtension: "mp3") else {
                     return
                 }
 
