@@ -25,7 +25,8 @@ class DataManager: ObservableObject {
     @Published var selectedContactPhoneNumber2 = ""
     @Published var selectedContactName = ""
     @Published var selectedContactName2 = ""
-
+    @Published var selectedContact1: CNContact?
+    @Published var selectedContact2: CNContact?
     
     init() {
         self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
