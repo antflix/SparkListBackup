@@ -98,7 +98,10 @@ struct ContactsView: View {
         .background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
     }
 }
-#Preview{
-   ContactsView()
-
+@available(iOS 17.0, *)
+struct PreViews_Previews: PreviewProvider {
+    static var previews: some View {
+        PreViews()
+            .environmentObject(DataManager())
+    }
 }
