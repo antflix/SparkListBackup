@@ -34,7 +34,7 @@ struct ContactsView: View {
                     Text("No Contacts Selected. Please Choose someone send your time to.")
                         .padding()
                     Image(systemName: "person.crop.circle.badge.xmark")
-                        .symbolRenderingMode(.multicolor)
+                        .symbolRenderingMode(.palette)
                         .onAppear(){
                             symbolAnimation.toggle()
                         }
