@@ -270,7 +270,7 @@ struct ContactsView: View {
     }
 }
 struct ProfileInfoView: View {
-    var contact: ContactModel // Assuming you have a ContactModel structure to hold contact details
+    var contact: DataManager // Assuming you have a ContactModel structure to hold contact details
 
     var body: some View {
         VStack {
