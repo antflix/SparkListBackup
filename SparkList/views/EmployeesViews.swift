@@ -85,22 +85,32 @@ struct EmployeesViews: View {
                         .cornerRadius(8) // Optional: Add corner radius to rows
                 }
             }
-
-            Button(action: {
-                // Save entered hours and route to PreView
-                showPreView = true
-            }, label: {
-                Text("Submit")
-            })
-            .disabled(!isAnyEmployeeAssignedHours)
-            .navigationDestination(
-                isPresented: $showPreView) {
-                    PreViews().environmentObject(dataManager)
-                    Text("")
+            NavigationLink(destination: PreViews().environmentObject(dataManager), isActive: $showPreView) {
+                EmptyView()
             }
-            .environmentObject(dataManager) // Inject DataManager as environment object
-            .navigationBarBackButtonHidden(true) // Hides the back button
-            .navigationBarHidden(true)
+            Button(action: {
+                showPreView = true
+            }) {
+                Text("Submit")
+                    .padding(.horizontal)
+                    .disabled(!isSelectionComplete)
+                    .opacity(isSelectionComplete ? 1.0 : 0.5)
+            }
+//            Button(action: {
+//                // Save entered hours and route to PreView
+//                showPreView = true
+//            }, label: {
+//                Text("Submit")
+//            })
+//            .disabled(!isAnyEmployeeAssignedHours)
+//            .navigationDestination(
+//                isPresented: $showPreView) {
+//                    PreViews().environmentObject(dataManager)
+//                    Text("")
+//            }
+//            .environmentObject(dataManager) // Inject DataManager as environment object
+//            .navigationBarBackButtonHidden(true) // Hides the back button
+//            .navigationBarHidden(true)
         }.toolbar{MyToolbarItems()}
         .background(EllipticalGradient(colors: [Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
         .onChange(of: dataManager.isDarkMode) { newValue in
