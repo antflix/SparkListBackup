@@ -149,38 +149,31 @@ struct EmployeeView: View {
             Divider().frame(height: 2.0).background(
                 Color("Color 2")
             ).padding(.horizontal)
-            HStack{
+            HStack {
+                NavigationLink(destination: EmployeesViews().environmentObject(dataManager), isActive: $isNavigatingToEmployeesView) {
+                    EmptyView()
+                }
                 Button(action: {
                     // Change the value to control navigation
                     isNavigatingToEmployeesView = true
                 }) {
-                    HStack {
-                        Text("Individual Hours")
-                            .padding(.leading)
-                            .background(Color.clear)
-                    }
-                    .navigationDestination(isPresented: $isNavigatingToEmployeesView) {
-                        EmployeesViews().environmentObject(dataManager)
-                        Text("").hidden()
-                    }
+                    Text("Individual Hours")
+                        .padding(.leading)
                 }
                 Spacer()
                 
-                Button(action: { showPreView = true }, label: {
+                NavigationLink(destination: PreViews().environmentObject(dataManager), isActive: $showPreView) {
+                    EmptyView()
+                }
+                Button(action: {
+                    showPreView = true
+                }) {
                     Text("Submit")
-                        .buttonStyle(PlainButtonStyle())
                         .padding(.horizontal)
                         .disabled(!isSelectionComplete)
                         .opacity(isSelectionComplete ? 1.0 : 0.5)
-                })
-                .navigationDestination(
-                    isPresented: $showPreView) {
-                        PreViews().environmentObject(dataManager)
-                        Text("")
-                            .hidden()
-                    }
+                }
             }
-            
             //                NavigationLink(
             //                    destination: PreViews().environmentObject(dataManager), isActive: $showPreView
             //                ) {
