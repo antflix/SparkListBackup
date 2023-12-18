@@ -202,6 +202,12 @@ struct EmployeeView: View {
             .navigationBarBackButtonHidden(true) // Hides the back button
             .navigationBarHidden(true)
         
+    }.onChange(of: dataManager.isDarkMode) { newValue in
+        UserDefaults.standard.set(newValue, forKey: "isDarkMode")
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController?.overrideUserInterfaceStyle = newValue ? .dark : .light
+        }
     }
         
     //        .foregroundColor(colorScheme == .dark ? Color.blue : Color.black)
