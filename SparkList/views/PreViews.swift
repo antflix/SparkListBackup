@@ -183,6 +183,12 @@ struct PreViews: View {
         
         //                            dismissButton: .default(Text("OK"))
         
+    }.onChange(of: dataManager.isDarkMode) { newValue in
+        UserDefaults.standard.set(newValue, forKey: "isDarkMode")
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController?.overrideUserInterfaceStyle = newValue ? .dark : .light
+        }
     }
     
 }
