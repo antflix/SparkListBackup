@@ -186,13 +186,7 @@ struct PreViews: View {
     }
     
 }
-    .onChange(of: dataManager.isDarkMode) { newValue in
-        UserDefaults.standard.set(newValue, forKey: "isDarkMode")
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
-            window.rootViewController?.overrideUserInterfaceStyle = newValue ? .dark : .light
-        }
-    }
+
     func sendMessage(sms: String) {
             guard let strURL = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                   let url = URL(string: strURL)
