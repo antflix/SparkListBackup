@@ -143,7 +143,7 @@ struct PreViews: View {
                 )
                 .buttonStyle(PlainButtonStyle()) //
                     .padding()
-                NavigationLink(destination: JobsView()) {
+                NavigationLink(destination: JobsView().navigationBarHidden(true)) {
                     HStack {
                         Text("Add More Time")
                             .foregroundColor(Color.orange)
@@ -154,7 +154,8 @@ struct PreViews: View {
                             .font(.title)
                             .background(Color.clear)
                     }
-                }.ignoresSafeArea()
+                }
+                .ignoresSafeArea()
                 .buttonStyle(PlainButtonStyle())
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)
