@@ -198,7 +198,7 @@ struct EmployeeView: View {
                         showInstructions = true
                     }
                 }
-            }
+            }.toolbar{MyToolbarItems()}
             .navigationBarBackButtonHidden(true) // Hides the back button
             .navigationBarHidden(true)
         

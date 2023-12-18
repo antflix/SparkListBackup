@@ -101,7 +101,8 @@ struct EmployeesViews: View {
             .environmentObject(dataManager) // Inject DataManager as environment object
             .navigationBarBackButtonHidden(true) // Hides the back button
             .navigationBarHidden(true)
-        }.background(EllipticalGradient(colors: [Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
+        }.toolbar{MyToolbarItems()}
+        .background(EllipticalGradient(colors: [Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
     }
 }
 

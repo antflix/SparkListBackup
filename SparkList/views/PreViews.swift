@@ -163,7 +163,8 @@ struct PreViews: View {
                     generateSMSBody()
                 }
             }
-        }.background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
+        }.toolbar{MyToolbarItems()}
+        .background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
         
         //            .alert(isPresented: $showAlert) {
         //                Alert(

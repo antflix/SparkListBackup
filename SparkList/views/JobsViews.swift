@@ -126,7 +126,9 @@ struct JobsView: View {
       //                NavigationLink(destination: EmployeeView()) {
       //                    Text("Next")
       //                }
-    }.background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.5))
+    }
+    .toolbar{MyToolbarItems()}
+    .background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.5))
       
   }
 
