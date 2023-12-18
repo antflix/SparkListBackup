@@ -32,7 +32,7 @@ struct ContentView: View {
               ZStack(alignment: .topTrailing) {
                   switch selectedTab {
                   case .jobs:
-//                      JobsView().toolbar{MyToolbarItems()}
+                      JobsView()
                   case .employee:
                       EmployeeView()
 //                          .toolbar{MyToolbarItems()}
