@@ -34,26 +34,27 @@ struct darkmode: View {
                         }
                         
                 } else {
-                    Image("Symbol")
-                        .rotationEffect(Angle(degrees: 180))
-                        .symbolRenderingMode(.multicolor)
-                        .onAppear(){
-                            symbolAnimation.toggle()
-                        }
-                        .foregroundStyle(Color.yellow, Color.orange, Color.yellow)
-                        
-                        .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
-                                        symbolAnimation)
-
-                        .font(.largeTitle)
-                        .onTapGesture {
-                            withAnimation {
-                                dataManager.isDarkMode.toggle()
-                                
-
-
-                            }
-                        }
+                    EmptyView()
+//                    Image("Symbol")
+//                        .rotationEffect(Angle(degrees: 180))
+//                        .symbolRenderingMode(.multicolor)
+//                        .onAppear(){
+//                            symbolAnimation.toggle()
+//                        }
+//                        .foregroundStyle(Color.yellow, Color.orange, Color.yellow)
+//                        
+//                        .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
+//                                        symbolAnimation)
+//
+//                        .font(.largeTitle)
+//                        .onTapGesture {
+//                            withAnimation {
+//                                dataManager.isDarkMode.toggle()
+//                                
+//
+//
+//                            }
+//                        }
                 }
             
             }
