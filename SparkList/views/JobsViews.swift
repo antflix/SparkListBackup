@@ -122,7 +122,10 @@ struct JobsView: View {
       Spacer()
       SearchBar(text: $searchText)
             .background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.5))
-            .padding()
+            .padding(.bottom)
+        Divider().frame(height: 2.0).background(
+            Color("Color 2")
+        ).padding(.horizontal)
                     
       //                NavigationLink(destination: EmployeeView()) {
       //                    Text("Next")
