@@ -69,6 +69,7 @@ class DataManager: ObservableObject {
     func clearAllSMSData() {
         dataManager.allSMSs = "" // Clear the string
         dataManager.allSMSBodies = [] // Clear the array
+        
     }
     
     func saveSelectedNumbers() {
