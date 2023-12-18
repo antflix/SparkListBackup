@@ -32,18 +32,18 @@ struct ContentView: View {
               ZStack(alignment: .topTrailing) {
                   switch selectedTab {
                   case .jobs:
-                      JobsView().toolbar{MyToolbarItems()}
+//                      JobsView().toolbar{MyToolbarItems()}
                   case .employee:
                       EmployeeView()
-                          .toolbar{MyToolbarItems()}
+//                          .toolbar{MyToolbarItems()}
                           .environmentObject(dataManager)
                   case .employees:
                       EmployeesViews()
-                          .toolbar{MyToolbarItems()}
+//                          .toolbar{MyToolbarItems()}
                           .environmentObject(dataManager)
                   case .preview:
                       PreViews()
-                          .toolbar{MyToolbarItems()}
+//                          .toolbar{MyToolbarItems()}
                           .environmentObject(dataManager)
                   }
               
