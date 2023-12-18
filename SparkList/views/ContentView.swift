@@ -27,65 +27,30 @@ struct ContentView: View {
     }
     
     @State private var selectedTab: Tab = .jobs  // Track selected tab
-    
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            
-            
-            switch selectedTab {
-            case .jobs:
-                
-                NavigationStack {
-                    
-                    JobsView()
-                     
-//                        .navigationBarBackButtonHidden(true)// Pass
-//                        .navigationBarHidden(true)
-                }
-            case .employee:
-                NavigationStack {
-                    EmployeeView()
-                        .environmentObject(dataManager)
-                        .navigationBarTitleDisplayMode(.inline)
-                     
-//                        .navigationBarBackButtonHidden(true)// Pass
-//                        .navigationBarHidden(true)
-                }
-                
-            case .employees:
-                NavigationStack {
-                    EmployeesViews()
-                        .environmentObject(dataManager)
-                        .navigationBarTitleDisplayMode(.inline)
-                     
-//                        .navigationBarBackButtonHidden(true)// Pass DataManager to EmployeesViews
-//                        .navigationBarItems(leading: EmptyView())
-//                        .navigationBarHidden(true)
-                        
-                }
-                
-            case .preview:
-                
-                NavigationStack {
-                    PreViews()
-                        .environmentObject(dataManager)
-                        .navigationBarTitleDisplayMode(.inline)
-                      
-//                        .navigationBarBackButtonHidden(true)
-//                        .navigationBarItems(leading: EmptyView())
-//                        .navigationBarHidden(true)
-                }
-            }
-            
-        }.toolbar {
-            MyToolbarItems()
-        }
-        .navigationBarBackButtonHidden(true)
-                                .navigationBarItems(leading: EmptyView())
-                                .navigationBarHidden(true)
-        
-    }
-}
+          NavigationView {
+              ZStack(alignment: .topTrailing) {
+                  switch selectedTab {
+                  case .jobs:
+                      JobsView()
+                  case .employee:
+                      EmployeeView()
+                          .environmentObject(dataManager)
+                  case .employees:
+                      EmployeesViews()
+                          .environmentObject(dataManager)
+                  case .preview:
+                      PreViews()
+                          .environmentObject(dataManager)
+                  }
+              }
+              .toolbar {
+                  MyToolbarItems()
+              }
+              .navigationBarHidden(true)
+          }
+      }
+  }
 
 //            if isSettingsViewPresented {
 //                GeometryReader { geometry in
