@@ -93,8 +93,8 @@ struct EmployeesViews: View {
             }) {
                 Text("Submit")
                     .padding(.horizontal)
-                    .disabled(!isSelectionComplete)
-                    .opacity(isSelectionComplete ? 1.0 : 0.5)
+                    .disabled(!isAnyEmployeeAssignedHours)
+                    .opacity(isAnyEmployeeAssignedHours ? 1.0 : 0.5)
             }
 //            Button(action: {
 //                // Save entered hours and route to PreView
