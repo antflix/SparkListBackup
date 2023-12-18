@@ -22,7 +22,7 @@ struct AlarmSettingView: View {
                 .foregroundStyle(Color("Color 1"))// Use a wheel-style picker for time selection
             HStack{
                 Button("Set Notification ") {
-                    scheduleAlarm(at: selectedTime, soundName: "customalarm.mp3")
+                    scheduleAlarm(at: selectedTime, soundName: "customAlarm-2.mp3")
                     isAlarmSet = true
                 }.buttonStyle(PlainButtonStyle())
                 .padding()
@@ -70,7 +70,7 @@ struct AlarmSettingView: View {
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
-        let request = UNNotificationRequest(identifier: "newAlarm", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "timeAlarm", content: content, trigger: trigger)
         
         center.add(request) { error in
             if let error = error {
@@ -83,7 +83,7 @@ struct AlarmSettingView: View {
 }
 func cancelAlarm() {
     let center = UNUserNotificationCenter.current()
-    center.removePendingNotificationRequests(withIdentifiers: ["newAlarm"]) // Replace "dailyAlarm" with your notification identifier
+    center.removePendingNotificationRequests(withIdentifiers: ["timeAlarm"]) // Replace "dailyAlarm" with your notification identifier
 }
 #if DEBUG
 struct AlarmSettingView_Previews: PreviewProvider {
