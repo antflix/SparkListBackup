@@ -165,6 +165,13 @@ struct PreViews: View {
             }
         }.toolbar{MyToolbarItems()}
         .background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
+        .onChange(of: dataManager.isDarkMode) { newValue in
+            UserDefaults.standard.set(newValue, forKey: "isDarkMode")
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let window = windowScene.windows.first {
+                window.rootViewController?.overrideUserInterfaceStyle = newValue ? .dark : .light
+            }
+        }
         
         //            .alert(isPresented: $showAlert) {
         //                Alert(
