@@ -22,7 +22,7 @@ struct AlarmSettingView: View {
                 .foregroundStyle(Color("Color 1"))// Use a wheel-style picker for time selection
             HStack{
                 Button("Set Notification ") {
-                    scheduleAlarm(at: selectedTime, soundName: "alarm.mp3")
+                    scheduleAlarm(at: selectedTime, soundName: "customalarm.mp3")
                     isAlarmSet = true
                 }.buttonStyle(PlainButtonStyle())
                 .padding()
