@@ -85,6 +85,8 @@ struct ContentView: View {
                 }
             }
             
+        }.toolbar {
+            MyToolbarItems()
         }
         
     }
