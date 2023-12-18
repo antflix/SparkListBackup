@@ -28,7 +28,7 @@ struct ContentView: View {
     
     @State private var selectedTab: Tab = .jobs  // Track selected tab
     var body: some View {
-          NavigationView {
+          NavigationStack {
               ZStack(alignment: .topTrailing) {
                   switch selectedTab {
                   case .jobs:
