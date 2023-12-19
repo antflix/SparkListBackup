@@ -99,13 +99,22 @@ struct ContactsView: View {
             }
             //  1 is not empty
             // 2 is empty
-            if !dataManager.selectedContactName.isEmpty && !dataManager.selectedContactName2.isEmpty {
+            if !dataManager.selectedContactName.isEmpty || !dataManager.selectedContactName2.isEmpty {
                 //                Text("Selected Contact 1: \(dataManager.selectedContactName)")
                 //                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
                 VStack{
                     VStack{
-                        if let contact1 = dataManager.selectedContact1 {
-                            ContactCardView(contact: contact1)
+                        if dataManager.selectedContact1 != nil {
+                            let contact1 = dataManager.selectedContact1
+                            ContactCardView(contact: contact1!)
+                            Button("Clear Contact 1") {
+                                dataManager.clearFirstContact()
+                            }
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.red)
+                            .cornerRadius(8)
+                            .padding()
                         }
                         HStack{
                             Button(action: {
@@ -129,16 +138,7 @@ struct ContactsView: View {
                                 
                             }
                             .padding()
-                            if dataManager.selectedContact1 != nil {
-                                
-                                Button("Clear Contact 1") {
-                                    dataManager.clearFirstContact()
-                                }
-                                .padding()
-                                .foregroundColor(.white)
-                                .background(Color.red)
-                                .cornerRadius(8)
-                                .padding()}
+                            
                         }//contact 1 HStack
                         
                     }//contact 1 vstack
@@ -156,8 +156,17 @@ struct ContactsView: View {
                         
                     //2 add contact button
                     VStack{
-                        if let contact2 = dataManager.selectedContact2 {
-                            ContactCardView(contact: contact2)
+                        if dataManager.selectedContact2 != nil {
+                            let contact2 = dataManager.selectedContact2
+                            ContactCardView(contact: contact2!)
+                            Button("Clear Contact 2") {
+                                dataManager.clearFirstContact()
+                            }
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.red)
+                            .cornerRadius(8)
+                            .padding()
                         }
                         HStack{
                             Button(action: {
@@ -180,16 +189,7 @@ struct ContactsView: View {
                                 
                             }
                             .padding()
-                            if dataManager.selectedContact2 != nil {
-                                
-                                Button("Clear Contact 2") {
-                                    dataManager.clearSecondContact()
-                                }
-                                .padding()
-                                .foregroundColor(.white)
-                                .background(Color.red)
-                                .cornerRadius(8)
-                                .padding()}
+                          
                             
                         } //2nd contack hstack
                         
