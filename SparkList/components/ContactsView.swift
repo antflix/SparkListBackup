@@ -99,7 +99,7 @@ struct ContactsView: View {
             }
             //  1 is not empty
             // 2 is empty
-            if !dataManager.selectedContactName.isEmpty || !dataManager.selectedContactName2.isEmpty {
+            if !dataManager.selectedContactName.isEmpty && !dataManager.selectedContactName2.isEmpty {
                 //                Text("Selected Contact 1: \(dataManager.selectedContactName)")
                 //                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
                 VStack{
@@ -142,6 +142,8 @@ struct ContactsView: View {
                         }//contact 1 HStack
                         
                     }//contact 1 vstack
+                    
+                    
                     .padding()
                     //   1 clear button
                     VStack{
