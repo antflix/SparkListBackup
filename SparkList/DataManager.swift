@@ -81,7 +81,7 @@ class DataManager: ObservableObject {
         }
     }
     func hasSavedContacts() -> Bool {
-        return UserDefaults.standard.object(forKey: "SelectedContact1") != nil &&
+        return UserDefaults.standard.object(forKey: "SelectedContact1") != nil ||
                UserDefaults.standard.object(forKey: "SelectedContact2") != nil
     }
 

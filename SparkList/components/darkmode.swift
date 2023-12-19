@@ -9,7 +9,7 @@ struct darkmode: View {
 
         
         var body: some View {
-        
+            let _ = Self._printChanges()
             VStack {
                 if colorScheme == .light {
                     
@@ -56,7 +56,7 @@ struct darkmode: View {
 //                        }
 //                }
             
-            }
+            }.background(.random)
             .environment(\.colorScheme, dataManager.isDarkMode ? .dark : .light) // Set the environment color scheme
             .onAppear {
                 dataManager.isDarkMode = (colorScheme == .light) // Set the initial state based on color scheme
