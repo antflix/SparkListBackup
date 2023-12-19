@@ -13,18 +13,19 @@ struct ContactsView: View {
             HStack {
                 VStack {
                     Text("Time Contact?").font(Font.custom("Quicksand", size: 30).bold())
-                        .frame(alignment: .center)
-
+                        .frame( alignment: .center)
+                    
                     Text("Who do you need to turn time into?").font(Font.custom("Quicksand", size: 12).bold())
                         .frame(maxWidth: .infinity * 0.90, alignment: .center)
                         .foregroundStyle(Color.black)
+
                 }
                 .padding()
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .font(.headline)
             }
-
+            
             // 1 is empty
             // 2 is empty
             if dataManager.selectedContactName.isEmpty && dataManager.selectedContactName2.isEmpty {
@@ -42,136 +43,158 @@ struct ContactsView: View {
                         symbolAnimation.toggle()
                     }
                     .foregroundStyle(Color.red, Color.yellow)
-
+                
                     .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
-                        symbolAnimation)
+                                    symbolAnimation)
                 Text("Please choose 1 or 2 contacts to send your time to.")
                 Spacer()
-
-                // add contact 1
+                
+                //add contact 1
                 Button(action: {
                     self.isContact1PickerPresented = true
                 }) { HStack {
                     Image(systemName: "person.fill.questionmark")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(Color.red, Color.green)
-
+                    
                     Text("Select Contact 1")
-
+                    
                 }.padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
                 }
                 .sheet(isPresented: $isContact1PickerPresented) {
+                    
                     ContactPickerViewController()
+                    
+                    
                 }
                 .padding()
 //                if let contact1 = dataManager.selectedContact1 {
 //                    ContactCardView(contact: contact1)
 //                }
-                // add contact2
+                //add contact2
                 Button(action: {
                     self.isContact2PickerPresented = true
                 }) { HStack {
                     Image(systemName: "person.fill.questionmark")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(Color.red, Color.green)
-
+                    
                     Text("Select Contact 2")
-
+                    
                 }.padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
                 }
                 .sheet(isPresented: $isContact2PickerPresented) {
+                    
                     ContactPickerViewController()
+                    
                 }
                 .padding()
-            } else {
-                VStack {
-                    // Check if contact 1 is selected
-                    if dataManager.selectedContact1 != nil {
-                        // Display Contact 1 card and clear button
-                        let contact1 = dataManager.selectedContact1
-                        ContactCardView(contact: contact1!)
-                        Button("Clear Contact 1") {
-                            dataManager.clearFirstContact()
+          
+            }
+            //  1 is not empty
+            // 2 is empty
+            if !dataManager.selectedContactName.isEmpty || !dataManager.selectedContactName2.isEmpty {
+                //                Text("Selected Contact 1: \(dataManager.selectedContactName)")
+                //                                   Text("Phone Number 1: \(dataManager.selectedContactPhoneNumber)").padding()
+                VStack{
+                    VStack{
+                        if let contact1 = dataManager.selectedContact1 {
+                            ContactCardView(contact: contact1)
                         }
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.red)
-                        .cornerRadius(8)
-                        .padding()
-
-                        // Check if contact 2 is selected
-                        if dataManager.selectedContact2 != nil {
-                            // Display divider and Contact 2 card with clear button
-                            let contact2 = dataManager.selectedContact2
-                            VStack {
-                                Spacer()
-                                Divider().frame(height: 2.0).background(Color("Color 2")).padding(.horizontal)
-                                Spacer()
-                            }
-                            ContactCardView(contact: contact2!)
-                            Button("Clear Contact 2") {
-                                dataManager.clearSecondContact()
-                            }
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(Color.red)
-                            .cornerRadius(8)
-                            .padding()
-                        }
-           
-                            else {
-                                // If Contact 2 is not selected, provide an option to select it
-                                HStack {
-                                    Button(action: {
-                                        self.isContact2PickerPresented = true
-                                    }) { HStack {
-                                        Image(systemName: "person.fill.questionmark")
-                                            .symbolRenderingMode(.palette)
-                                            .foregroundStyle(Color.red, Color.green)
-                                        Text("Select Contact 2")
-                                    }
-                                    .padding()
+                        HStack{
+                            Button(action: {
+                                self.isContact1PickerPresented = true
+                            }) { HStack {
+                                Image(systemName: "person.fill.questionmark")
+                                    .symbolRenderingMode(.palette)
+                                    .foregroundStyle(Color.red, Color.green)
+                                
+                                Text("Select Contact 1")
+                                
+                            }.padding()
                                     .foregroundColor(.white)
                                     .background(Color.blue)
                                     .cornerRadius(8)
-                                    }
-                                    .sheet(isPresented: $isContact2PickerPresented) {
-                                        ContactPickerViewController()
-                                    }
-                                    .padding()
-                                } // End of Contact 2 selection HStack
                             }
-                        } else {
-                            // If Contact 1 is not selected, provide an option to select it
-                            HStack {
-                                Button(action: {
-                                    self.isContact1PickerPresented = true
-                                }) { HStack {
-                                    Image(systemName: "person.fill.questionmark")
-                                        .symbolRenderingMode(.palette)
-                                        .foregroundStyle(Color.red, Color.green)
-                                    Text("Select Contact 1")
+                            .sheet(isPresented: $isContact1PickerPresented) {
+                                
+                                ContactPickerViewController()
+                                
+                                
+                            }
+                            .padding()
+                            if let contact1 = dataManager.selectedContact1 {
+                                
+                                Button("Clear Contact 1") {
+                                    dataManager.clearSecondContact()
                                 }
                                 .padding()
                                 .foregroundColor(.white)
-                                .background(Color.blue)
+                                .background(Color.red)
                                 .cornerRadius(8)
-                                }
-                                .sheet(isPresented: $isContact1PickerPresented) {
-                                    ContactPickerViewController()
-                                }
-                            } // End of Contact 1 selection HStack
+                                .padding()}
+                        }//contact 1 HStack
+                        
+                    }//contact 1 vstack
+                    .padding()
+                    //   1 clear button
+                    VStack{
+                        Spacer()
+                        Divider().frame(height: 2.0).background(
+                            Color("Color 2")
+                        ).padding(.horizontal)
+                        Spacer()
+                    }
+                        
+                    //2 add contact button
+                    VStack{
+                        if let contact2 = dataManager.selectedContact2 {
+                            ContactCardView(contact: contact2)
                         }
-                    } // End of Contact 1 VStack
-                } // End of VStack wrapping both contacts' code
-            } // End of if statement for both contacts
-            // Existing Code Below...
+                        HStack{
+                            Button(action: {
+                                self.isContact2PickerPresented = true
+                            }) { HStack {
+                                Image(systemName: "person.fill.questionmark")
+                                    .symbolRenderingMode(.palette)
+                                    .foregroundStyle(Color.red, Color.green)
+                                
+                                Text("Select Contact 2")
+                                
+                            }.padding()
+                                    .foregroundColor(.white)
+                                    .background(Color.blue)
+                                    .cornerRadius(8)
+                            }
+                            .sheet(isPresented: $isContact2PickerPresented) {
+                                
+                                ContactPickerViewController()
+                                
+                            }
+                            .padding()
+                            if let contact2 = dataManager.selectedContact2 {
+                                
+                                Button("Clear Contact 2") {
+                                    dataManager.clearSecondContact()
+                                }
+                                .padding()
+                                .foregroundColor(.white)
+                                .background(Color.red)
+                                .cornerRadius(8)
+                                .padding()}
+                            
+                        } //2nd contack hstack
+                        
+                    }.padding() //2nd contact vstack
+                }//vstack wrapped around both contacts code
+            }//if statement for both contacts
+        }//vstack wrapped
         .background(EllipticalGradient(colors: [Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
         .onAppear {
             // Check if there are saved contacts
@@ -179,19 +202,30 @@ struct ContactsView: View {
                 // Update the state to indicate saved contacts are present
                 hasSavedContacts = true
 
+                // Add logic to show existing saved contacts if available
                 if let savedContact1Data = UserDefaults.standard.data(forKey: "SelectedContact1"),
                    let savedContact2Data = UserDefaults.standard.data(forKey: "SelectedContact2") {
-                    if let savedContact1 = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CNContact.self, from: savedContact1Data) {
-                        dataManager.selectedContact1 = savedContact1
-                    } else {
-                        print("Error decoding savedContact1: Unable to decode CNContact from data")
+                    do {
+                        let unarchiver = try NSKeyedUnarchiver(forReadingFrom: savedContact1Data)
+                        if let savedContact1 = try unarchiver.decodeTopLevelObject(forKey: NSKeyedArchiveRootObjectKey) as? CNContact {
+                            dataManager.selectedContact1 = savedContact1
+                        }
+                        unarchiver.finishDecoding()
+                    } catch {
+                        print("Error decoding savedContact1: \(error)")
                     }
 
-                    if let savedContact2 = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CNContact.self, from: savedContact2Data) {
-                        dataManager.selectedContact2 = savedContact2
-                    } else {
-                        print("Error decoding savedContact2: Unable to decode CNContact from data")
+                    do {
+                        let unarchiver = try NSKeyedUnarchiver(forReadingFrom: savedContact2Data)
+                        if let savedContact2 = try unarchiver.decodeTopLevelObject(forKey: NSKeyedArchiveRootObjectKey) as? CNContact {
+                            dataManager.selectedContact2 = savedContact2
+                        }
+                        unarchiver.finishDecoding()
+                    } catch {
+                        print("Error decoding savedContact2: \(error)")
                     }
+                
+                
                 }
             }
         }
@@ -207,7 +241,7 @@ struct ProfileInfoView: View {
             Text("\(contact.givenName) \(contact.familyName)")
                 .font(.title)
                 .foregroundColor(.black)
-
+            
             // Display additional contact details...
         }
         .padding()
@@ -224,22 +258,22 @@ struct ContactCardView: View {
     var body: some View {
         VStack {
             if let imageData = contact.thumbnailImageData, let image = UIImage(data: imageData) {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 75, height: 75)
-                    .clipShape(Circle())
-                    .padding()
-            } else {
-                // Placeholder image when contact has no picture
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 75, height: 75)
-                    .clipShape(Circle())
-                    .padding()
-                    .foregroundColor(.gray) // Adjust placeholder color as needed
-            }
+                           Image(uiImage: image)
+                               .resizable()
+                               .aspectRatio(contentMode: .fit)
+                               .frame(width: 75, height: 75)
+                               .clipShape(Circle())
+                               .padding()
+                       } else {
+                           // Placeholder image when contact has no picture
+                           Image(systemName: "person.circle.fill")
+                               .resizable()
+                               .aspectRatio(contentMode: .fit)
+                               .frame(width: 75, height: 75)
+                               .clipShape(Circle())
+                               .padding()
+                               .foregroundColor(.gray) // Adjust placeholder color as needed
+                       }
 
             Text("\(contact.givenName) \(contact.familyName)")
                 .font(.title)
