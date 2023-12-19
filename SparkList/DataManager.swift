@@ -100,10 +100,12 @@ class DataManager: ObservableObject {
     func clearFirstContact() {
         selectedContactName = ""
         selectedContactPhoneNumber = ""
-        }
+        UserDefaults.standard.removeObject(forKey: "SelectedContact1")
+    }
     func clearSecondContact() {
         selectedContactName2 = ""
         selectedContactPhoneNumber2 = ""
+        UserDefaults.standard.removeObject(forKey: "SelectedContact2")
 
         
     }
