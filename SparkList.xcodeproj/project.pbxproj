@@ -1,0 +1,540 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE8E49FE2B137F5B00435031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8E49FD2B137F5B00435031 /* Assets.xcassets */; };
+		CE8E4A022B137F5B00435031 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8E4A012B137F5B00435031 /* Preview Assets.xcassets */; };
+		CEBCD8752B2E6000007AC15C /* modetogglebutton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD86B2B2E6000007AC15C /* modetogglebutton.swift */; };
+		CEBCD8762B2E6001007AC15C /* P22_FabulaToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD86C2B2E6000007AC15C /* P22_FabulaToggleStyle.swift */; };
+		CEBCD8772B2E6001007AC15C /* timePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD86D2B2E6000007AC15C /* timePicker.swift */; };
+		CEBCD8782B2E6001007AC15C /* hoursPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD86E2B2E6000007AC15C /* hoursPicker.swift */; };
+		CEBCD8792B2E6001007AC15C /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD86F2B2E6000007AC15C /* LaunchScreen.swift */; };
+		CEBCD87A2B2E6001007AC15C /* toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8702B2E6000007AC15C /* toggle.swift */; };
+		CEBCD87B2B2E6001007AC15C /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8712B2E6000007AC15C /* AlarmSettingView.swift */; };
+		CEBCD87C2B2E6001007AC15C /* darkmode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8722B2E6000007AC15C /* darkmode.swift */; };
+		CEBCD87D2B2E6001007AC15C /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8732B2E6000007AC15C /* ContactsView.swift */; };
+		CEBCD87E2B2E6001007AC15C /* getContact2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8742B2E6000007AC15C /* getContact2.swift */; };
+		CEBCD8842B2E603D007AC15C /* ContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD87F2B2E603D007AC15C /* ContactPickerViewController.swift */; };
+		CEBCD8862B2E603D007AC15C /* SMSGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8812B2E603D007AC15C /* SMSGenerator.swift */; };
+		CEBCD8872B2E603D007AC15C /* example.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8822B2E603D007AC15C /* example.swift */; };
+		CEBCD8882B2E603D007AC15C /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8832B2E603D007AC15C /* extensions.swift */; };
+		CEBCD88A2B2E60A3007AC15C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8892B2E60A3007AC15C /* DataManager.swift */; };
+		CEBCD8912B2E60B8007AC15C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD88B2B2E60B8007AC15C /* SettingsView.swift */; };
+		CEBCD8922B2E60B8007AC15C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD88C2B2E60B8007AC15C /* ContentView.swift */; };
+		CEBCD8932B2E60B8007AC15C /* PreViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD88D2B2E60B8007AC15C /* PreViews.swift */; };
+		CEBCD8942B2E60B8007AC15C /* EmployeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD88E2B2E60B8007AC15C /* EmployeeView.swift */; };
+		CEBCD8952B2E60B8007AC15C /* EmployeesViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD88F2B2E60B8007AC15C /* EmployeesViews.swift */; };
+		CEBCD8962B2E60B8007AC15C /* JobsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8902B2E60B8007AC15C /* JobsViews.swift */; };
+		CEBCD8982B2E60EC007AC15C /* SparkListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD8972B2E60EC007AC15C /* SparkListApp.swift */; };
+		CEBCD89D2B2EA892007AC15C /* toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD89C2B2EA892007AC15C /* toolbar.swift */; };
+		CEBCD89F2B2FB33A007AC15C /* AlarmSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD89E2B2FB33A007AC15C /* AlarmSound.swift */; };
+		CEBCD8A12B2FBA35007AC15C /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEBCD8A02B2FBA35007AC15C /* alarm.mp3 */; };
+		CEBCD8A32B2FCE3A007AC15C /* customalarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEBCD8A22B2FCE39007AC15C /* customalarm.mp3 */; };
+		CEBCD8A52B2FD39A007AC15C /* customAlarm-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEBCD8A42B2FD39A007AC15C /* customAlarm-2.mp3 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		CEE2D5C82B199DA200E11F7D /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = text.plist;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# builtin-copyPlist\n";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXFileReference section */
+		CE04A3B02B2839500030F970 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CE8E49F62B137F5800435031 /* SparkList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SparkList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE8E49FD2B137F5B00435031 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE8E49FF2B137F5B00435031 /* SparkList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SparkList.entitlements; sourceTree = "<group>"; };
+		CE8E4A012B137F5B00435031 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CE8E538A2B13D1AD00435031 /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
+		CEBCD86B2B2E6000007AC15C /* modetogglebutton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = modetogglebutton.swift; path = ../../../SparkListBackup/SparkList/components/modetogglebutton.swift; sourceTree = "<group>"; };
+		CEBCD86C2B2E6000007AC15C /* P22_FabulaToggleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = P22_FabulaToggleStyle.swift; path = ../../../SparkListBackup/SparkList/components/P22_FabulaToggleStyle.swift; sourceTree = "<group>"; };
+		CEBCD86D2B2E6000007AC15C /* timePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = timePicker.swift; path = ../../../SparkListBackup/SparkList/components/timePicker.swift; sourceTree = "<group>"; };
+		CEBCD86E2B2E6000007AC15C /* hoursPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = hoursPicker.swift; path = ../../../SparkListBackup/SparkList/components/hoursPicker.swift; sourceTree = "<group>"; };
+		CEBCD86F2B2E6000007AC15C /* LaunchScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchScreen.swift; path = ../../../SparkListBackup/SparkList/components/LaunchScreen.swift; sourceTree = "<group>"; };
+		CEBCD8702B2E6000007AC15C /* toggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = toggle.swift; path = ../../../SparkListBackup/SparkList/components/toggle.swift; sourceTree = "<group>"; };
+		CEBCD8712B2E6000007AC15C /* AlarmSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlarmSettingView.swift; path = ../../../SparkListBackup/SparkList/components/AlarmSettingView.swift; sourceTree = "<group>"; };
+		CEBCD8722B2E6000007AC15C /* darkmode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = darkmode.swift; path = ../../../SparkListBackup/SparkList/components/darkmode.swift; sourceTree = "<group>"; };
+		CEBCD8732B2E6000007AC15C /* ContactsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactsView.swift; path = ../../../SparkListBackup/SparkList/components/ContactsView.swift; sourceTree = "<group>"; };
+		CEBCD8742B2E6000007AC15C /* getContact2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = getContact2.swift; path = ../../../SparkListBackup/SparkList/components/getContact2.swift; sourceTree = "<group>"; };
+		CEBCD87F2B2E603D007AC15C /* ContactPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactPickerViewController.swift; path = ../../../SparkListBackup/SparkList/functions/ContactPickerViewController.swift; sourceTree = "<group>"; };
+		CEBCD8812B2E603D007AC15C /* SMSGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSGenerator.swift; path = ../../../SparkListBackup/SparkList/functions/SMSGenerator.swift; sourceTree = "<group>"; };
+		CEBCD8822B2E603D007AC15C /* example.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = example.swift; path = ../../../SparkListBackup/SparkList/functions/example.swift; sourceTree = "<group>"; };
+		CEBCD8832B2E603D007AC15C /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = extensions.swift; path = ../../../SparkListBackup/SparkList/functions/extensions.swift; sourceTree = "<group>"; };
+		CEBCD8892B2E60A3007AC15C /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = ../../SparkListBackup/SparkList/DataManager.swift; sourceTree = "<group>"; };
+		CEBCD88B2B2E60B8007AC15C /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = ../../../SparkListBackup/SparkList/views/SettingsView.swift; sourceTree = "<group>"; };
+		CEBCD88C2B2E60B8007AC15C /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ../../../SparkListBackup/SparkList/views/ContentView.swift; sourceTree = "<group>"; };
+		CEBCD88D2B2E60B8007AC15C /* PreViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreViews.swift; path = ../../../SparkListBackup/SparkList/views/PreViews.swift; sourceTree = "<group>"; };
+		CEBCD88E2B2E60B8007AC15C /* EmployeeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmployeeView.swift; path = ../../../SparkListBackup/SparkList/views/EmployeeView.swift; sourceTree = "<group>"; };
+		CEBCD88F2B2E60B8007AC15C /* EmployeesViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmployeesViews.swift; path = ../../../SparkListBackup/SparkList/views/EmployeesViews.swift; sourceTree = "<group>"; };
+		CEBCD8902B2E60B8007AC15C /* JobsViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JobsViews.swift; path = ../../../SparkListBackup/SparkList/views/JobsViews.swift; sourceTree = "<group>"; };
+		CEBCD8972B2E60EC007AC15C /* SparkListApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SparkListApp.swift; path = ../../SparkListBackup/SparkList/SparkListApp.swift; sourceTree = "<group>"; };
+		CEBCD89C2B2EA892007AC15C /* toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toolbar.swift; sourceTree = "<group>"; };
+		CEBCD89E2B2FB33A007AC15C /* AlarmSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSound.swift; sourceTree = "<group>"; };
+		CEBCD8A02B2FBA35007AC15C /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
+		CEBCD8A22B2FCE39007AC15C /* customalarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = customalarm.mp3; sourceTree = "<group>"; };
+		CEBCD8A42B2FD39A007AC15C /* customAlarm-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "customAlarm-2.mp3"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE8E49F32B137F5800435031 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE5C7CEC2B16E4ED0027EB4C /* functions */ = {
+			isa = PBXGroup;
+			children = (
+				CEBCD87F2B2E603D007AC15C /* ContactPickerViewController.swift */,
+				CEBCD8822B2E603D007AC15C /* example.swift */,
+				CEBCD8832B2E603D007AC15C /* extensions.swift */,
+				CEBCD8812B2E603D007AC15C /* SMSGenerator.swift */,
+			);
+			path = functions;
+			sourceTree = "<group>";
+		};
+		CE8E49ED2B137F5800435031 = {
+			isa = PBXGroup;
+			children = (
+				CE8E49F82B137F5800435031 /* SparkList */,
+				CE8E49F72B137F5800435031 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE8E49F72B137F5800435031 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE8E49F62B137F5800435031 /* SparkList.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE8E49F82B137F5800435031 /* SparkList */ = {
+			isa = PBXGroup;
+			children = (
+				CE04A3B02B2839500030F970 /* Info.plist */,
+				CE9E98452B23B77D007FC3FC /* components */,
+				CE5C7CEC2B16E4ED0027EB4C /* functions */,
+				CEBCD8892B2E60A3007AC15C /* DataManager.swift */,
+				CE8E4A0A2B13883C00435031 /* views */,
+				CEBCD8972B2E60EC007AC15C /* SparkListApp.swift */,
+				CE8E49FD2B137F5B00435031 /* Assets.xcassets */,
+				CE8E538A2B13D1AD00435031 /* Contents.json */,
+				CE8E49FF2B137F5B00435031 /* SparkList.entitlements */,
+				CE8E4A002B137F5B00435031 /* Preview Content */,
+			);
+			path = SparkList;
+			sourceTree = "<group>";
+		};
+		CE8E4A002B137F5B00435031 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				CE8E4A012B137F5B00435031 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CE8E4A0A2B13883C00435031 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				CEBCD88C2B2E60B8007AC15C /* ContentView.swift */,
+				CEBCD88F2B2E60B8007AC15C /* EmployeesViews.swift */,
+				CEBCD88E2B2E60B8007AC15C /* EmployeeView.swift */,
+				CEBCD8902B2E60B8007AC15C /* JobsViews.swift */,
+				CEBCD88D2B2E60B8007AC15C /* PreViews.swift */,
+				CEBCD88B2B2E60B8007AC15C /* SettingsView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		CE9E98452B23B77D007FC3FC /* components */ = {
+			isa = PBXGroup;
+			children = (
+				CEBCD8A22B2FCE39007AC15C /* customalarm.mp3 */,
+				CEBCD8A02B2FBA35007AC15C /* alarm.mp3 */,
+				CEBCD8712B2E6000007AC15C /* AlarmSettingView.swift */,
+				CEBCD8A42B2FD39A007AC15C /* customAlarm-2.mp3 */,
+				CEBCD8732B2E6000007AC15C /* ContactsView.swift */,
+				CEBCD8722B2E6000007AC15C /* darkmode.swift */,
+				CEBCD8742B2E6000007AC15C /* getContact2.swift */,
+				CEBCD86E2B2E6000007AC15C /* hoursPicker.swift */,
+				CEBCD86F2B2E6000007AC15C /* LaunchScreen.swift */,
+				CEBCD86B2B2E6000007AC15C /* modetogglebutton.swift */,
+				CEBCD86C2B2E6000007AC15C /* P22_FabulaToggleStyle.swift */,
+				CEBCD86D2B2E6000007AC15C /* timePicker.swift */,
+				CEBCD8702B2E6000007AC15C /* toggle.swift */,
+				CEBCD89C2B2EA892007AC15C /* toolbar.swift */,
+				CEBCD89E2B2FB33A007AC15C /* AlarmSound.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE8E49F52B137F5800435031 /* SparkList */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE8E4A052B137F5B00435031 /* Build configuration list for PBXNativeTarget "SparkList" */;
+			buildPhases = (
+				CE8E49F22B137F5800435031 /* Sources */,
+				CE8E49F32B137F5800435031 /* Frameworks */,
+				CE8E49F42B137F5800435031 /* Resources */,
+				CEBCD89B2B2E635C007AC15C /* ShellScript */,
+			);
+			buildRules = (
+				CEE2D5C82B199DA200E11F7D /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = SparkList;
+			productName = SparkList;
+			productReference = CE8E49F62B137F5800435031 /* SparkList.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE8E49EE2B137F5800435031 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					CE8E49F52B137F5800435031 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+				};
+			};
+			buildConfigurationList = CE8E49F12B137F5800435031 /* Build configuration list for PBXProject "SparkList" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CE8E49ED2B137F5800435031;
+			productRefGroup = CE8E49F72B137F5800435031 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE8E49F52B137F5800435031 /* SparkList */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE8E49F42B137F5800435031 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE8E4A022B137F5B00435031 /* Preview Assets.xcassets in Resources */,
+				CEBCD8A32B2FCE3A007AC15C /* customalarm.mp3 in Resources */,
+				CE8E49FE2B137F5B00435031 /* Assets.xcassets in Resources */,
+				CEBCD8A12B2FBA35007AC15C /* alarm.mp3 in Resources */,
+				CEBCD8A52B2FD39A007AC15C /* customAlarm-2.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CEBCD89B2B2E635C007AC15C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\necho \"build Successful\"\nNOW=$(date +\"%Y-%m-%d_%H%M\")\n\n# Add debugging statements\necho \"Backing up files...\"\nrsync -ru --exclude=.git /Users/user/Desktop/SparkList/SparkList/ /Users/user/Desktop/SparkListBackup/SparkList\n\necho \"Moving to backup directory...\"\ncd /Users/user/Desktop/SparkListBackup/SparkList\n\necho \"Adding files to Git...\"\ngit add -A\n\necho \"Committing changes...\"\ngit commit --allow-empty -m \"Backup: $NOW\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE8E49F22B137F5800435031 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEBCD8872B2E603D007AC15C /* example.swift in Sources */,
+				CEBCD89F2B2FB33A007AC15C /* AlarmSound.swift in Sources */,
+				CEBCD8922B2E60B8007AC15C /* ContentView.swift in Sources */,
+				CEBCD88A2B2E60A3007AC15C /* DataManager.swift in Sources */,
+				CEBCD8962B2E60B8007AC15C /* JobsViews.swift in Sources */,
+				CEBCD89D2B2EA892007AC15C /* toolbar.swift in Sources */,
+				CEBCD8762B2E6001007AC15C /* P22_FabulaToggleStyle.swift in Sources */,
+				CEBCD8942B2E60B8007AC15C /* EmployeeView.swift in Sources */,
+				CEBCD8772B2E6001007AC15C /* timePicker.swift in Sources */,
+				CEBCD87B2B2E6001007AC15C /* AlarmSettingView.swift in Sources */,
+				CEBCD8882B2E603D007AC15C /* extensions.swift in Sources */,
+				CEBCD87A2B2E6001007AC15C /* toggle.swift in Sources */,
+				CEBCD8982B2E60EC007AC15C /* SparkListApp.swift in Sources */,
+				CEBCD87D2B2E6001007AC15C /* ContactsView.swift in Sources */,
+				CEBCD8912B2E60B8007AC15C /* SettingsView.swift in Sources */,
+				CEBCD8952B2E60B8007AC15C /* EmployeesViews.swift in Sources */,
+				CEBCD8932B2E60B8007AC15C /* PreViews.swift in Sources */,
+				CEBCD8752B2E6000007AC15C /* modetogglebutton.swift in Sources */,
+				CEBCD87C2B2E6001007AC15C /* darkmode.swift in Sources */,
+				CEBCD87E2B2E6001007AC15C /* getContact2.swift in Sources */,
+				CEBCD8842B2E603D007AC15C /* ContactPickerViewController.swift in Sources */,
+				CEBCD8782B2E6001007AC15C /* hoursPicker.swift in Sources */,
+				CEBCD8792B2E6001007AC15C /* LaunchScreen.swift in Sources */,
+				CEBCD8862B2E603D007AC15C /* SMSGenerator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CE8E4A032B137F5B00435031 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CE8E4A042B137F5B00435031 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		CE8E4A062B137F5B00435031 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "Color 1";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = SparkList/SparkList.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.3;
+				DEVELOPMENT_ASSET_PATHS = "\"SparkList/Preview Content\"";
+				DEVELOPMENT_TEAM = 729NUWS546;
+				ENABLE_HARDENED_RUNTIME = YES;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SparkList/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SparkList;
+				INFOPLIST_KEY_NSContactsUsageDescription = "Access to Contacts allows the user the ability to select contacts out of their phone to send their daily employee hours in to";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.swift;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.3;
+				NEW_SETTING = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.antflix.sparklist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE8E4A072B137F5B00435031 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "Color 1";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = SparkList/SparkList.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.3;
+				DEVELOPMENT_ASSET_PATHS = "\"SparkList/Preview Content\"";
+				DEVELOPMENT_TEAM = 729NUWS546;
+				ENABLE_HARDENED_RUNTIME = YES;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SparkList/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SparkList;
+				INFOPLIST_KEY_NSContactsUsageDescription = "Access to Contacts allows the user the ability to select contacts out of their phone to send their daily employee hours in to";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.swift;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.3;
+				NEW_SETTING = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.antflix.sparklist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE8E49F12B137F5800435031 /* Build configuration list for PBXProject "SparkList" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE8E4A032B137F5B00435031 /* Debug */,
+				CE8E4A042B137F5B00435031 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE8E4A052B137F5B00435031 /* Build configuration list for PBXNativeTarget "SparkList" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE8E4A062B137F5B00435031 /* Debug */,
+				CE8E4A072B137F5B00435031 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE8E49EE2B137F5800435031 /* Project object */;
+}

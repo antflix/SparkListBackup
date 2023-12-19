@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in closure #1 in JobsView.body.getter:JobsViews.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PreViews.body.getter:PreViews.swift">
+      </ContextState>
+      <ContextState
+         contextName = "sendMessage(sms:):PreViews.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
