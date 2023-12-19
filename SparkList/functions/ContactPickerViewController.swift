@@ -30,17 +30,16 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
             let fullName = CNContactFormatter.string(from: contact, style: .fullName) ?? ""
             let phoneNumbers = contact.phoneNumbers.first?.value.stringValue ?? ""
 
-            // Update DataManager directly when a contact is selected
             if dataManager.selectedContact1 == nil {
                 dataManager.selectedContactName = fullName
                 dataManager.selectedContactPhoneNumber = phoneNumbers
                 dataManager.selectedContact1 = contact
-
+                dataManager.saveContacts() // Save contacts after updating
             } else {
                 dataManager.selectedContactName2 = fullName
                 dataManager.selectedContactPhoneNumber2 = phoneNumbers
                 dataManager.selectedContact2 = contact
-
+                dataManager.saveContacts() // Save contacts after updating
             }
         }
     }

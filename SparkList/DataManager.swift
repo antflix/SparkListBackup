@@ -71,6 +71,16 @@ class DataManager: ObservableObject {
         dataManager.allSMSBodies = [] // Clear the array
         
     }
+    func saveContacts() {
+        // Check if there are selected contacts
+        if let selectedContact1 = selectedContact1,
+           let selectedContact2 = selectedContact2 {
+            // Use UserDefaults to save contact data
+            UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: selectedContact1, requiringSecureCoding: false), forKey: "SelectedContact1")
+            UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: selectedContact2, requiringSecureCoding: false), forKey: "SelectedContact2")
+        }
+    }
+
     
     func saveSelectedNumbers() {
         UserDefaults.standard.set(selectedPhoneNumber, forKey: "CustomPhoneNumber")
