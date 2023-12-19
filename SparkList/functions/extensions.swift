@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct AppearanceModeKey: EnvironmentKey {
-    static var defaultValue: ColorScheme = .light// Default value is light mode
+    static var defaultValue: ColorScheme = .dark// Default value is light mode
 }
 
 extension EnvironmentValues {
