@@ -34,12 +34,12 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
                 dataManager.selectedContactName = fullName
                 dataManager.selectedContactPhoneNumber = phoneNumbers
                 dataManager.selectedContact1 = contact
-                dataManager.saveContacts() // Save contacts after updating
+                dataManager.saveContact1() // Save contacts after updating
             } else {
                 dataManager.selectedContactName2 = fullName
                 dataManager.selectedContactPhoneNumber2 = phoneNumbers
                 dataManager.selectedContact2 = contact
-                dataManager.saveContacts() // Save contacts after updating
+                dataManager.saveContact2() // Save contacts after updating
             }
         }
     }
