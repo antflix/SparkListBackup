@@ -76,7 +76,23 @@ struct ContactPicker: View {
     @Binding var selectedContacts: [CNContact]
 
     var body: some View {
-        ContactPickerViewController() // Replace this with your contact picker implementation
+        NavigationView {
+            List {
+                ForEach(0..<10) { index in // Replace this with your actual contact picker logic
+                    Text("Contact \(index)")
+                        .onTapGesture {
+                            let contact = CNContact() // Replace this with logic to fetch the actual contact
+                            selectedContacts.append(contact)
+                        }
+                }
+            }
+            .navigationTitle("Select Contacts")
+            .navigationBarItems(trailing:
+                Button("Done") {
+                    // Dismiss the view here
+                }
+            )
+        }
     }
 }
 
