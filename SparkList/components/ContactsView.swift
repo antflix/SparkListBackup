@@ -174,11 +174,11 @@ struct ContactsView: View {
                                 .sheet(isPresented: $isContact1PickerPresented) {
                                     ContactPickerViewController()
                                 }
-                                .padding()
+                                
                             } // contact 1 HStack
                         } // contact 1 vstack
                     }
-                    .padding()
+                    
                     //   1 clear button
 
                     // 2 add contact button
