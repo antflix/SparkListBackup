@@ -1,4 +1,86 @@
-//
+// Your code to present contact picker view
+import SwiftUI
+import ContactsUI
+struct ContactPickerView: View {
+    @State private var selectedContacts: [CNContact] = []
+    @State private var retrievedContacts: [CNContact] = []
+
+    var body: some View {
+        VStack {
+            // Button to present contact picker
+            Button("Select Contacts") {
+                isPresentingContactPicker.toggle()
+            }
+            .padding()
+
+            // Display selected contacts
+            Text("Selected Contacts:")
+            List(selectedContacts, id: \.identifier) { contact in
+                Text(contact.givenName + " " + contact.familyName)
+            }
+            .padding()
+
+            // Button to save contacts to UserDefaults
+            Button("Save Contacts") {
+                saveSelectedContacts()
+            }
+            .padding()
+
+            // Display retrieved contacts from UserDefaults
+            Text("Retrieved Contacts:")
+            List(retrievedContacts, id: \.identifier) { contact in
+                Text(contact.givenName + " " + contact.familyName)
+            }
+            .padding()
+
+            // Button to retrieve contacts from UserDefaults
+            Button("Retrieve Contacts") {
+                retrieveContacts()
+            }
+            .padding()
+
+            // Button to delete contacts from UserDefaults
+            Button("Delete Contacts") {
+                deleteContacts()
+            }
+            .padding()
+        }
+        .sheet(isPresented: $isPresentingContactPicker) {
+            ContactPicker(selectedContacts: self.$selectedContacts)
+        }
+    }
+
+    @State private var isPresentingContactPicker = false
+
+    // Function to save selected contacts to UserDefaults
+    func saveSelectedContacts() {
+        let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: selectedContacts, requiringSecureCoding: false)
+        UserDefaults.standard.set(encodedData, forKey: "selectedContactsKey")
+    }
+
+    func retrieveContacts() {
+        if let savedData = UserDefaults.standard.data(forKey: "selectedContactsKey"),
+           let decodedContacts = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, CNContact.self], from: savedData) as? [CNContact] {
+            retrievedContacts = decodedContacts
+        }
+    }
+    // Function to delete contacts from UserDefaults
+    func deleteContacts() {
+        UserDefaults.standard.removeObject(forKey: "selectedContactsKey")
+        retrievedContacts = [] // Clear the retrieved contacts list
+    }
+}
+
+// ContactPicker view
+struct ContactPicker: View {
+    @Binding var selectedContacts: [CNContact]
+
+    var body: some View {
+        ContactPickerViewController() // Replace this with your contact picker implementation
+    }
+}
+
+
 //
 ////import SwiftUI
 ////
