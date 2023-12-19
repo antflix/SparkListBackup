@@ -25,11 +25,4 @@ extension String {
     }
 }
 
-extension DataManager {
-    // Function to check if contacts are saved in UserDefaults
-    func hasSavedContacts() -> Bool {
-        // Check if both contacts are present in UserDefaults
-        return UserDefaults.standard.object(forKey: "SelectedContact1") != nil &&
-               UserDefaults.standard.object(forKey: "SelectedContact2") != nil
-    }
-}
+

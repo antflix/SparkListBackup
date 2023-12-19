@@ -10,7 +10,7 @@ struct Job: Codable {
 struct ContentView: View {
     @StateObject var dataManager = DataManager()
 //    @StateObject var darkModeSettings = DataManager() // Use observed object for dark mode
-
+    
     @State private var selectedJobID: String?
     @Environment(\.colorScheme) var colorScheme
     @State private var isSettingsOpen = false // Add this line to declare isSettingsOpen

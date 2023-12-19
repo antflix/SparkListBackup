@@ -15,7 +15,7 @@ class DataManager: ObservableObject {
     @Published var selectedHours: String = ""
     @Published var allSMSs: String = ""
     @Published var allSMSBodies: [String] = []
-    
+
     @Published var selectedPhoneNumber: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
     @Published var selectedPhoneNumber2: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber2") ?? ""
     @Published var employeeData: [String: String] = [:]
@@ -79,6 +79,10 @@ class DataManager: ObservableObject {
             UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: selectedContact1, requiringSecureCoding: false), forKey: "SelectedContact1")
             UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: selectedContact2, requiringSecureCoding: false), forKey: "SelectedContact2")
         }
+    }
+    func hasSavedContacts() -> Bool {
+        return UserDefaults.standard.object(forKey: "SelectedContact1") != nil &&
+               UserDefaults.standard.object(forKey: "SelectedContact2") != nil
     }
 
     
