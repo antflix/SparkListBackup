@@ -129,7 +129,7 @@ struct ContactsView: View {
                                 
                             }
                             .padding()
-                            if let contact1 = dataManager.selectedContact1 {
+                            if dataManager.selectedContact1 != nil {
                                 
                                 Button("Clear Contact 1") {
                                     dataManager.clearSecondContact()
@@ -178,7 +178,7 @@ struct ContactsView: View {
                                 
                             }
                             .padding()
-                            if let contact2 = dataManager.selectedContact2 {
+                            if dataManager.selectedContact2 != nil {
                                 
                                 Button("Clear Contact 2") {
                                     dataManager.clearSecondContact()
@@ -202,29 +202,20 @@ struct ContactsView: View {
                 // Update the state to indicate saved contacts are present
                 hasSavedContacts = true
 
-                // Add logic to show existing saved contacts if available
                 if let savedContact1Data = UserDefaults.standard.data(forKey: "SelectedContact1"),
                    let savedContact2Data = UserDefaults.standard.data(forKey: "SelectedContact2") {
-                    do {
-                        let unarchiver = try NSKeyedUnarchiver(forReadingFrom: savedContact1Data)
-                        if let savedContact1 = try unarchiver.decodeTopLevelObject(forKey: NSKeyedArchiveRootObjectKey) as? CNContact {
-                            dataManager.selectedContact1 = savedContact1
-                        }
-                        unarchiver.finishDecoding()
-                    } catch {
-                        print("Error decoding savedContact1: \(error)")
+
+                    if let savedContact1 = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CNContact.self, from: savedContact1Data) {
+                        dataManager.selectedContact1 = savedContact1
+                    } else {
+                        print("Error decoding savedContact1: Unable to decode CNContact from data")
                     }
 
-                    do {
-                        let unarchiver = try NSKeyedUnarchiver(forReadingFrom: savedContact2Data)
-                        if let savedContact2 = try unarchiver.decodeTopLevelObject(forKey: NSKeyedArchiveRootObjectKey) as? CNContact {
-                            dataManager.selectedContact2 = savedContact2
-                        }
-                        unarchiver.finishDecoding()
-                    } catch {
-                        print("Error decoding savedContact2: \(error)")
+                    if let savedContact2 = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CNContact.self, from: savedContact2Data) {
+                        dataManager.selectedContact2 = savedContact2
+                    } else {
+                        print("Error decoding savedContact2: Unable to decode CNContact from data")
                     }
-                
                 
                 }
             }
