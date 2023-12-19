@@ -132,7 +132,7 @@ struct ContactsView: View {
                             if let contact1 = dataManager.selectedContact1 {
                                 
                                 Button("Clear Contact 1") {
-                                    dataManager.clearSecondContact()
+                                    dataManager.clearFirstContact()
                                 }
                                 .padding()
                                 .foregroundColor(.white)
