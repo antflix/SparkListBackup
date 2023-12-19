@@ -1,42 +1,45 @@
 import SwiftUI
 import ContactsUI
-// ContactPickerViewController.swift
-struct ContactPickerViewController: UIViewControllerRepresentable {
-    @Binding var selectedContactName: String
-    @Binding var selectedContactPhoneNumber: String
-    @Binding var selectedContactName2: String // Additional binding for second contact name
-    @Binding var selectedContactPhoneNumber2: String // Additional binding for second contact phone number
 
+struct ContactPickerViewController: UIViewControllerRepresentable {
+    @EnvironmentObject var dataManager: DataManager
+    
     func makeUIViewController(context: Context) -> CNContactPickerViewController {
         let picker = CNContactPickerViewController()
         picker.delegate = context.coordinator
         return picker
     }
-
+    
     func updateUIViewController(_ uiViewController: CNContactPickerViewController, context: Context) {}
-
+    
     func makeCoordinator() -> Coordinator {
-        return Coordinator(parent: self)
+        Coordinator(dataManager: dataManager)
     }
-
+    
     class Coordinator: NSObject, CNContactPickerDelegate {
-        let parent: ContactPickerViewController
-
-        init(parent: ContactPickerViewController) {
-            self.parent = parent
+        var dataManager: DataManager
+        
+        init(dataManager: DataManager) {
+            self.dataManager = dataManager
         }
-
+        
         func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
             let fullName = CNContactFormatter.string(from: contact, style: .fullName) ?? ""
             let phoneNumbers = contact.phoneNumbers.first?.value.stringValue ?? ""
             
-            // Save the first selected contact's details
-            if self.parent.selectedContactName.isEmpty {
-                self.parent.selectedContactName = fullName
-                self.parent.selectedContactPhoneNumber = phoneNumbers
-            } else { // Save the second selected contact's details
-                self.parent.selectedContactName2 = fullName
-                self.parent.selectedContactPhoneNumber2 = phoneNumbers
+            // Update DataManager directly when a contact is selected
+            // Call this function when a contact is selected
+            // Update DataManager directly when a contact is selected
+            if dataManager.selectedContact1 == nil {
+                dataManager.selectedContactName = fullName
+                dataManager.selectedContactPhoneNumber = phoneNumbers
+                dataManager.selectedContact1 = contact
+                dataManager.saveContacts() // Save contacts after updating
+            } else {
+                dataManager.selectedContactName2 = fullName
+                dataManager.selectedContactPhoneNumber2 = phoneNumbers
+                dataManager.selectedContact2 = contact
+                dataManager.saveContacts() // Save contacts after updating
             }
         }
     }
