@@ -49,29 +49,7 @@ struct ContactsView: View {
             //                Text("Please choose 1 or 2 contacts to send your time to.")
             //                Spacer()
             //
-                            // add contact 1
-//                            Button(action: {
-//                                self.isContact1PickerPresented = true
-//                            }) { HStack {
-//                                Image(systemName: "person.fill.questionmark")
-//                                    .symbolRenderingMode(.palette)
-//                                    .foregroundStyle(Color.red, Color.green)
-//            
-//                                Text("Select Contact 1")
-//            
-//                            }.padding()
-//                                .foregroundColor(.white)
-//                                .background(Color.blue)
-//                                .cornerRadius(8)
-//                            }
-//                            .sheet(isPresented: $isContact1PickerPresented) {
-//                                ContactPickerViewController()
-//                            }
-//                            .padding()
-//                            if let contact1 = dataManager.selectedContact1 {
-//                                ContactCardView(contact: contact1)
-//                            }
-//                            // add contact2
+//                             add contact 1
                             Button(action: {
                                 self.isContact1PickerPresented = true
                             }) { HStack {
@@ -90,11 +68,33 @@ struct ContactsView: View {
                                 ContactPickerViewController()
                             }
                             .padding()
-            if dataManager.selectedContact1 != nil {
-                
-                let contact1 = dataManager.selectedContact2
-                ContactCardView(contact: contact1!)
-            }
+                            if let contact1 = dataManager.selectedContact1 {
+                                ContactCardView(contact: contact1)
+                            }
+                            // add contact2
+//                            Button(action: {
+//                                self.isContact1PickerPresented = true
+//                            }) { HStack {
+//                                Image(systemName: "person.fill.questionmark")
+//                                    .symbolRenderingMode(.palette)
+//                                    .foregroundStyle(Color.red, Color.green)
+//            
+//                                Text("Select Contact 1")
+//            
+//                            }.padding()
+//                                .foregroundColor(.white)
+//                                .background(Color.blue)
+//                                .cornerRadius(8)
+//                            }
+//                            .sheet(isPresented: $isContact1PickerPresented) {
+//                                ContactPickerViewController()
+//                            }
+//                            .padding()
+//            if dataManager.selectedContact1 != nil {
+//                
+//                let contact1 = dataManager.selectedContact2
+//                ContactCardView(contact: contact1!)
+//            }
            
             //            } else {
             //                VStack {
