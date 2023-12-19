@@ -12,7 +12,7 @@ struct darkmode: View {
         
             VStack {
                 if colorScheme == .light {
-                
+                    
                     Image("Symbol 1")
                         .rotationEffect(Angle(degrees: 180))
                         .symbolRenderingMode(.multicolor)
@@ -20,41 +20,41 @@ struct darkmode: View {
                             symbolAnimation.toggle()
                         }
                         .foregroundStyle(Color.yellow, Color.orange, Color.yellow)
-                        
+                    
                         .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
                                         symbolAnimation)
-
+                    
                         .font(.largeTitle)
                         .onTapGesture {
                             withAnimation {
                                 dataManager.isDarkMode.toggle()
                                 
-                                    
-                            }
-                        }
-                        
-                } else {
-                    Image("Symbol")
-                        .rotationEffect(Angle(degrees: 180))
-                        .symbolRenderingMode(.multicolor)
-                        .onAppear(){
-                            symbolAnimation.toggle()
-                        }
-                        .foregroundStyle(Color.yellow, Color.orange, Color.yellow)
-                        
-                        .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
-                                        symbolAnimation)
-
-                        .font(.largeTitle)
-                        .onTapGesture {
-                            withAnimation {
-                                dataManager.isDarkMode.toggle()
                                 
-
-
                             }
                         }
-                }
+                } else { EmptyView()}
+//                } else {
+//                    Image("Symbol")
+//                        .rotationEffect(Angle(degrees: 180))
+//                        .symbolRenderingMode(.multicolor)
+//                        .onAppear(){
+//                            symbolAnimation.toggle()
+//                        }
+//                        .foregroundStyle(Color.yellow, Color.orange, Color.yellow)
+//                        
+//                        .symbolEffect(.variableColor.reversing.cumulative, options: .repeat(100).speed(1), value:
+//                                        symbolAnimation)
+//
+//                        .font(.largeTitle)
+//                        .onTapGesture {
+//                            withAnimation {
+//                                dataManager.isDarkMode.toggle()
+//                                
+//
+//
+//                            }
+//                        }
+//                }
             
             }
             .environment(\.colorScheme, dataManager.isDarkMode ? .dark : .light) // Set the environment color scheme

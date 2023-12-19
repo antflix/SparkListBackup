@@ -4,11 +4,13 @@ import SwiftUI
 struct ContactsView: View {
     @EnvironmentObject var dataManager: DataManager // Access the DataManager
     @State private var symbolAnimation = false
+    @State private var hasSavedContacts = false
 
     @State private var isContact1PickerPresented = false
     @State private var isContact2PickerPresented = false
 
     var body: some View {
+        
         VStack {
             HStack {
                 VStack {
@@ -29,6 +31,24 @@ struct ContactsView: View {
             // 1 is empty
             // 2 is empty
             if dataManager.selectedContactName.isEmpty && dataManager.selectedContactName2.isEmpty {
+                if dataManager.selectedContactName.isEmpty && dataManager.selectedContactName2.isEmpty {
+                    // ...Existing code for when no contacts are selected...
+
+                    // Check if there are saved contacts
+                    if dataManager.hasSavedContacts() {
+                        // Update the state to indicate saved contacts are present
+                        hasSavedContacts = true
+
+                        // Add logic to show existing saved contacts if available
+                        if let savedContact1Data = UserDefaults.standard.data(forKey: "SelectedContact1"),
+                           let savedContact2Data = UserDefaults.standard.data(forKey: "SelectedContact2"),
+                           let savedContact1 = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedContact1Data) as? CNContact,
+                           let savedContact2 = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedContact2Data) as? CNContact {
+                            dataManager.selectedContact1 = savedContact1
+                            dataManager.selectedContact2 = savedContact2
+                        }
+                    }
+
                 Text("No Contacts Selected. ")
                     .foregroundStyle(Color.red)
                     .font(Font.custom("Quicksand", size: 20).bold())
@@ -196,7 +216,23 @@ struct ContactsView: View {
             }//if statement for both contacts
         }//vstack wrapped
         .background(EllipticalGradient(colors: [Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
+    }.onAppear {
+        // Check if there are saved contacts
+        if dataManager.hasSavedContacts() {
+            // Update the state to indicate saved contacts are present
+            hasSavedContacts = true
+
+            // Add logic to show existing saved contacts if available
+            if let savedContact1Data = UserDefaults.standard.data(forKey: "SelectedContact1"),
+               let savedContact2Data = UserDefaults.standard.data(forKey: "SelectedContact2"),
+               let savedContact1 = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedContact1Data) as? CNContact,
+               let savedContact2 = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedContact2Data) as? CNContact {
+                dataManager.selectedContact1 = savedContact1
+                dataManager.selectedContact2 = savedContact2
+            }
+        }
     }
+
 }
 
 struct ProfileInfoView: View {

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct AppearanceModeKey: EnvironmentKey {
-    static var defaultValue: ColorScheme = .light // Default value is light mode
+    static var defaultValue: ColorScheme = .light// Default value is light mode
 }
 
 extension EnvironmentValues {
@@ -22,5 +22,14 @@ extension String {
     func removeNonNumeric() -> String {
         return self.components(separatedBy: CharacterSet.decimalDigits.inverted)
             .joined()
+    }
+}
+
+extension DataManager {
+    // Function to check if contacts are saved in UserDefaults
+    func hasSavedContacts() -> Bool {
+        // Check if both contacts are present in UserDefaults
+        return UserDefaults.standard.object(forKey: "SelectedContact1") != nil &&
+               UserDefaults.standard.object(forKey: "SelectedContact2") != nil
     }
 }
