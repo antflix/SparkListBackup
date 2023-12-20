@@ -1,10 +1,10 @@
 import SwiftUI
 import ContactsUI
-
 struct ContactView: View {
-    @StateObject var dataManager = DataManager()
+    @EnvironmentObject var dataManager: DataManager
+    @Binding var retrievedContacts: [CNContact]
     @State private var selectedContacts: [CNContact] = []
-    @State private var retrievedContacts: [CNContact] = []
+    @State private var showContactPicker = false
 
     var body: some View {
         NavigationView {
@@ -20,7 +20,7 @@ struct ContactView: View {
                         VStack(alignment: .leading) {
                             Text("\(contact.givenName) \(contact.familyName)")
                             Text(contact.phoneNumbers.first?.value.stringValue ?? "No phone number")
-                                .foregroundColor(.white)
+                                .foregroundColor(.gray)
                         }
                         .contextMenu {
                             Button("Delete") {
@@ -34,18 +34,17 @@ struct ContactView: View {
             }
             .navigationTitle("Contacts")
             .sheet(isPresented: $showContactPicker) {
-                ContactPickerViewController(selectedContacts: Binding($selectedContacts))
+                ContactPickerViewController(selectedContacts: $dataManager.selectedContacts)
                     .environmentObject(dataManager)
+                    .onDisappear {
+                        retrievedContacts = dataManager.retrieveSelectedContacts() ?? []
+                    }
             }
             .onAppear {
-                if let contacts = dataManager.retrieveSelectedContacts() {
-                    retrievedContacts = contacts
-                }
+                retrievedContacts = dataManager.retrieveSelectedContacts() ?? []
             }
         }
     }
-
-    @State private var showContactPicker = false
 
     func deleteContact(at index: Int) {
         retrievedContacts.remove(at: index)
