@@ -2,16 +2,24 @@
 import SwiftUI
 import ContactsUI
 struct ContactPickerView: View {
+    @EnvironmentObject var dataManager: DataManager
     @State private var selectedContacts: [CNContact] = []
     @State private var retrievedContacts: [CNContact] = []
+    @State private var showContactPicker = false
 
     var body: some View {
         VStack {
-            // Button to present contact picker
-            Button("Select Contacts") {
-                isPresentingContactPicker.toggle()
-            }
-            .padding()
+            VStack {
+                           Button("Select Contacts") {
+                               showContactPicker = true // Toggle to show the contact picker
+                           }
+                           .padding()
+                       }
+                       .navigationTitle("Contact Picker Demo")
+                       .sheet(isPresented: $showContactPicker) {
+                           ContactPickerViewController(selectedContacts: $dataManager.selectedContacts)
+                               .environmentObject(dataManager)
+                       }
 
             // Display selected contacts
             Text("Selected Contacts:")
