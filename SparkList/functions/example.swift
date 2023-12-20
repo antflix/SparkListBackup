@@ -24,30 +24,30 @@ struct ContactPickerView: View {
             // Display selected contacts
             Text("Selected Contacts:")
             if let contacts = dataManager.retrieveSelectedContacts() {
-            List(selectedContacts, id: \.identifier) { contacts in
-                Text(contacts.girgenName + " " + contacts.familyName)
-            }
-            .padding()
-            
-            // Button to save contacts to UserDefaults
-            Button("Save Contacts") {
-                dataManager.saveSelectedContacts()
-            }
-            .padding()
-            
-            // Display retrieved contacts from UserDefaults
-            Text("Retrieved Contacts:")
-            List(retrievedContacts, id: \.identifier) { contact in
-                Text("\(contact.givenName) \(contact.familyName)")
-                    .padding()
-                
-                // Button to retrieve contacts from UserDefaults
-                Button("Retrieve Contacts") {
-                    if let contacts = dataManager.retrieveSelectedContacts() {
-                        retrievedContacts = contacts // Update retrieved contacts
-                    }
+                List(selectedContacts, id: \.identifier) { contacts in
+                    Text(contacts.givenName + " " + contacts.familyName)
                 }
+                .padding()
+                
+                // Button to save contacts to UserDefaults
+                Button("Save Contacts") {
+                    dataManager.saveSelectedContacts()
+                }
+                .padding()
+                
+                // Display retrieved contacts from UserDefaults
+                Text("Retrieved Contacts:")
+                List(retrievedContacts, id: \.identifier) { contact in
+                    Text("\(contact.givenName) \(contact.familyName)")
                         .padding()
+                    
+                    // Button to retrieve contacts from UserDefaults
+                    Button("Retrieve Contacts") {
+                        if let contacts = dataManager.retrieveSelectedContacts() {
+                            retrievedContacts = contacts // Update retrieved contacts
+                        }
+                    }
+                    .padding()
                     
                     // Button to delete contacts from UserDefaults
                     Button("Delete Contacts") {
@@ -58,6 +58,8 @@ struct ContactPickerView: View {
                 
             }
         }
+    }
+}
     
         //
         //    @State private var isPresentingContactPicker = false
@@ -105,7 +107,7 @@ struct ContactPickerView: View {
                 }
             }
         }
-    }
+    
 
 
 
