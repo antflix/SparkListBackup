@@ -20,7 +20,7 @@ struct ContactView: View {
                         VStack(alignment: .leading) {
                             Text("\(contact.givenName) \(contact.familyName)")
                             Text(contact.phoneNumbers.first?.value.stringValue ?? "No phone number")
-                                .foregroundColor(.gray)
+                                .foregroundColor(.white)
                         }
                         .contextMenu {
                             Button("Delete") {
