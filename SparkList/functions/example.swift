@@ -25,7 +25,7 @@ struct ContactsSelectionView: View {
             }
             .sheet(isPresented: $isContact1PickerPresented) {
                 
-                ContactPickerViewController(selectedContacts: <#Binding<[CNContact]?>#>)
+                ContactPickerViewController(selectedContacts: $selectedContacts)
                 
                 
             }
