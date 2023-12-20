@@ -6,103 +6,106 @@ struct ContactPickerView: View {
     @State private var selectedContacts: [CNContact] = []
     @State private var retrievedContacts: [CNContact] = []
     @State private var showContactPicker = false
-
+    
     var body: some View {
         VStack {
             VStack {
-                           Button("Select Contacts") {
-                               showContactPicker = true // Toggle to show the contact picker
-                           }
-                           .padding()
-                       }
-                       .navigationTitle("Contact Picker Demo")
-                       .sheet(isPresented: $showContactPicker) {
-                           ContactPickerViewController(selectedContacts: $dataManager.selectedContacts)
-                               .environmentObject(dataManager)
-                       }
-
+                Button("Select Contacts") {
+                    showContactPicker = true // Toggle to show the contact picker
+                }
+                .padding()
+            }
+            .navigationTitle("Contact Picker Demo")
+            .sheet(isPresented: $showContactPicker) {
+                ContactPickerViewController(selectedContacts: $dataManager.selectedContacts)
+                    .environmentObject(dataManager)
+            }
+            
             // Display selected contacts
             Text("Selected Contacts:")
-            List(selectedContacts, id: \.identifier) { contact in
+            List(dataManager.selectedContacts!, id: \.identifier) { contact in
                 Text(contact.givenName + " " + contact.familyName)
             }
             .padding()
-
+            
             // Button to save contacts to UserDefaults
             Button("Save Contacts") {
-                saveSelectedContacts()
+                dataManager.saveSelectedContacts()
             }
             .padding()
-
+            
             // Display retrieved contacts from UserDefaults
             Text("Retrieved Contacts:")
             List(retrievedContacts, id: \.identifier) { contact in
-                Text(contact.givenName + " " + contact.familyName)
+                Text("\(contact.givenName) \(contact.familyName)")
+                    .padding()
+                
+                // Button to retrieve contacts from UserDefaults
+                Button("Retrieve Contacts") {
+                    if let contacts = dataManager.retrieveSelectedContacts() {
+                        retrievedContacts = contacts // Update retrieved contacts
+                    }
+                }
+                        .padding()
+                    
+                    // Button to delete contacts from UserDefaults
+                    Button("Delete Contacts") {
+                        dataManager.deleteSelectedContacts()
+                    }
+                    .padding()
+                }
+                
             }
-            .padding()
-
-            // Button to retrieve contacts from UserDefaults
-            Button("Retrieve Contacts") {
-                retrieveContacts()
-            }
-            .padding()
-
-            // Button to delete contacts from UserDefaults
-            Button("Delete Contacts") {
-                deleteContacts()
-            }
-            .padding()
         }
-        .sheet(isPresented: $isPresentingContactPicker) {
-            ContactPicker(selectedContacts: self.$selectedContacts)
-        }
-    }
-
-    @State private var isPresentingContactPicker = false
-
-    // Function to save selected contacts to UserDefaults
-    func saveSelectedContacts() {
-        let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: selectedContacts, requiringSecureCoding: false)
-        UserDefaults.standard.set(encodedData, forKey: "selectedContactsKey")
-    }
-
-    func retrieveContacts() {
-        if let savedData = UserDefaults.standard.data(forKey: "selectedContactsKey"),
-           let decodedContacts = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, CNContact.self], from: savedData) as? [CNContact] {
-            retrievedContacts = decodedContacts
-        }
-    }
-    // Function to delete contacts from UserDefaults
-    func deleteContacts() {
-        UserDefaults.standard.removeObject(forKey: "selectedContactsKey")
-        retrievedContacts = [] // Clear the retrieved contacts list
-    }
-}
-
-// ContactPicker view
-struct ContactPicker: View {
-    @Binding var selectedContacts: [CNContact]
-
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(0..<10) { index in // Replace this with your actual contact picker logic
-                    Text("Contact \(index)")
-                        .onTapGesture {
-                            let contact = CNContact() // Replace this with logic to fetch the actual contact
-                            selectedContacts.append(contact)
+    
+        //
+        //    @State private var isPresentingContactPicker = false
+        //
+        //    // Function to save selected contacts to UserDefaults
+        //    func saveSelectedContacts() {
+        //        let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: selectedContacts, requiringSecureCoding: false)
+        //        UserDefaults.standard.set(encodedData, forKey: "selectedContactsKey")
+        //    }
+        //
+        //    func retrieveContacts() {
+        //        if let savedData = UserDefaults.standard.data(forKey: "selectedContactsKey"),
+        //           let decodedContacts = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, CNContact.self], from: savedData) as? [CNContact] {
+        //            retrievedContacts = decodedContacts
+        //        }
+        //    }
+        //    // Function to delete contacts from UserDefaults
+        //    func deleteContacts() {
+        //        UserDefaults.standard.removeObject(forKey: "selectedContactsKey")
+        //        retrievedContacts = [] // Clear the retrieved contacts list
+        //    }
+        //}
+        
+        // ContactPicker view
+        struct ContactPicker: View {
+            @Binding var selectedContacts: [CNContact]
+            
+            var body: some View {
+                NavigationView {
+                    List {
+                        ForEach(0..<10) { index in // Replace this with your actual contact picker logic
+                            Text("Contact \(index)")
+                                .onTapGesture {
+                                    let contact = CNContact() // Replace this with logic to fetch the actual contact
+                                    selectedContacts.append(contact)
+                                }
                         }
+                    }
+                    .navigationTitle("Select Contacts")
+                    .navigationBarItems(trailing:
+                                            Button("Done") {
+                        // Dismiss the view here
+                    }
+                    )
                 }
             }
-            .navigationTitle("Select Contacts")
-            .navigationBarItems(trailing:
-                Button("Done") {
-                    // Dismiss the view here
-                }
-            )
         }
     }
-}
+
 
 
 //
