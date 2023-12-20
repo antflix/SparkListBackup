@@ -6,7 +6,7 @@ struct ContactPickerView: View {
     @State private var selectedContacts: [CNContact] = []
     @State private var retrievedContacts: [CNContact] = []
     @State private var showContactPicker = false
-    
+
     var body: some View {
         VStack {
             VStack {
@@ -23,7 +23,6 @@ struct ContactPickerView: View {
             
             // Display selected contacts
             Text("Selected Contacts:")
-            if let contacts = dataManager.retrieveSelectedContacts() {
                 List(selectedContacts, id: \.identifier) { contacts in
                     Text(contacts.givenName + " " + contacts.familyName)
                 }
@@ -37,16 +36,16 @@ struct ContactPickerView: View {
                 
                 // Display retrieved contacts from UserDefaults
                 Text("Retrieved Contacts:")
-                List(retrievedContacts, id: \.identifier) { contact in
-                    Text("\(contact.givenName) \(contact.familyName)")
-                        .padding()
-                    
+            List(retrievedContacts, id: \.identifier) { contact in
+                Text("\(contact.givenName) \(contact.familyName)")
+                    .padding()
+            }
                     // Button to retrieve contacts from UserDefaults
-                    Button("Retrieve Contacts") {
-                        if let contacts = dataManager.retrieveSelectedContacts() {
-                            retrievedContacts = contacts // Update retrieved contacts
-                        }
-                    }
+            Button("Retrieve Contacts")
+                {
+                    dataManager.retrieveSelectedContacts()
+                }
+            
                     .padding()
                     
                     // Button to delete contacts from UserDefaults
@@ -58,9 +57,10 @@ struct ContactPickerView: View {
                 
             }
         }
-    }
-}
     
+//            if let contacts = dataManager.retrieveSelectedContacts() {
+
+//    if let contacts = dataManager.retrieveSelectedContacts()
         //
         //    @State private var isPresentingContactPicker = false
         //
