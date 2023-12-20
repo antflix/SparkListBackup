@@ -3,8 +3,11 @@ import ContactsUI
 
 struct ContactPickerViewController: UIViewControllerRepresentable {
     @EnvironmentObject var dataManager: DataManager
-    @Binding var selectedContacts: [CNContact] // Binding to track selected contacts
+    @Binding var selectedContacts: [CNContact]? // Update to accept an optional array
     
+    func makeCoordinator() -> Coordinator {
+        Coordinator(dataManager: dataManager, selectedContacts: $selectedContacts)
+    }
     func makeUIViewController(context: Context) -> CNContactPickerViewController {
         let picker = CNContactPickerViewController()
         picker.delegate = context.coordinator
@@ -13,22 +16,23 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: CNContactPickerViewController, context: Context) {}
     
-    func makeCoordinator() -> Coordinator {
-        Coordinator(dataManager: dataManager, selectedContacts: $selectedContacts)
-    }
+    
     
     class Coordinator: NSObject, CNContactPickerDelegate {
         var dataManager: DataManager
-        @Binding var selectedContacts: [CNContact]
+        var selectedContacts: Binding<[CNContact]?> // Change the type to accept optional binding
         
-        init(dataManager: DataManager, selectedContacts: Binding<[CNContact]>) {
+        init(dataManager: DataManager, selectedContacts: Binding<[CNContact]?>) {
             self.dataManager = dataManager
-            _selectedContacts = selectedContacts
+            self.selectedContacts = selectedContacts // Assign the binding directly
         }
         
         func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-            selectedContacts.append(contact) // Add selected contact to the array
-            dataManager.saveSelectedContacts() // Save selected contacts using your DataManager
+            if var contacts = selectedContacts.wrappedValue { // Unwrap the optional binding
+                contacts.append(contact)
+                selectedContacts.wrappedValue = contacts // Update the wrappedValue
+                dataManager.saveSelectedContacts() // Save selected contacts using your DataManager
+            }
         }
     }
 }
