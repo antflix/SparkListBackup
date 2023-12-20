@@ -15,7 +15,7 @@ class DataManager: ObservableObject {
     @Published var selectedHours: String = ""
     @Published var allSMSs: String = ""
     @Published var allSMSBodies: [String] = []
-    
+    @Published var selectedContacts: [CNContact]?
     @Published var selectedPhoneNumber: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
     @Published var selectedPhoneNumber2: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber2") ?? ""
     @Published var employeeData: [String: String] = [:]
@@ -81,6 +81,31 @@ class DataManager: ObservableObject {
         }
     }
     
+     func saveSelectedContacts() {
+         // Ensure `selectedContacts` is not nil before proceeding
+         guard let contacts = selectedContacts else {
+             UserDefaults.standard.removeObject(forKey: "selectedContactsKey") // Remove stored data if contacts are nil
+             return
+         }
+         
+         let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: contacts, requiringSecureCoding: false)
+         UserDefaults.standard.set(encodedData, forKey: "selectedContactsKey")
+     }
+     
+     func retrieveSelectedContacts() -> [CNContact]? {
+         if let savedData = UserDefaults.standard.data(forKey: "selectedContactsKey"),
+            let decodedContacts = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, CNContact.self], from: savedData) as? [CNContact] {
+             selectedContacts = decodedContacts
+             return decodedContacts
+         }
+         return nil
+     }
+     
+     func deleteSelectedContacts() {
+         UserDefaults.standard.removeObject(forKey: "selectedContactsKey")
+         selectedContacts = nil // Clear the selected contacts
+     }
+ }
     func saveContact1() {
         UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: dataManager.selectedContact1!, requiringSecureCoding: false), forKey: "SelectedContact1")
         
@@ -95,30 +120,30 @@ class DataManager: ObservableObject {
                UserDefaults.standard.object(forKey: "SelectedContact2") != nil
     }
 
-    
-    func saveSelectedNumbers() {
-        UserDefaults.standard.set(selectedPhoneNumber, forKey: "CustomPhoneNumber")
-        UserDefaults.standard.set(selectedPhoneNumber2, forKey: "CustomPhoneNumber2")
-    }
-    
-    func clearSelectedNumbers() {
-        selectedPhoneNumber = ""
-        selectedPhoneNumber2 = ""
-        UserDefaults.standard.removeObject(forKey: "CustomPhoneNumber")
-        UserDefaults.standard.removeObject(forKey: "CustomPhoneNumber2")
-    }
-    func clearFirstContact() {
-        selectedContactName = ""
-        selectedContactPhoneNumber = ""
-        UserDefaults.standard.removeObject(forKey: "SelectedContact1")
-    }
-    func clearSecondContact() {
-        selectedContactName2 = ""
-        selectedContactPhoneNumber2 = ""
-        UserDefaults.standard.removeObject(forKey: "SelectedContact2")
-
-        
-    }
+//    
+//    func saveSelectedNumbers() {
+//        UserDefaults.standard.set(selectedPhoneNumber, forKey: "CustomPhoneNumber")
+//        UserDefaults.standard.set(selectedPhoneNumber2, forKey: "CustomPhoneNumber2")
+//    }
+//    
+//    func clearSelectedNumbers() {
+//        selectedPhoneNumber = ""
+//        selectedPhoneNumber2 = ""
+//        UserDefaults.standard.removeObject(forKey: "CustomPhoneNumber")
+//        UserDefaults.standard.removeObject(forKey: "CustomPhoneNumber2")
+//    }
+//    func clearFirstContact() {
+//        selectedContactName = ""
+//        selectedContactPhoneNumber = ""
+//        UserDefaults.standard.removeObject(forKey: "SelectedContact1")
+//    }
+//    func clearSecondContact() {
+//        selectedContactName2 = ""
+//        selectedContactPhoneNumber2 = ""
+//        UserDefaults.standard.removeObject(forKey: "SelectedContact2")
+//
+//        
+//    }
     //
     //
     //
@@ -166,4 +191,4 @@ class DataManager: ObservableObject {
     //      }
     //  }
     
-}
+

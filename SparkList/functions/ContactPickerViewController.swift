@@ -3,7 +3,7 @@ import ContactsUI
 
 struct ContactPickerViewController: UIViewControllerRepresentable {
     @EnvironmentObject var dataManager: DataManager
-    
+//    @Binding var selectedContacts: [CNContact] // Binding to track selected contacts
     func makeUIViewController(context: Context) -> CNContactPickerViewController {
         let picker = CNContactPickerViewController()
         picker.delegate = context.coordinator
@@ -13,34 +13,22 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: CNContactPickerViewController, context: Context) {}
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(dataManager: dataManager)
+
+        Coordinator(dataManager: dataManager, selectedContacts: $dataManager.selectedContacts)
     }
     
     class Coordinator: NSObject, CNContactPickerDelegate {
         var dataManager: DataManager
+        @Binding var selectedContacts: [CNContact]
         
-        init(dataManager: DataManager) {
+        init(dataManager: DataManager, selectedContacts: Binding<[CNContact]>) {
             self.dataManager = dataManager
+            _selectedContacts = selectedContacts
         }
         
         func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-            let fullName = CNContactFormatter.string(from: contact, style: .fullName) ?? ""
-            let phoneNumbers = contact.phoneNumbers.first?.value.stringValue ?? ""
-            
-            // Update DataManager directly when a contact is selected
-            // Call this function when a contact is selected
-            // Update DataManager directly when a contact is selected
-            if dataManager.selectedContact1 == nil {
-                dataManager.selectedContactName = fullName
-                dataManager.selectedContactPhoneNumber = phoneNumbers
-                dataManager.selectedContact1 = contact
-                dataManager.saveContact1() // Save contacts after updating
-            } else {
-                dataManager.selectedContactName2 = fullName
-                dataManager.selectedContactPhoneNumber2 = phoneNumbers
-                dataManager.selectedContact2 = contact
-                dataManager.saveContact2() // Save contacts after updating
-            }
+            selectedContacts.append(contact) // Add selected contact to the array
+            dataManager.saveSelectedContacts() // Save selected contacts using your DataManager
         }
     }
 }

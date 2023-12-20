@@ -132,7 +132,7 @@ struct ContactsView: View {
                             if let contact1 = dataManager.selectedContact1 {
                                 
                                 Button("Clear Contact 1") {
-                                    dataManager.clearSecondContact()
+//                                    dataManager.clearSecondContact()
                                 }
                                 .padding()
                                 .foregroundColor(.white)
@@ -181,7 +181,7 @@ struct ContactsView: View {
                             if let contact2 = dataManager.selectedContact2 {
                                 
                                 Button("Clear Contact 2") {
-                                    dataManager.clearSecondContact()
+//                                    dataManager.clearSecondContact()
                                 }
                                 .padding()
                                 .foregroundColor(.white)
@@ -198,7 +198,7 @@ struct ContactsView: View {
         .background(EllipticalGradient(colors: [Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.8))
         .onAppear {
             // Check if there are saved contacts
-            if dataManager.hasSavedContacts() {
+//            if dataManager.hasSavedContacts() {
                 // Update the state to indicate saved contacts are present
                 hasSavedContacts = true
 
@@ -223,7 +223,7 @@ struct ContactsView: View {
                 }
             }
         }
-    }
+    
 
 
 struct ProfileInfoView: View {
