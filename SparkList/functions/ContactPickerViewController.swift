@@ -28,10 +28,12 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
         }
         
         func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-            if var contacts = selectedContacts.wrappedValue { // Unwrap the optional binding
-                contacts.append(contact)
-                selectedContacts.wrappedValue = contacts // Update the wrappedValue
-                dataManager.saveSelectedContacts() // Save selected contacts using your DataManager
+               if var contacts = selectedContacts.wrappedValue {
+                   contacts.append(contact)
+                   selectedContacts.wrappedValue = contacts
+
+                   // Save the contacts immediately upon selection
+                   dataManager.saveSelectedContacts()
             }
         }
     }
