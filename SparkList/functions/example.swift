@@ -31,24 +31,28 @@ struct ContactsSelectionView: View {
             }
 
             if let contacts = selectedContacts, !contacts.isEmpty {
-                List {
-                    ForEach(contacts, id: \.self) { contact in
-                        ContactRow(contact: contact) {
-                            // Implement deletion logic for each contact
-                            if let index = selectedContacts?.firstIndex(of: contact) {
-                                selectedContacts?.remove(at: index)
-                                dataManager.saveSelectedContacts()
-                            }
-                        }
-                    }
-                }
-            } else {
-                Text("No contacts selected")
-            }
-        }
-    }
-}
-
+                         List {
+                             ForEach(contacts, id: \.self) { contact in
+                                 ContactRow(contact: contact) {
+                                     if let index = selectedContacts?.firstIndex(of: contact) {
+                                         selectedContacts?.remove(at: index)
+                                         dataManager.saveSelectedContacts()
+                                     }
+                                 }
+                             }
+                         }
+                     } else {
+                         Text("No contacts selected")
+                     }
+                 }
+                 .onAppear {
+                     // Retrieve saved contacts from UserDefaults
+                     if let savedContacts = dataManager.retrieveSelectedContacts() {
+                         self.selectedContacts = savedContacts
+                     }
+                 }
+             }
+         }
 struct ContactRow: View {
     let contact: CNContact
     let onDelete: () -> Void
