@@ -1,54 +1,49 @@
 import SwiftUI
 import ContactsUI
 
-struct ContactView: View {
-    @StateObject var dataManager = DataManager()
-    @State private var selectedContacts: [CNContact] = []
-    @State private var retrievedContacts: [CNContact] = []
+struct ContactsSelectionView: View {
+    @EnvironmentObject var dataManager: DataManager
+    @State private var selectedContacts: [CNContact]? = []
 
     var body: some View {
-        NavigationView {
-            VStack {
-                Button("Select Contacts") {
-                    showContactPicker = true
-                }
-                .padding()
+        VStack {
+            Button("Select Contacts") {
+                // Present the contact picker
+                // Implement logic to present `ContactPickerViewController`
+            }
+            .padding()
 
+            if let contacts = selectedContacts, !contacts.isEmpty {
                 List {
-                    ForEach(retrievedContacts.indices, id: \.self) { index in
-                        let contact = retrievedContacts[index]
-                        VStack(alignment: .leading) {
-                            Text("\(contact.givenName) \(contact.familyName)")
-                            Text(contact.phoneNumbers.first?.value.stringValue ?? "No phone number")
-                                .foregroundColor(.gray)
-                        }
-                        .contextMenu {
-                            Button("Delete") {
-                                deleteContact(at: index)
+                    ForEach(contacts, id: \.self) { contact in
+                        ContactRow(contact: contact) {
+                            // Implement deletion logic for each contact
+                            if let index = selectedContacts?.firstIndex(of: contact) {
+                                selectedContacts?.remove(at: index)
+                                dataManager.saveSelectedContacts()
                             }
                         }
                     }
                 }
-
-                Spacer()
-            }
-            .navigationTitle("Contacts")
-            .sheet(isPresented: $showContactPicker) {
-                ContactPickerViewController(selectedContacts: Binding($selectedContacts))
-                    .environmentObject(dataManager)
-            }
-            .onAppear {
-                if let contacts = dataManager.retrieveSelectedContacts() {
-                    retrievedContacts = contacts
-                }
+            } else {
+                Text("No contacts selected")
             }
         }
     }
+}
 
-    @State private var showContactPicker = false
+struct ContactRow: View {
+    let contact: CNContact
+    let onDelete: () -> Void
 
-    func deleteContact(at index: Int) {
-        retrievedContacts.remove(at: index)
-        dataManager.deleteSelectedContacts()
+    var body: some View {
+        HStack {
+            Text("\(contact.givenName) \(contact.familyName)")
+            Spacer()
+            Button(action: onDelete) {
+                Image(systemName: "trash")
+                    .foregroundColor(.red)
+            }
+        }
     }
 }
