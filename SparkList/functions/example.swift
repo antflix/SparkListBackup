@@ -23,8 +23,9 @@ struct ContactPickerView: View {
             
             // Display selected contacts
             Text("Selected Contacts:")
-            List(dataManager.selectedContacts!, id: \.identifier) { contact in
-                Text(contact.givenName + " " + contact.familyName)
+            if let contacts = dataManager.retrieveSelectedContacts() {
+            List(selectedContacts, id: \.identifier) { contacts in
+                Text(contacts.girgenName + " " + contacts.familyName)
             }
             .padding()
             

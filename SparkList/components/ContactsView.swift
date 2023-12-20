@@ -2,7 +2,6 @@ import ContactsUI
 import SwiftUI
 @available(iOS 17.0, *)
 struct ContactsView: View {
-    @EnvironmentObject var dataManager: DataManager // Access the DataManager
     @State private var symbolAnimation = false
     @State private var hasSavedContacts = false
     @State private var isContact1PickerPresented = false
