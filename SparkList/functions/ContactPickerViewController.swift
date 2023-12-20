@@ -3,7 +3,8 @@ import ContactsUI
 
 struct ContactPickerViewController: UIViewControllerRepresentable {
     @EnvironmentObject var dataManager: DataManager
-//    @Binding var selectedContacts: [CNContact] // Binding to track selected contacts
+    @Binding var selectedContacts: [CNContact] // Binding to track selected contacts
+    
     func makeUIViewController(context: Context) -> CNContactPickerViewController {
         let picker = CNContactPickerViewController()
         picker.delegate = context.coordinator
@@ -13,8 +14,7 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: CNContactPickerViewController, context: Context) {}
     
     func makeCoordinator() -> Coordinator {
-
-        Coordinator(dataManager: dataManager, selectedContacts: $dataManager.selectedContacts)
+        Coordinator(dataManager: dataManager, selectedContacts: $selectedContacts)
     }
     
     class Coordinator: NSObject, CNContactPickerDelegate {

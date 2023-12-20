@@ -15,7 +15,7 @@ class DataManager: ObservableObject {
     @Published var selectedHours: String = ""
     @Published var allSMSs: String = ""
     @Published var allSMSBodies: [String] = []
-    @Published var selectedContacts: [CNContact]?
+    @Published var selectedContacts: [CNContact]? // Define as an optional array
     @Published var selectedPhoneNumber: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
     @Published var selectedPhoneNumber2: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber2") ?? ""
     @Published var employeeData: [String: String] = [:]

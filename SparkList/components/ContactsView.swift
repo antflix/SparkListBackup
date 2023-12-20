@@ -66,7 +66,7 @@ struct ContactsView: View {
                 }
                 .sheet(isPresented: $isContact1PickerPresented) {
                     
-                    ContactPickerViewController()
+//                    ContactPickerViewController()
                     
                     
                 }
@@ -91,7 +91,7 @@ struct ContactsView: View {
                 }
                 .sheet(isPresented: $isContact2PickerPresented) {
                     
-                    ContactPickerViewController()
+//                    ContactPickerViewController()
                     
                 }
                 .padding()
@@ -124,7 +124,7 @@ struct ContactsView: View {
                             }
                             .sheet(isPresented: $isContact1PickerPresented) {
                                 
-                                ContactPickerViewController()
+//                                ContactPickerViewController()
                                 
                                 
                             }
@@ -174,7 +174,7 @@ struct ContactsView: View {
                             }
                             .sheet(isPresented: $isContact2PickerPresented) {
                                 
-                                ContactPickerViewController()
+//                                ContactPickerViewController()
                                 
                             }
                             .padding()
