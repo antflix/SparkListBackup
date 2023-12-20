@@ -1,10 +1,10 @@
 import SwiftUI
 import ContactsUI
+
 struct ContactView: View {
-    @EnvironmentObject var dataManager: DataManager
-    @Binding var retrievedContacts: [CNContact]
+    @StateObject var dataManager = DataManager()
     @State private var selectedContacts: [CNContact] = []
-    @State private var showContactPicker = false
+    @State private var retrievedContacts: [CNContact] = []
 
     var body: some View {
         NavigationView {
@@ -34,17 +34,18 @@ struct ContactView: View {
             }
             .navigationTitle("Contacts")
             .sheet(isPresented: $showContactPicker) {
-                ContactPickerViewController(selectedContacts: $dataManager.selectedContacts)
+                ContactPickerViewController(selectedContacts: Binding($selectedContacts))
                     .environmentObject(dataManager)
-                    .onDisappear {
-                        retrievedContacts = dataManager.retrieveSelectedContacts() ?? []
-                    }
             }
             .onAppear {
-                retrievedContacts = dataManager.retrieveSelectedContacts() ?? []
+                if let contacts = dataManager.retrieveSelectedContacts() {
+                    retrievedContacts = contacts
+                }
             }
         }
     }
+
+    @State private var showContactPicker = false
 
     func deleteContact(at index: Int) {
         retrievedContacts.remove(at: index)
