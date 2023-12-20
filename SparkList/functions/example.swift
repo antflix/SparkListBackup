@@ -4,14 +4,31 @@ import ContactsUI
 struct ContactsSelectionView: View {
     @EnvironmentObject var dataManager: DataManager
     @State private var selectedContacts: [CNContact]? = []
+    @State private var isContact1PickerPresented = false
 
+    
     var body: some View {
         VStack {
-            Button("Select Contacts") {
-                // Present the contact picker
-                // Implement logic to present `ContactPickerViewController`
+            Button(action: {
+                self.isContact1PickerPresented = true
+            }) { HStack {
+                Image(systemName: "person.fill.questionmark")
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color.red, Color.green)
+                
+                Text("Select Contact 1")
+                
+            }.padding()
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(8)
             }
-            .padding()
+            .sheet(isPresented: $isContact1PickerPresented) {
+                
+//                    ContactPickerViewController()
+                
+                
+            }
 
             if let contacts = selectedContacts, !contacts.isEmpty {
                 List {
