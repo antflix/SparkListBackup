@@ -139,21 +139,25 @@ struct PreViews: View {
             Spacer()
             VStack {
                 Button(
-                    action: { if let smsURLString = getURL() {
-                        sendMessage(sms: smsURLString)
-                    }},
-                    label: {
-                        Text("Send Message")
-                            .font(.title)
-                            .foregroundColor(Color.green)
-                            .background(Color.clear)
-                        Image(systemName: "arrow.up.circle.fill")
-                            .background(Color.clear)
-                            .foregroundStyle(Color.green)
-                            .font(.title)
-                    }
-                    
-                )
+                      action: {
+                          if let smsURLString = getURL() {
+                              sendMessage(sms: smsURLString)
+                          } else {
+                              print("Unable to send SMS")
+                          }
+                      },
+                      label: {
+                          Text("Send Message")
+                              .font(.title)
+                              .foregroundColor(Color.green)
+                              .background(Color.clear)
+                          Image(systemName: "arrow.up.circle.fill")
+                              .background(Color.clear)
+                              .foregroundStyle(Color.green)
+                              .font(.title)
+                      }
+                  )
+              
                 .buttonStyle(PlainButtonStyle()) //
                     .padding()
                 NavigationLink(destination: JobsView().navigationBarHidden(true)) {
@@ -206,18 +210,25 @@ struct PreViews: View {
     }
     
 }
+
 func getPhoneNumbers() -> String? {
-    let phoneNumbersString = dataManager.selectedContacts?.compactMap { contact -> String? in
-        guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
-            return nil // Skip contacts without phone numbers
-        }
-        return firstPhoneNumber
-    }.joined(separator: ", ")
-    
-    dataManager.numbersList = phoneNumbersString ?? "" // Assign to numbersList
-    
-    return phoneNumbersString // Return the concatenated phone numbers
+    if let selectedContacts = dataManager.selectedContacts {
+        let phoneNumbersString = selectedContacts.compactMap { contact -> String? in
+            guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
+                return nil // Skip contacts without phone numbers
+            }
+            return firstPhoneNumber
+        }.joined(separator: ", ")
+        
+        dataManager.numbersList = phoneNumbersString // Assign to numbersList
+        
+        return phoneNumbersString // Return the concatenated phone numbers
+    } else {
+        print("No contacts selected")
+        return nil
+    }
 }
+
 func getURL() -> String? {
     guard let numbers = getPhoneNumbers() else {
         print("NO PHONE NUMBERS AVAILABLE")
@@ -225,8 +236,8 @@ func getURL() -> String? {
     }
 
     let smsURLString = "sms:/open?addresses=\(numbers)&body=\(dataManager.allSMSs)"
+    print("SMS URL: \(smsURLString)") // Print the constructed SMS URL for debugging
     return smsURLString
-
 }
     func sendMessage(sms: String) {
             guard let strURL = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
