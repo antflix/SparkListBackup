@@ -47,9 +47,26 @@ struct AlarmSettingView: View {
                 Text("Alarm is not set")
                     .foregroundStyle(Color.yellow)
             }
+        }.onAppear {
+            // Retrieve the saved time from UserDefaults and assign it to selectedTime
+            if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
+                selectedTime = savedTime
+            }
+        
+    }.onAppear {
+        // Retrieve the saved time from UserDefaults and assign it to selectedTime
+        if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
+            selectedTime = savedTime
         }
-        .padding()
     }
+    .onDisappear {
+        // Save the selectedTime to UserDefaults when the view disappears
+        UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
+    }
+}
+        
+    
+
     
     // Function to format time for display
     private func formattedTime(_ time: Date) -> String {
