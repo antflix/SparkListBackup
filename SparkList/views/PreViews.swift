@@ -8,7 +8,7 @@
 import Foundation
 import MessageUI
 import SwiftUI
-
+import ContactsUI
 @available(iOS 17.0, *)
 struct PreViews: View {
     @State private var messageText = "Content from the preview app"
@@ -21,9 +21,11 @@ struct PreViews: View {
 //    @State private var recipient: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
     // To save the formatted data for later use:
     @State private var savedData: String = "" // State variable to store the formatted data
-    
+    @State private var selectedContacts: [CNContact]? = []
+    @State private var phoneNumbersString: String = ""
     
     func generateSMSBody() {
+        
         let sortedOutput = SMSGenerator.sortedFormat(dataManager: dataManager)
         let smsBodyWithDate = SMSGenerator.generateSMSURL(
             sortedOutput: sortedOutput, dataManger: dataManager)
@@ -50,14 +52,32 @@ struct PreViews: View {
            }
        }
     
+    
+  
     var body: some View {
 //        let sortedOutput = SMSGenerator.sortedFormat(dataManager: dataManager)
 //        let smsBodyWithDate = SMSGenerator.generateSMSURL(
-//            sortedOutput: sortedOutput, dataManger: dataManager)
-        
-        
+//           
     
-        let smsURLString = "sms:/open?addresses=\(dataManager.selectedPhoneNumber)&body=\(dataManager.allSMSs)"
+    
+    
+//    sortedOutput: sortedOutput, dataManger: dataManager)
+        
+        
+        if let savedContacts = dataManager.retrieveSelectedContacts() {
+            self.selectedContacts = savedContacts
+        }
+        
+        let phoneNumbersString = selectedContacts?.compactMap { contact -> String? in
+            guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
+                return nil // Skip contacts without phone numbers
+            }
+            return firstPhoneNumber
+        }.joined(separator: ", ")
+        
+        
+
+        let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
         //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
         return VStack {
             HStack {

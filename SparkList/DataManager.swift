@@ -71,16 +71,7 @@ class DataManager: ObservableObject {
         dataManager.allSMSBodies = [] // Clear the array
         
     }
-    func saveContacts() {
-        // Check if there are selected contacts
-        if let selectedContact1 = selectedContact1,
-           let selectedContact2 = selectedContact2 {
-            // Use UserDefaults to save contact data
-            UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: selectedContact1, requiringSecureCoding: false), forKey: "SelectedContact1")
-            UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: selectedContact2, requiringSecureCoding: false), forKey: "SelectedContact2")
-        }
-    }
-    
+  
 
     func saveSelectedContacts(_ contacts: [CNContact]) {
         let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: contacts, requiringSecureCoding: false)
@@ -100,20 +91,7 @@ class DataManager: ObservableObject {
          selectedContacts = nil // Clear the selected contacts
      }
  }
-    func saveContact1() {
-        UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: dataManager.selectedContact1!, requiringSecureCoding: false), forKey: "SelectedContact1")
-        
-    }
-    func saveContact2() {
-        UserDefaults.standard.set(try? NSKeyedArchiver.archivedData(withRootObject: dataManager.selectedContact2!, requiringSecureCoding: false), forKey: "SelectedContact2")
-        
-    }
-   
-    func hasSavedContacts() -> Bool {
-        return UserDefaults.standard.object(forKey: "SelectedContact1") != nil ||
-               UserDefaults.standard.object(forKey: "SelectedContact2") != nil
-    }
-
+ 
 //    
 //    func saveSelectedNumbers() {
 //        UserDefaults.standard.set(selectedPhoneNumber, forKey: "CustomPhoneNumber")
