@@ -31,28 +31,29 @@ struct AlarmSettingView: View {
                 .foregroundColor(.white)
                 .cornerRadius(8)
             }
-            if isAlarmSet {
-                Text("Alarm is set for \(formattedTime(selectedTime))")
-                    .padding()
-                    .foregroundStyle(Color.red)
-            }
-            else {
-                Text("Alarm is not set")
-                    .foregroundStyle(Color.yellow)
-            }
+            // ... (existing code remains unchanged)
+                 if isAlarmSet {
+                     Text("Alarm is set for \(formattedTime(selectedTime))")
+                         .padding()
+                         .foregroundStyle(Color.red)
+                 } else {
+                     Text("Alarm is not set")
+                         .foregroundStyle(Color.yellow)
+                 }
         }
         .padding()
         .onAppear {
-            // Retrieve the saved time from UserDefaults and assign it to selectedTime
-            if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
-                selectedTime = savedTime
-            }
-        }
-        .onDisappear {
-            // Save the selectedTime to UserDefaults when the view disappears
-            UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
-        }
-    }
+               // Retrieve the saved time from UserDefaults and assign it to selectedTime
+               if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
+                   selectedTime = savedTime
+                   isAlarmSet = true // Set isAlarmSet to true since time is retrieved
+               }
+           }
+           .onDisappear {
+               // Save the selectedTime to UserDefaults when the view disappears
+               UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
+           }
+       }
     
     // Function to format time for display
     private func formattedTime(_ time: Date) -> String {
