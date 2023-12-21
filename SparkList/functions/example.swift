@@ -30,20 +30,20 @@ struct ContactsSelectionView: View {
                 
             }
             
-            if let contacts = selectedContacts, !contacts.isEmpty {
-                List {
-                    ForEach(contacts, id: \.self) { contact in
-                        ContactRow(contact: contact) {
-                            if let index = selectedContacts?.firstIndex(of: contact) {
-                                selectedContacts?.remove(at: index)
-                                dataManager.saveSelectedContacts(contacts)
-                            }
-                        }
-                    }
-                }
-            } else {
-                Text("No contacts selected")
-            }
+//            if let contacts = selectedContacts, !contacts.isEmpty {
+//                List {
+//                    ForEach(contacts, id: \.self) { contact in
+//                        ContactRow(contact: contact) {
+//                            if let index = selectedContacts?.firstIndex(of: contact) {
+//                                selectedContacts?.remove(at: index)
+//                                dataManager.saveSelectedContacts(contacts)
+//                            }
+//                        }
+//                    }
+//                }
+//            } else {
+//                Text("No contacts selected")
+//            }
             if let contacts = selectedContacts, !contacts.isEmpty {
                 List {
                     ForEach(contacts, id: \.self) { contact in
@@ -57,10 +57,6 @@ struct ContactsSelectionView: View {
                 Text("No contacts selected")
             }
         }
-        // ... existing code for retrieving saved contacts
-        
-        
-        
         .onAppear {
             // Retrieve saved contacts from UserDefaults
             if let savedContacts = dataManager.retrieveSelectedContacts() {
