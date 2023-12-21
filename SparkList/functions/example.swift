@@ -8,52 +8,52 @@ struct ContactsSelectionView: View {
     
     
     var body: some View {
-        
-        VStack {
-            
-            if let contacts = selectedContacts, !contacts.isEmpty {
-                List {
-                    ForEach(contacts, id: \.self) { contact in
-                        ContactRow(contact: contact) {
-                            // Pass the contact to be deleted to the onDelete action
-                            deleteContact(contact)
+            VStack {
+                
+                if let contacts = selectedContacts, !contacts.isEmpty {
+                    List {
+                        ForEach(contacts, id: \.self) { contact in
+                            ContactRow(contact: contact) {
+                                // Pass the contact to be deleted to the onDelete action
+                                deleteContact(contact)
+                            }
                         }
                     }
+                } else {
+                    Text("No contacts selected")
                 }
-            } else {
-                Text("No contacts selected")
-            }
-            Spacer()
-            Button(action: {
-                self.isContact1PickerPresented = true
-            }){
-                HStack {
-                    Image(systemName: "person.fill.questionmark")
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(Color.red, Color.green)
+                Button(action: {
+                    self.isContact1PickerPresented = true
+                }){
+                    HStack {
+                        Image(systemName: "person.fill.questionmark")
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(Color.red, Color.green)
+                        
+                        Text("Add Contacts")
+                        
+                    }.padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                .sheet(isPresented: $isContact1PickerPresented) {
                     
-                    Text("Add Contacts")
+                    ContactPickerViewController(selectedContacts: $selectedContacts)
                     
-                }.padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(8)
-            }
-            .sheet(isPresented: $isContact1PickerPresented) {
+                    
+                }
                 
-                ContactPickerViewController(selectedContacts: $selectedContacts)
-                
-                
-            }
-            
-//
-        }.background(Color("Color 7"))
-        .onAppear {
-            // Retrieve saved contacts from UserDefaults
-            if let savedContacts = dataManager.retrieveSelectedContacts() {
-                self.selectedContacts = savedContacts
-            }
-        }
+                //
+            }.frame(maxWidth: .infinity)
+            .background(Color("Color 7"))
+                .onAppear {
+                    // Retrieve saved contacts from UserDefaults
+                    if let savedContacts = dataManager.retrieveSelectedContacts() {
+                        self.selectedContacts = savedContacts
+                    }
+                }
+        
     }
         func deleteContact(_ contact: CNContact) {
             if let index = selectedContacts?.firstIndex(of: contact) {
