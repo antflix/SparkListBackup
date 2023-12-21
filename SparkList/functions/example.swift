@@ -47,7 +47,7 @@ struct ContactsSelectionView: View {
             }
             
 //
-        }.background(Color("Color 8"))
+        }.background(Color("Color 7"))
         .onAppear {
             // Retrieve saved contacts from UserDefaults
             if let savedContacts = dataManager.retrieveSelectedContacts() {
