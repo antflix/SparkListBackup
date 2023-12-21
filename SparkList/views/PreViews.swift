@@ -17,6 +17,7 @@ struct PreViews: View {
     @State private var customPhoneNumber: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
     @State private var customPhoneNumber2: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber2") ?? ""
     @State private var showAlert = false
+    @State private var smsURLString: String = ""
     @State private var settingsPopover = false // Create a state variable to control popover visibility//    @Binding var isSettingsViewPresented: Bool
 //    @State private var recipient: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
     // To save the formatted data for later use:
@@ -66,17 +67,10 @@ struct PreViews: View {
         
         
       
-//       
-//        if let phoneNumbersString = getPhoneNumbers() {
-//       dssdddddddddd , let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
-//            // Use smsURLString for your intended purpose
-//        } else {
-//            print("NO PHONE NUMBERS AVAILABLE")
-//            // Handle scenario when phone numbers are not available
-//        }
-        let phoneNumbersString = getPhoneNumbers()
-        let smsURLString = "sms:/open?addresses=\(String(describing: phoneNumbersString))&body=\(dataManager.allSMSs)"
-        //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
+       
+        let smsURLString = getURL()
+//        let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
+//        //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
         return VStack {
             HStack {
                 Text("Text Preview").font(Font.custom("Quicksand", size: 30).bold())
@@ -146,7 +140,9 @@ struct PreViews: View {
             Spacer()
             VStack {
                 Button(
-                    action: { sendMessage(sms: smsURLString) },
+                    action: { if let smsURLString = getURL() {
+                        sendMessage(sms: smsURLString)
+                    }},
                     label: {
                         Text("Send Message")
                             .font(.title)
@@ -222,6 +218,16 @@ func getPhoneNumbers() -> String? {
     dataManager.numbersList = phoneNumbersString ?? "" // Assign to numbersList
     
     return phoneNumbersString // Return the concatenated phone numbers
+}
+func getURL() -> String? {
+    guard let numbers = getPhoneNumbers() else {
+        print("NO PHONE NUMBERS AVAILABLE")
+        return nil // Return nil if no phone numbers are available
+    }
+
+    let smsURLString = "sms:/open?addresses=\(numbers)&body=\(dataManager.allSMSs)"
+    return smsURLString
+
 }
     func sendMessage(sms: String) {
             guard let strURL = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
