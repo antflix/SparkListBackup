@@ -225,7 +225,7 @@ func getURL() -> String? {
         return nil // Return nil if no phone numbers are available
     }
 
-    let smsURLString = "sms:/open?addresses=\(numbers)&body=\(dataManager.allSMSs)"
+    let smsURLString = "sms:/open?addresses=\(dataManager.numbersList)&body=\(dataManager.allSMSs)"
     return smsURLString
 
 }
