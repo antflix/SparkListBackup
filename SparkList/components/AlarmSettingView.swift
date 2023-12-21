@@ -18,28 +18,34 @@ struct AlarmSettingView: View {
                     scheduleAlarm(at: selectedTime, soundName: "customAlarm-2.mp3")
                     isAlarmSet = true
                 }.buttonStyle(PlainButtonStyle())
-                .padding()
-                .background(Color.green)
-                .foregroundColor(.white)
-                .cornerRadius(8)
+                    .padding()
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
                 Button("Clear Notification") {
                     cancelAlarm() // Function to cancel the notification
                     isAlarmSet = false
                 }.buttonStyle(PlainButtonStyle())
-                .padding()
-                .background(Color.red)
-                .foregroundColor(.white)
-                .cornerRadius(8)
+                    .padding()
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
             }
             // ... (existing code remains unchanged)
-                 if isAlarmSet {
-                     Text("Alarm is set for \(formattedTime(selectedTime))")
-                         .padding()
-                         .foregroundStyle(Color.red)
-                 } else {
-                     Text("Alarm is not set")
-                         .foregroundStyle(Color.yellow)
-                 }
+            if isAlarmSet {
+                Text("Alarm is set for \(formattedTime(selectedTime))")
+                    .padding()
+                    .font(.headline) // Change the font to headline
+                    .foregroundColor(.white) // Set text color to white
+                    .padding(10) // Add more padding
+                    .background(Color.blue) // Add a blue background
+                    .cornerRadius(10) // Round the corners
+            } else {
+                Text("Alarm is not set")
+                    .font(.title) // Change the font to title
+                    .foregroundColor(.yellow) // Set text color to yellow
+                    .padding() // Add default padding
+            }
         }
         .padding()
         .onAppear {
