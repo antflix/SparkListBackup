@@ -17,15 +17,13 @@ struct PreViews: View {
     @State private var customPhoneNumber: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
     @State private var customPhoneNumber2: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber2") ?? ""
     @State private var showAlert = false
-    @State private var smsURLString: String = ""
     @State private var settingsPopover = false // Create a state variable to control popover visibility//    @Binding var isSettingsViewPresented: Bool
 //    @State private var recipient: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
     // To save the formatted data for later use:
     @State private var savedData: String = "" // State variable to store the formatted data
     @State private var selectedContacts: [CNContact]? = []
     @State private var phoneNumbersString: String = ""
-    @State private var phoneNumber: String = ""
-
+    
     func generateSMSBody() {
         
         let sortedOutput = SMSGenerator.sortedFormat(dataManager: dataManager)
@@ -68,8 +66,10 @@ struct PreViews: View {
         
       
        
-//        let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
-//        //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
+        
+
+        let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
+        //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
         return VStack {
             HStack {
                 Text("Text Preview").font(Font.custom("Quicksand", size: 30).bold())
@@ -139,25 +139,19 @@ struct PreViews: View {
             Spacer()
             VStack {
                 Button(
-                      action: {
-                          if let smsURLString = getURL() {
-                              sendMessage(sms: smsURLString)
-                          } else {
-                              print("Unable to send SMS")
-                          }
-                      },
-                      label: {
-                          Text("Send Message")
-                              .font(.title)
-                              .foregroundColor(Color.green)
-                              .background(Color.clear)
-                          Image(systemName: "arrow.up.circle.fill")
-                              .background(Color.clear)
-                              .foregroundStyle(Color.green)
-                              .font(.title)
-                      }
-                  )
-              
+                    action: { sendMessage(sms: smsURLString) },
+                    label: {
+                        Text("Send Message")
+                            .font(.title)
+                            .foregroundColor(Color.green)
+                            .background(Color.clear)
+                        Image(systemName: "arrow.up.circle.fill")
+                            .background(Color.clear)
+                            .foregroundStyle(Color.green)
+                            .font(.title)
+                    }
+                    
+                )
                 .buttonStyle(PlainButtonStyle()) //
                     .padding()
                 NavigationLink(destination: JobsView().navigationBarHidden(true)) {
@@ -210,34 +204,19 @@ struct PreViews: View {
     }
     
 }
-
-func getPhoneNumbers() -> String? {
-    if let selectedContacts = dataManager.selectedContacts {
-        let phoneNumbersString = selectedContacts.compactMap { contact -> String? in
-            guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
-                return nil // Skip contacts without phone numbers
-            }
-            return firstPhoneNumber
-        }.joined(separator: ", ")
-        
-        dataManager.numbersList = phoneNumbersString // Assign to numbersList
-        
-        return phoneNumbersString // Return the concatenated phone numbers
-    } else {
-        print("No contacts selected")
-        return nil
+func getPhoneNumbers() {
+    
+    if let savedContacts = dataManager.retrieveSelectedContacts() {
+        dataManager.selectedContacts = savedContacts
     }
-}
-
-func getURL() -> String? {
-    guard let numbers = getPhoneNumbers() else {
-        print("NO PHONE NUMBERS AVAILABLE")
-        return nil // Return nil if no phone numbers are available
-    }
-
-    let smsURLString = "sms:/open?addresses=\(numbers)&body=\(dataManager.allSMSs)"
-    print("SMS URL: \(smsURLString)") // Print the constructed SMS URL for debugging
-    return smsURLString
+    
+    let phoneNumbersString = dataManager.selectedContacts?.compactMap { contact -> String? in
+        guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
+            return nil // Skip contacts without phone numbers
+        }
+        return firstPhoneNumber
+    }.joined(separator: ", ")
+    
 }
     func sendMessage(sms: String) {
             guard let strURL = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
