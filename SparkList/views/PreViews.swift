@@ -68,7 +68,7 @@ struct PreViews: View {
       
 //       
 //        if let phoneNumbersString = getPhoneNumbers() {
-//        let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
+//       dssdddddddddd , let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
 //            // Use smsURLString for your intended purpose
 //        } else {
 //            print("NO PHONE NUMBERS AVAILABLE")
