@@ -67,7 +67,12 @@ struct PreViews: View {
         
       
        
-        
+        if let phoneNumbersString = getPhoneNumbers() {
+            let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
+            // Use smsURLString for your intended purpose
+        } else {
+            // Handle scenario when phone numbers are not available
+        }
 
         let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
         //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
@@ -205,18 +210,17 @@ struct PreViews: View {
     }
     
 }
-func getPhoneNumbers() {
-    
-    if let savedContacts = dataManager.retrieveSelectedContacts() {
-        dataManager.selectedContacts = savedContacts
-    }
-    
+func getPhoneNumbers() -> String? {
     let phoneNumbersString = dataManager.selectedContacts?.compactMap { contact -> String? in
         guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
             return nil // Skip contacts without phone numbers
         }
-        dataManager.numbersList = dataManager.numbersList.appending(firstPhoneNumber);        return firstPhoneNumber
+        return firstPhoneNumber
     }.joined(separator: ", ")
+    
+    dataManager.numbersList = phoneNumbersString ?? "" // Assign to numbersList
+    
+    return phoneNumbersString // Return the concatenated phone numbers
 }
     func sendMessage(sms: String) {
             guard let strURL = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
