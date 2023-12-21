@@ -81,25 +81,19 @@ class DataManager: ObservableObject {
         }
     }
     
-     func saveSelectedContacts() {
-         // Ensure `selectedContacts` is not nil before proceeding
-         guard let contacts = selectedContacts else {
-             UserDefaults.standard.removeObject(forKey: "selectedContactsKey") // Remove stored data if contacts are nil
-             return
-         }
-         
-         let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: contacts, requiringSecureCoding: false)
-         UserDefaults.standard.set(encodedData, forKey: "selectedContactsKey")
-     }
-     
-     func retrieveSelectedContacts() -> [CNContact]? {
-         if let savedData = UserDefaults.standard.data(forKey: "selectedContactsKey"),
+
+    func saveSelectedContacts(_ contacts: [CNContact]) {
+        let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: contacts, requiringSecureCoding: false)
+        UserDefaults.standard.set(encodedData, forKey: "selectedContactsKey")
+    }
+    
+    func retrieveSelectedContacts() -> [CNContact]? {
+        if let savedData = UserDefaults.standard.data(forKey: "selectedContactsKey"),
             let decodedContacts = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, CNContact.self], from: savedData) as? [CNContact] {
-             selectedContacts = decodedContacts
-             return decodedContacts
-         }
-         return nil
-     }
+            return decodedContacts
+        }
+        return nil
+    }
      
      func deleteSelectedContacts() {
          UserDefaults.standard.removeObject(forKey: "selectedContactsKey")
