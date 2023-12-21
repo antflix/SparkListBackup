@@ -65,7 +65,7 @@ struct PreViews: View {
 //    sortedOutput: sortedOutput, dataManger: dataManager)
         
         
-      getPhoneNumbers()
+      
        
         
 
