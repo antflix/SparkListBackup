@@ -51,7 +51,7 @@ struct PreViews: View {
                dataManager.selectedPhoneNumber = "\(dataManager.selectedContactPhoneNumber)"
            }
        }
- 
+    
     
   
     var body: some View {
@@ -63,9 +63,13 @@ struct PreViews: View {
     
 //    sortedOutput: sortedOutput, dataManger: dataManager)
         
+        let phoneNumbersString = dataManager.selectedContacts?.compactMap { contact -> String? in
+            guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
+                return nil // Skip contacts without phone numbers
+            }
+            return firstPhoneNumber
+        }.joined(separator: ", ")
         
-      
-       
         
 
         let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
@@ -204,20 +208,7 @@ struct PreViews: View {
     }
     
 }
-func getPhoneNumbers() {
-    
-    if let savedContacts = dataManager.retrieveSelectedContacts() {
-        dataManager.selectedContacts = savedContacts
-    }
-    
-    let phoneNumbersString = dataManager.selectedContacts?.compactMap { contact -> String? in
-        guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
-            return nil // Skip contacts without phone numbers
-        }
-        return firstPhoneNumber
-    }.joined(separator: ", ")
-    
-}
+
     func sendMessage(sms: String) {
             guard let strURL = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                   let url = URL(string: strURL)
