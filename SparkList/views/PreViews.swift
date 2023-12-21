@@ -63,7 +63,12 @@ struct PreViews: View {
     
 //    sortedOutput: sortedOutput, dataManger: dataManager)
         
-        let phoneNumbersString = dataManager.selectedContacts?.compactMap { contact -> String? in
+        
+        if let savedContacts = dataManager.retrieveSelectedContacts() {
+            self.selectedContacts = savedContacts
+        }
+        
+        let phoneNumbersString = selectedContacts?.compactMap { contact -> String? in
             guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
                 return nil // Skip contacts without phone numbers
             }
