@@ -82,4 +82,5 @@ struct ContactRow: View {
 }
 #Preview {
     ContactsSelectionView()
+        .environmentObject(DataManager())
 }
