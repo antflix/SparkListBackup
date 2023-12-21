@@ -68,7 +68,6 @@ struct PreViews: View {
         
       
        
-        let smsURLString = getURL()
 //        let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
 //        //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
         return VStack {
