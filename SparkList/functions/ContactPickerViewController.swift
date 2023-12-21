@@ -34,7 +34,7 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
                    selectedContacts.wrappedValue = contacts
 
                    // Save the contacts immediately upon selection
-                   dataManager.saveSelectedContacts()
+                   dataManager.saveSelectedContacts(contacts)
             }
         }
     }

@@ -36,7 +36,7 @@ struct ContactsSelectionView: View {
                                  ContactRow(contact: contact) {
                                      if let index = selectedContacts?.firstIndex(of: contact) {
                                          selectedContacts?.remove(at: index)
-                                         dataManager.saveSelectedContacts()
+                                         dataManager.saveSelectedContacts(contacts)
                                      }
                                  }
                              }
