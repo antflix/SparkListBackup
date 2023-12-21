@@ -35,13 +35,13 @@ struct AlarmSettingView: View {
             if isAlarmSet {
                    Text("Alarm is set for \(formattedTime(selectedTime))")
                        .font(.callout) // Adjust the font size and style
-                       .foregroundColor(.gray) // Use a subdued color for the text
+                       .foregroundColor(.green) // Use a subdued color for the text
                        .italic() // Make it italic to indicate a status message
                        .padding(.top) // Add some top padding
                } else {
                    Text("Alarm is not set")
                        .font(.callout) // Adjust the font size and style
-                       .foregroundColor(.gray) // Use a subdued color for the text
+                       .foregroundColor(.red) // Use a subdued color for the text
                        .italic() // Make it italic to indicate a status message
                }
            }
