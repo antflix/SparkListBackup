@@ -23,7 +23,8 @@ struct PreViews: View {
     @State private var savedData: String = "" // State variable to store the formatted data
     @State private var selectedContacts: [CNContact]? = []
     @State private var phoneNumbersString: String = ""
-    
+    @State private var phoneNumber: String = ""
+
     func generateSMSBody() {
         
         let sortedOutput = SMSGenerator.sortedFormat(dataManager: dataManager)
@@ -51,7 +52,7 @@ struct PreViews: View {
                dataManager.selectedPhoneNumber = "\(dataManager.selectedContactPhoneNumber)"
            }
        }
-    
+ 
     
   
     var body: some View {
@@ -64,17 +65,8 @@ struct PreViews: View {
 //    sortedOutput: sortedOutput, dataManger: dataManager)
         
         
-        if let savedContacts = dataManager.retrieveSelectedContacts() {
-            self.selectedContacts = savedContacts
-        }
-        
-        let phoneNumbersString = selectedContacts?.compactMap { contact -> String? in
-            guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
-                return nil // Skip contacts without phone numbers
-            }
-            return firstPhoneNumber
-        }.joined(separator: ", ")
-        
+      getPhoneNumbers()
+       
         
 
         let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
@@ -213,7 +205,19 @@ struct PreViews: View {
     }
     
 }
-
+func getPhoneNumbers() {
+    
+    if let savedContacts = dataManager.retrieveSelectedContacts() {
+        dataManager.selectedContacts = savedContacts
+    }
+    
+    let phoneNumbersString = dataManager.selectedContacts?.compactMap { contact -> String? in
+        guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
+            return nil // Skip contacts without phone numbers
+        }
+        return firstPhoneNumber
+    }.joined(separator: ", ")
+}
     func sendMessage(sms: String) {
             guard let strURL = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                   let url = URL(string: strURL)
