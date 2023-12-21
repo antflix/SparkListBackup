@@ -30,6 +30,7 @@ struct ContactPickerViewController: UIViewControllerRepresentable {
         func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
                if var contacts = selectedContacts.wrappedValue {
                    contacts.append(contact)
+                   print("\(contacts)")
                    selectedContacts.wrappedValue = contacts
 
                    // Save the contacts immediately upon selection
