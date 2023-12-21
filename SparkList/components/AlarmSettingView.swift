@@ -31,23 +31,21 @@ struct AlarmSettingView: View {
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
-            // ... (existing code remains unchanged)
+            Spacer()
             if isAlarmSet {
-                Text("Alarm is set for \(formattedTime(selectedTime))")
-                    .padding()
-                    .font(.headline) // Change the font to headline
-                    .foregroundColor(.white) // Set text color to white
-                    .padding(10) // Add more padding
-                    .background(Color.blue) // Add a blue background
-                    .cornerRadius(10) // Round the corners
-            } else {
-                Text("Alarm is not set")
-                    .font(.title) // Change the font to title
-                    .foregroundColor(.yellow) // Set text color to yellow
-                    .padding() // Add default padding
-            }
-        }
-        .padding()
+                   Text("Alarm is set for \(formattedTime(selectedTime))")
+                       .font(.callout) // Adjust the font size and style
+                       .foregroundColor(.gray) // Use a subdued color for the text
+                       .italic() // Make it italic to indicate a status message
+                       .padding(.top) // Add some top padding
+               } else {
+                   Text("Alarm is not set")
+                       .font(.callout) // Adjust the font size and style
+                       .foregroundColor(.gray) // Use a subdued color for the text
+                       .italic() // Make it italic to indicate a status message
+               }
+           }
+           .padding()
         .onAppear {
                // Retrieve the saved time from UserDefaults and assign it to selectedTime
                if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
