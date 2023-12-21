@@ -68,7 +68,7 @@ struct PreViews: View {
             self.selectedContacts = savedContacts
         }
         
-        let phoneNumbersString = selectedContacts?.compactMap { contact -> String? in
+        let phoneNumbersString = self.selectedContacts?.compactMap { contact -> String? in
             guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
                 return nil // Skip contacts without phone numbers
             }
