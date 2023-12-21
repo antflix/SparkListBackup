@@ -71,6 +71,7 @@ struct PreViews: View {
             let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
             // Use smsURLString for your intended purpose
         } else {
+            print("NO PHONE NUMBERS AVAILABLE")
             // Handle scenario when phone numbers are not available
         }
 
