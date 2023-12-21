@@ -66,16 +66,16 @@ struct PreViews: View {
         
         
       
-       
-        if let phoneNumbersString = getPhoneNumbers() {
-            let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
-            // Use smsURLString for your intended purpose
-        } else {
-            print("NO PHONE NUMBERS AVAILABLE")
-            // Handle scenario when phone numbers are not available
-        }
-
-        let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
+//       
+//        if let phoneNumbersString = getPhoneNumbers() {
+//        let smsURLString = "sms:/open?addresses=\(phoneNumbersString)&body=\(dataManager.allSMSs)"
+//            // Use smsURLString for your intended purpose
+//        } else {
+//            print("NO PHONE NUMBERS AVAILABLE")
+//            // Handle scenario when phone numbers are not available
+//        }
+        let phoneNumbersString = getPhoneNumbers()
+        let smsURLString = "sms:/open?addresses=\(String(describing: phoneNumbersString))&body=\(dataManager.allSMSs)"
         //      let deviceBg = #colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1)
         return VStack {
             HStack {
