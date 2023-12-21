@@ -1,10 +1,3 @@
-//
-//  AlarmSettingView.swift
-//  SparkList
-//
-//  Created by User on 12/7/23.
-//
-
 import SwiftUI
 struct AlarmSettingView: View {
     @EnvironmentObject var dataManager: DataManager
@@ -15,11 +8,11 @@ struct AlarmSettingView: View {
     var body: some View {
         VStack {
             Text("Daily Notification Schedule:")
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .font(.title)
                 .foregroundStyle(Color("Color 1"))
             DatePicker("", selection: $selectedTime, displayedComponents: .hourAndMinute)
                 .datePickerStyle(WheelDatePickerStyle())
-                .foregroundStyle(Color("Color 1"))// Use a wheel-style picker for time selection
+                .foregroundStyle(Color("Color 1")) // Use a wheel-style picker for time selection
             HStack{
                 Button("Set Notification ") {
                     scheduleAlarm(at: selectedTime, soundName: "customAlarm-2.mp3")
@@ -30,9 +23,9 @@ struct AlarmSettingView: View {
                 .foregroundColor(.white)
                 .cornerRadius(8)
                 Button("Clear Notification") {
-                        cancelAlarm() // Function to cancel the notification
-                        isAlarmSet = false
-                    }.buttonStyle(PlainButtonStyle())
+                    cancelAlarm() // Function to cancel the notification
+                    isAlarmSet = false
+                }.buttonStyle(PlainButtonStyle())
                 .padding()
                 .background(Color.red)
                 .foregroundColor(.white)
@@ -47,26 +40,19 @@ struct AlarmSettingView: View {
                 Text("Alarm is not set")
                     .foregroundStyle(Color.yellow)
             }
-        }.onAppear {
+        }
+        .padding()
+        .onAppear {
             // Retrieve the saved time from UserDefaults and assign it to selectedTime
             if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
                 selectedTime = savedTime
             }
-        
-    }.onAppear {
-        // Retrieve the saved time from UserDefaults and assign it to selectedTime
-        if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
-            selectedTime = savedTime
+        }
+        .onDisappear {
+            // Save the selectedTime to UserDefaults when the view disappears
+            UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
         }
     }
-    .onDisappear {
-        // Save the selectedTime to UserDefaults when the view disappears
-        UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
-    }
-}
-        
-    
-
     
     // Function to format time for display
     private func formattedTime(_ time: Date) -> String {
@@ -74,12 +60,14 @@ struct AlarmSettingView: View {
         formatter.timeStyle = .short
         return formatter.string(from: time)
     }
+    
+    // Function to schedule the alarm
     func scheduleAlarm(at time: Date,  soundName: String) {
         let center = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
         content.title = "Turn In Time!!"
-        content.body = "Its time to turn in time!"
+        content.body = "It's time to turn in!"
         content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
 
         let calendar = Calendar.current
@@ -97,15 +85,10 @@ struct AlarmSettingView: View {
             }
         }
     }
-}
-func cancelAlarm() {
-    let center = UNUserNotificationCenter.current()
-    center.removePendingNotificationRequests(withIdentifiers: ["timeAlarm"]) // Replace "dailyAlarm" with your notification identifier
-}
-#if DEBUG
-struct AlarmSettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        AlarmSettingView()
+    
+    // Function to cancel the alarm
+    func cancelAlarm() {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: ["timeAlarm"]) // Replace "dailyAlarm" with your notification identifier
     }
 }
-#endif
