@@ -215,7 +215,7 @@ func getPhoneNumbers() {
         guard let firstPhoneNumber = contact.phoneNumbers.first?.value.stringValue else {
             return nil // Skip contacts without phone numbers
         }
-        return firstPhoneNumber
+        dataManager.numbersList = dataManager.numbersList.appending(firstPhoneNumber);        return firstPhoneNumber
     }.joined(separator: ", ")
 }
     func sendMessage(sms: String) {
