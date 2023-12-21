@@ -8,21 +8,23 @@ struct ContactsSelectionView: View {
     
     
     var body: some View {
+        
         VStack {
             Button(action: {
                 self.isContact1PickerPresented = true
-            }) { HStack {
-                Image(systemName: "person.fill.questionmark")
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(Color.red, Color.green)
-                
-                Text("Add Contacts")
-                
-            }.padding()
+            }){
+                HStack {
+                    Image(systemName: "person.fill.questionmark")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(Color.red, Color.green)
+                    
+                    Text("Add Contacts")
+                    
+                }.padding()
                     .foregroundColor(.white)
                     .background(Color.blue)
                     .cornerRadius(8)
-            }
+            }.padding()
             .sheet(isPresented: $isContact1PickerPresented) {
                 
                 ContactPickerViewController(selectedContacts: $selectedContacts)
@@ -30,20 +32,7 @@ struct ContactsSelectionView: View {
                 
             }
             
-//            if let contacts = selectedContacts, !contacts.isEmpty {
-//                List {
-//                    ForEach(contacts, id: \.self) { contact in
-//                        ContactRow(contact: contact) {
-//                            if let index = selectedContacts?.firstIndex(of: contact) {
-//                                selectedContacts?.remove(at: index)
-//                                dataManager.saveSelectedContacts(contacts)
-//                            }
-//                        }
-//                    }
-//                }
-//            } else {
-//                Text("No contacts selected")
-//            }
+//
             if let contacts = selectedContacts, !contacts.isEmpty {
                 List {
                     ForEach(contacts, id: \.self) { contact in
@@ -90,4 +79,7 @@ struct ContactRow: View {
             }
         }
     }
+}
+#Preview {
+    ContactsSelectionView()
 }
