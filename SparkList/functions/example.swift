@@ -10,6 +10,20 @@ struct ContactsSelectionView: View {
     var body: some View {
         
         VStack {
+            
+            if let contacts = selectedContacts, !contacts.isEmpty {
+                List {
+                    ForEach(contacts, id: \.self) { contact in
+                        ContactRow(contact: contact) {
+                            // Pass the contact to be deleted to the onDelete action
+                            deleteContact(contact)
+                        }
+                    }
+                }
+            } else {
+                Text("No contacts selected")
+            }
+            Spacer()
             Button(action: {
                 self.isContact1PickerPresented = true
             }){
@@ -24,7 +38,7 @@ struct ContactsSelectionView: View {
                     .foregroundColor(.white)
                     .background(Color.blue)
                     .cornerRadius(8)
-            }.padding()
+            }
             .sheet(isPresented: $isContact1PickerPresented) {
                 
                 ContactPickerViewController(selectedContacts: $selectedContacts)
@@ -33,19 +47,7 @@ struct ContactsSelectionView: View {
             }
             
 //
-            if let contacts = selectedContacts, !contacts.isEmpty {
-                List {
-                    ForEach(contacts, id: \.self) { contact in
-                        ContactRow(contact: contact) {
-                            // Pass the contact to be deleted to the onDelete action
-                            deleteContact(contact)
-                        }
-                    }
-                }
-            } else {
-                Text("No contacts selected")
-            }
-        }
+        }.background(Color("Color 7"))
         .onAppear {
             // Retrieve saved contacts from UserDefaults
             if let savedContacts = dataManager.retrieveSelectedContacts() {
