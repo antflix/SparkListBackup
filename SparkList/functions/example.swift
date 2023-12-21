@@ -16,7 +16,7 @@ struct ContactsSelectionView: View {
                     .symbolRenderingMode(.palette)
                     .foregroundStyle(Color.red, Color.green)
                 
-                Text("Select Contact 1")
+                Text("Add Contacts")
                 
             }.padding()
                     .foregroundColor(.white)
@@ -61,7 +61,7 @@ struct ContactRow: View {
         HStack {
             Text("\(contact.givenName) \(contact.familyName)")
             Spacer()
-            Button(action: onDelete) {
+            Button(action: dataManager.deleteSelectedContacts) {
                 Image(systemName: "trash")
                     .foregroundColor(.red)
             }
