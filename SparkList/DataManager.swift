@@ -28,7 +28,7 @@ class DataManager: ObservableObject {
     @Published var selectedContact1: CNContact?
     @Published var selectedContact2: CNContact?
     @Published var numbersList: String = ""
-
+    @Published var persistentMode = UserDefaults.standard.bool(forKey: "persistentMode") // Retrieve persistent mode status
     init() {
         self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         //         self.selectedContact = DataManager.loadContact()
@@ -50,7 +50,40 @@ class DataManager: ObservableObject {
     func hoursForEmployee(_ employeeName: String) -> String {
         return employeeData[employeeName] ?? ""
     }
-    
+    func scheduleAlarm(at time: Date, soundName: String) {
+        let center = UNUserNotificationCenter.current()
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Turn In Time!!"
+        content.body = "It's time to turn in!"
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
+
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: time)
+
+        var trigger: UNNotificationTrigger
+     
+        let now = Date()
+        var scheduledTime = time
+        if now > scheduledTime {
+            // Schedule for the next day
+            scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
+        }
+        if persistentMode {
+               trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+           } else {
+               trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.hour, .minute], from: scheduledTime), repeats: false)
+           }
+        let request = UNNotificationRequest(identifier: "timeAlarm", content: content, trigger: trigger)
+
+        center.add(request) { error in
+            if let error = error {
+                print("Error scheduling notification: \(error.localizedDescription)")
+            } else {
+                print("Notification scheduled successfully")
+            }
+        }
+    }
     // Array holding employee names
     let employeeNames = [
         "Anthony",

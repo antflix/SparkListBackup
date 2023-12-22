@@ -220,6 +220,13 @@ func stopPersistentNotifications() {
             else { return }
             
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        stopPersistentNotifications()
+
+            // Optionally, reschedule the alarm for the next day
+            if let scheduledTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
+                dataManager.scheduleAlarm(at: scheduledTime, soundName: "customAlarm-2.mp3")
+            }
+        
         }
     
 

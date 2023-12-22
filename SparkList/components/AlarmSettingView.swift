@@ -4,7 +4,6 @@ struct AlarmSettingView: View {
 
     @State private var selectedTime = Date() // State to hold the selected time
     @State private var isAlarmSet = false // State to track if the alarm is set
-    @State private var persistentMode = UserDefaults.standard.bool(forKey: "persistentMode") // Retrieve persistent mode status
 
     init() {
         // Retrieve the saved time from UserDefaults and assign it to selectedTime
@@ -23,7 +22,7 @@ struct AlarmSettingView: View {
                 .foregroundStyle(Color("Color 1")) // Use a wheel-style picker for time selection
             HStack{
                 Button("Set Notification ") {
-                    scheduleAlarm(at: selectedTime, soundName: "customalarm.mp3")
+                    dataManager.scheduleAlarm(at: selectedTime, soundName: "customAlarm-2.mp3")
                     isAlarmSet = true
                 }.buttonStyle(PlainButtonStyle())
                     .padding()
@@ -39,8 +38,8 @@ struct AlarmSettingView: View {
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
-            Toggle("Persistent Mode", isOn: $persistentMode)
-                   .onChange(of: persistentMode) { newValue in
+            Toggle("Persistent Mode", isOn: $dataManager.persistentMode)
+                .onChange(of: dataManager.persistentMode) { newValue in
                        UserDefaults.standard.set(newValue, forKey: "persistentMode")
                    }
                    .padding()
@@ -80,41 +79,41 @@ struct AlarmSettingView: View {
     }
     
     // Function to schedule the alarm
-    func scheduleAlarm(at time: Date, soundName: String) {
-        let center = UNUserNotificationCenter.current()
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Turn In Time!!"
-        content.body = "It's time to turn in!"
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "customAlarm-2.mp3"))
-
-        let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.hour, .minute], from: time)
-
-        var trigger: UNNotificationTrigger
-     
-        let now = Date()
-        var scheduledTime = time
-        if now > scheduledTime {
-            // Schedule for the next day
-            scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
-        }
-        if persistentMode {
-               trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
-           } else {
-               trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.hour, .minute], from: scheduledTime), repeats: false)
-           }
-        let request = UNNotificationRequest(identifier: "timeAlarm", content: content, trigger: trigger)
-
-        center.add(request) { error in
-            if let error = error {
-                print("Error scheduling notification: \(error.localizedDescription)")
-            } else {
-                print("Notification scheduled successfully")
-            }
-        }
-    }
-    
+//    func scheduleAlarm(at time: Date, soundName: String) {
+//        let center = UNUserNotificationCenter.current()
+//        
+//        let content = UNMutableNotificationContent()
+//        content.title = "Turn In Time!!"
+//        content.body = "It's time to turn in!"
+//        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "customAlarm-2.mp3"))
+//
+//        let calendar = Calendar.current
+//        let dateComponents = calendar.dateComponents([.hour, .minute], from: time)
+//
+//        var trigger: UNNotificationTrigger
+//     
+//        let now = Date()
+//        var scheduledTime = time
+//        if now > scheduledTime {
+//            // Schedule for the next day
+//            scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
+//        }
+//        if persistentMode {
+//               trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+//           } else {
+//               trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.hour, .minute], from: scheduledTime), repeats: false)
+//           }
+//        let request = UNNotificationRequest(identifier: "timeAlarm", content: content, trigger: trigger)
+//
+//        center.add(request) { error in
+//            if let error = error {
+//                print("Error scheduling notification: \(error.localizedDescription)")
+//            } else {
+//                print("Notification scheduled successfully")
+//            }
+//        }
+//    }
+//    
     // Function to cancel the alarm
     func cancelAlarm() {
         let center = UNUserNotificationCenter.current()
