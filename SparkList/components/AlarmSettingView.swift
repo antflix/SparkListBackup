@@ -100,7 +100,7 @@ struct AlarmSettingView: View {
             scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
         }
         if persistentMode {
-               trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: true)
+               trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
            } else {
                trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.hour, .minute], from: scheduledTime), repeats: false)
            }
