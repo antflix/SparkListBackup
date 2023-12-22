@@ -4,7 +4,8 @@ struct AlarmSettingView: View {
 
     @State private var selectedTime = Date() // State to hold the selected time
     @State private var isAlarmSet = false // State to track if the alarm is set
-    
+    @State private var persistentMode = UserDefaults.standard.bool(forKey: "persistentMode") // Retrieve persistent mode status
+
     var body: some View {
         VStack {
             Text("Daily Notification Schedule:")
@@ -31,6 +32,11 @@ struct AlarmSettingView: View {
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
+            Toggle("Persistent Mode", isOn: $persistentMode)
+                   .onChange(of: persistentMode) { newValue in
+                       UserDefaults.standard.set(newValue, forKey: "persistentMode")
+                   }
+                   .padding()
             Spacer()
             if isAlarmSet {
                    Text("Alarm is set for \(formattedTime(selectedTime))")
@@ -67,7 +73,7 @@ struct AlarmSettingView: View {
     }
     
     // Function to schedule the alarm
-    func scheduleAlarm(at time: Date,  soundName: String) {
+    func scheduleAlarm(at time: Date, soundName: String) {
         let center = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
@@ -76,12 +82,29 @@ struct AlarmSettingView: View {
         content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
 
         let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.hour, .minute], from: time) // Extract hour and minute from the selected time
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: time)
+
+        var trigger: UNNotificationTrigger
+        if persistentMode {
+            // Schedule the notification to repeat every 5 minutes
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: 300, repeats: true)
+        } else {
+            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        }
         
         let request = UNNotificationRequest(identifier: "timeAlarm", content: content, trigger: trigger)
-        
+        let now = Date()
+           var scheduledTime = time
+           if now > scheduledTime {
+               // Schedule for the next day
+               scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
+           }
+        if persistentMode {
+               trigger = UNTimeIntervalNotificationTrigger(timeInterval: 300, repeats: true)
+           } else {
+               trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.hour, .minute], from: scheduledTime), repeats: false)
+           }
+
         center.add(request) { error in
             if let error = error {
                 print("Error scheduling notification: \(error.localizedDescription)")

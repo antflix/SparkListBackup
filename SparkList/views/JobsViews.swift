@@ -12,9 +12,11 @@ struct JobsView: View {
     @State private var showingPopover: [Bool] = [] // Add state for showing popover
     @State private var isEmployeeViewActive = false
     @State private var animationsRunning = false
+    private func updatePopoverArray() {
+        showingPopover = Array(repeating: false, count: filteredJobs.count)
+    }
     
-    
-
+  
 
    
   var filteredJobs: [[String]] {
@@ -116,6 +118,7 @@ struct JobsView: View {
         showingPopover = Array(repeating: false, count: jobs.count)
           resetEmployeeData() // Call the function to reset employee data when the view appears
           animationsRunning = true
+          dataManager.selectedJobID = ""
 
       }.background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.5))
         
@@ -131,6 +134,11 @@ struct JobsView: View {
       //                NavigationLink(destination: EmployeeView()) {
       //                    Text("Next")
       //                }
+    }.onChange(of: searchText) { _ in
+        updatePopoverArray()
+    }
+    .onChange(of: jobs) { _ in
+        updatePopoverArray()
     }
     .toolbar{MyToolbarItems()}
     .background(EllipticalGradient(colors:[Color("Color 7"), Color("Color 8")], center: .top, startRadiusFraction: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, endRadiusFraction: 0.5))
