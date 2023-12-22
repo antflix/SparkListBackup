@@ -6,6 +6,13 @@ struct AlarmSettingView: View {
     @State private var isAlarmSet = false // State to track if the alarm is set
     @State private var persistentMode = UserDefaults.standard.bool(forKey: "persistentMode") // Retrieve persistent mode status
 
+    init() {
+        // Retrieve the saved time from UserDefaults and assign it to selectedTime
+        if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
+            selectedTime = savedTime
+            isAlarmSet = true // Set isAlarmSet to true since time is retrieved
+        }
+    }
     var body: some View {
         VStack {
             Text("Daily Notification Schedule:")
@@ -79,31 +86,25 @@ struct AlarmSettingView: View {
         let content = UNMutableNotificationContent()
         content.title = "Turn In Time!!"
         content.body = "It's time to turn in!"
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "customAlarm-2.mp3"))
 
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.hour, .minute], from: time)
 
         var trigger: UNNotificationTrigger
-        if persistentMode {
-            // Schedule the notification to repeat every 5 minutes
-            trigger = UNTimeIntervalNotificationTrigger(timeInterval: 300, repeats: true)
-        } else {
-            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        }
-        
-        let request = UNNotificationRequest(identifier: "timeAlarm", content: content, trigger: trigger)
+     
         let now = Date()
-           var scheduledTime = time
-           if now > scheduledTime {
-               // Schedule for the next day
-               scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
-           }
+        var scheduledTime = time
+        if now > scheduledTime {
+            // Schedule for the next day
+            scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
+        }
         if persistentMode {
-               trigger = UNTimeIntervalNotificationTrigger(timeInterval: 300, repeats: true)
+               trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: true)
            } else {
                trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.hour, .minute], from: scheduledTime), repeats: false)
            }
+        let request = UNNotificationRequest(identifier: "timeAlarm", content: content, trigger: trigger)
 
         center.add(request) { error in
             if let error = error {
