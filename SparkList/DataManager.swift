@@ -151,31 +151,31 @@ class DataManager: ObservableObject {
 			}
 		}
 	}
-    func persistentAlarm(soundName: String) {
-        let center = UNUserNotificationCenter.current()
-
-        let content = UNMutableNotificationContent()
-        content.title = "Reminder!"
-        content.body = "Time to check in!"
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
-
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
-
-        let request = UNNotificationRequest(identifier: "persistentAlarm", content: content, trigger: trigger)
-
-        center.add(request) { error in
-            if let error = error {
-                print("Error scheduling persistent notification: \(error.localizedDescription)")
-            } else {
-                print("Persistent notification scheduled successfully")
-            }
-        }
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-            for request in requests {
-                print("Pending request: \(request.identifier)")
-            }
-        }
-    }
+//    func persistentAlarm(soundName: String) {
+//        let center = UNUserNotificationCenter.current()
+//
+//        let content = UNMutableNotificationContent()
+//        content.title = "Reminder!"
+//        content.body = "Time to check in!"
+//        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
+//
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+//
+//        let request = UNNotificationRequest(identifier: "persistentAlarm", content: content, trigger: trigger)
+//
+//        center.add(request) { error in
+//            if let error = error {
+//                print("Error scheduling persistent notification: \(error.localizedDescription)")
+//            } else {
+//                print("Persistent notification scheduled successfully")
+//            }
+//        }
+//        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+//            for request in requests {
+//                print("Pending request: \(request.identifier)")
+//            }
+//        }
+//    }
 
     func cancelAlarm() {
            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
