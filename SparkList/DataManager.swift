@@ -45,13 +45,14 @@ class DataManager: ObservableObject {
 		self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
 		//         self.selectedContact = DataManager.loadContact()
 		//         self.selectedPhoneNumber = DataManager.loadPhoneNumber()
-		if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
-			selectedTime = savedTime
-			isAlarmSet = true
-		} else {
-			selectedTime = Date()
-		}
-		scheduleAlarm(at: selectedTime, soundName: alarmNoise)
+		self.selectedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date ?? Date()
+//		if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
+//			selectedTime = savedTime
+//			isAlarmSet = true
+//		} else {
+//			selectedTime = Date()
+//		}
+//		scheduleAlarm(at: selectedTime, soundName: alarmNoise)
 		
 	}
 	
@@ -71,6 +72,7 @@ class DataManager: ObservableObject {
 		return employeeData[employeeName] ?? ""
 	}
 	func togglePersistenceMode() {
+		print(#function)
 		persistentMode.toggle()
 		UserDefaults.standard.set(persistentMode, forKey: "PersistenceModeEnabled")
 		
@@ -82,6 +84,7 @@ class DataManager: ObservableObject {
 	}
 	
 	func scheduleAlarm(at time: Date, soundName: String) {
+		print(#function)
 		let center = UNUserNotificationCenter.current()
 		
 		let content = UNMutableNotificationContent()
@@ -120,6 +123,7 @@ class DataManager: ObservableObject {
 		}
 	}
 	func persistentAlarm(soundName: String) {
+		print(#function)
 		let center = UNUserNotificationCenter.current()
 		
 		let content = UNMutableNotificationContent()
