@@ -65,7 +65,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 			// Trigger the persistent alarm to start immediately and repeat every 60 seconds
 			dataManager.persistentAlarm(soundName: "customAlarm-2.mp3")
 			
-		
+		}
     }
 }
 
