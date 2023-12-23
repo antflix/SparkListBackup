@@ -88,13 +88,16 @@ class DataManager: ObservableObject {
         content.title = "Turn In Time!!"
         content.body = "It's time to turn in!"
         content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
-
-        var scheduledTime = time
-        let now = Date()
-        if now > scheduledTime {
-            // If the time has already passed for today, schedule for the next day
-            scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
-        }
+		let calendar = Calendar.current
+		let nowComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+		let now = calendar.date(from: nowComponents)!
+		let scheduledTimeComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: time)
+		var scheduledTime = calendar.date(from: scheduledTimeComponents)!
+      
+		if now > scheduledTime {
+			// If the time has already passed for today, schedule for the next day
+			scheduledTime = calendar.date(byAdding: .day, value: 1, to: scheduledTime)!
+		}
 		
         let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: scheduledTime), repeats: true)
 
