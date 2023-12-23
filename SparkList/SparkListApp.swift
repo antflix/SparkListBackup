@@ -36,17 +36,17 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 
     // Handle the notification when the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("Notification will present: \(notification.request.identifier)")
+        print("Notification will present:asdfasdfasdfsdfasdfas \(notification.request.identifier)")
         if notification.request.identifier == "dailyAlarm" {
             handleDailyAlarmResponse()
-            
+
         }
         completionHandler([.banner, .sound]) // Customize as needed
     }
 
     // Handle the user's interaction with the notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("Notification received with identifier: \(response.notification.request.identifier)")
+        print("Notification received with identifierasdfasdfasdfasdfasdfasdfa: \(response.notification.request.identifier)")
         if response.notification.request.identifier == "dailyAlarm" {
             handleDailyAlarmResponse()
         }
@@ -59,7 +59,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         // Access the shared instance of your DataManager
         // Check if persistent mode is enabled and trigger a persistent alarm
 		let dataManager = DataManager.shared  // Or however you access DataManager
-		
+		print("Daily Alarm Triggeredsasdfasdfasdfasdfsdfadsf")
 		// Check if persistent mode is enabled
 		if dataManager.persistentMode {
 			// Trigger the persistent alarm to start immediately and repeat every 60 seconds
