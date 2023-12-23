@@ -95,7 +95,9 @@ class DataManager: ObservableObject {
             // If the time has already passed for today, schedule for the next day
             scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
         }
-
+		if persistentMode {
+			persistentAlarm(soundName: alarmNoise)
+		}
         let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: scheduledTime), repeats: true)
 
         let request = UNNotificationRequest(identifier: "dailyAlarm", content: content, trigger: trigger)
