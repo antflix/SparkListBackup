@@ -112,7 +112,7 @@ class DataManager: ObservableObject {
         }
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             for request in requests {
-                print("Pending request: \(request.identifier)")
+                print("\(request.identifier) has been turn on")
             }
         }
     }
@@ -174,7 +174,7 @@ class DataManager: ObservableObject {
         }
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             for request in requests {
-                print("activated: \(request.identifier)")
+				print("\(request.identifier) has been turn on")
             }
         }
     }
