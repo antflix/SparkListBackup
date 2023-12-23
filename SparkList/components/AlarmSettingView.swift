@@ -59,46 +59,4 @@ struct AlarmSettingView: View {
         return formatter.string(from: time)
     }
 }
-    // Function to schedule the alarm
-    //    func scheduleAlarm(at time: Date, soundName: String) {
-    //        let center = UNUserNotificationCenter.current()
-    //
-    //        let content = UNMutableNotificationContent()
-    //        content.title = "Turn In Time!!"
-    //        content.body = "It's time to turn in!"
-    //        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "customAlarm-2.mp3"))
-    //
-    //        let calendar = Calendar.current
-    //        let dateComponents = calendar.dateComponents([.hour, .minute], from: time)
-    //
-    //        var trigger: UNNotificationTrigger
-    //
-    //        let now = Date()
-    //        var scheduledTime = time
-    //        if now > scheduledTime {
-    //            // Schedule for the next day
-    //            scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
-    //        }
-    //        if persistentMode {
-    //               trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
-    //           } else {
-    //               trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.hour, .minute], from: scheduledTime), repeats: false)
-    //           }
-    //        let request = UNNotificationRequest(identifier: "timeAlarm", content: content, trigger: trigger)
-    //
-    //        center.add(request) { error in
-    //            if let error = error {
-    //                print("Error scheduling notification: \(error.localizedDescription)")
-    //            } else {
-    //                print("Notification scheduled successfully")
-    //            }
-    //        }
-    //    }
-    //
-    //    // Function to cancel the alarm
-    //    func cancelAlarm() {
-    //        let center = UNUserNotificationCenter.current()
-    //        center.removePendingNotificationRequests(withIdentifiers: ["timeAlarm"]) // Replace "dailyAlarm" with your notification identifier
-    //    }
-    //}
-
+  

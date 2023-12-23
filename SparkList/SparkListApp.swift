@@ -36,7 +36,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 
     // Handle the notification when the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("Notification will present:asdfasdfasdfsdfasdfas \(notification.request.identifier)")
+        print("Notification will present: \(notification.request.identifier)")
         if notification.request.identifier == "dailyAlarm" {
             handleDailyAlarmResponse()
 
