@@ -59,7 +59,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         // Access the shared instance of your DataManager
         // Check if persistent mode is enabled and trigger a persistent alarm
 		let dataManager = DataManager.shared  // Or however you access DataManager
-		print("Daily Alarm Triggeredsasdfasdfasdfasdfsdfadsf")
+		print("Daily Alarm Triggered")
 		// Check if persistent mode is enabled
 		if dataManager.persistentMode {
 			// Trigger the persistent alarm to start immediately and repeat every 60 seconds

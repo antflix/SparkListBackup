@@ -209,23 +209,15 @@ struct PreViews: View {
     }
     
 }
-func stopPersistentNotifications() {
-    let center = UNUserNotificationCenter.current()
-    center.removePendingNotificationRequests(withIdentifiers: ["timeAlarm"])
-    // Optionally, you can reschedule the alarm here without persistent mode if needed
-}
+
     func sendMessage(sms: String) {
             guard let strURL = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                   let url = URL(string: strURL)
             else { return }
             
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        stopPersistentNotifications()
+		dataManager.stopPersistentNotifications()
 
-            // Optionally, reschedule the alarm for the next day
-            if let scheduledTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
-                dataManager.scheduleAlarm(at: scheduledTime, soundName: "customAlarm-2.mp3")
-            }
         
         }
     
