@@ -116,6 +116,41 @@ class DataManager: ObservableObject {
             }
         }
     }
+	func persistentAlarm(at time: Date, soundName: String) {
+		let center = UNUserNotificationCenter.current()
+		
+		let content = UNMutableNotificationContent()
+		content.title = "Turn In Time!!"
+		content.body = "It's time to turn in!"
+		content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
+		let calendar = Calendar.current
+		let nowComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+		let now = calendar.date(from: nowComponents)!
+		let scheduledTimeComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: time)
+		var scheduledTime = calendar.date(from: scheduledTimeComponents)!
+		
+		if now > scheduledTime {
+			// If the time has already passed for today, schedule for the next day
+			scheduledTime = calendar.date(byAdding: .day, value: 1, to: scheduledTime)!
+		}
+		
+		let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: scheduledTime), repeats: true)
+		
+		let request = UNNotificationRequest(identifier: "dailyAlarm", content: content, trigger: trigger)
+		
+		center.add(request) { error in
+			if let error = error {
+				print("Error scheduling daily notification: \(error.localizedDescription)")
+			} else {
+				print("Daily notification scheduled successfully")
+			}
+		}
+		UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+			for request in requests {
+				print("Pending request: \(request.identifier)")
+			}
+		}
+	}
     func persistentAlarm(soundName: String) {
         let center = UNUserNotificationCenter.current()
 
