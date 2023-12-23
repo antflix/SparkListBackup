@@ -89,7 +89,7 @@ class DataManager: ObservableObject {
 		
 		let content = UNMutableNotificationContent()
 		content.title = "Turn In Time!!"
-		content.body = "It's time to turn in!"
+	content.body = "It's time to turn in time!"
 		content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
 		let calendar = Calendar.current
 		let nowComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
@@ -127,8 +127,8 @@ class DataManager: ObservableObject {
 		let center = UNUserNotificationCenter.current()
 		
 		let content = UNMutableNotificationContent()
-		content.title = "Reminder!"
-		content.body = "Time to check in!"
+		content.title = "WARNING!!"
+		content.body = "Alarm will continue until you turn your time in!"
 		content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
 		let calendar = Calendar.current
 		let nowComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
@@ -156,12 +156,12 @@ class DataManager: ObservableObject {
 	}
 	func stopPersistentAlarm() {
 		UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["persistentAlarm"])
-		print("cancel alarm")
+		print("cancel persistence alarm")
 	}
 	func cancelAlarm() {
 		UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
 		isAlarmSet = false
-		print("cancel alarm")
+		print("cancel all alarms")
 	}
 	// Array holding employee names
 	let employeeNames = [
