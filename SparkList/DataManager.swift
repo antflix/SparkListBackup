@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 // Class managing global variables
 class DataManager: ObservableObject {
+    static let shared = DataManager()
+
     // Published variables storing various data
     @Published var selectedJobID: String = ""
     @Published var selectedHours: String = ""
@@ -28,11 +30,29 @@ class DataManager: ObservableObject {
     @Published var selectedContact1: CNContact?
     @Published var selectedContact2: CNContact?
     @Published var numbersList: String = ""
-    @Published var persistentMode = UserDefaults.standard.bool(forKey: "persistentMode") // Retrieve persistent mode status
+    @Published var persistentMode: Bool = UserDefaults.standard.bool(forKey: "persistentMode") // Retrieve persistent mode status
+    @Published var selectedTime: Date {
+           didSet {
+               UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
+           }
+       }
+    @Published var alarmNoise: String = "customAlarm-2.mp3"
+
+    @Published var isAlarmSet: Bool = false
+    
+    
     init() {
         self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
         //         self.selectedContact = DataManager.loadContact()
         //         self.selectedPhoneNumber = DataManager.loadPhoneNumber()
+        if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
+            selectedTime = savedTime
+            isAlarmSet = true
+        } else {
+            selectedTime = Date()
+        }
+        scheduleAlarm(at: selectedTime, soundName: alarmNoise)
+
     }
     
     func toggleDarkMode() {
@@ -50,40 +70,79 @@ class DataManager: ObservableObject {
     func hoursForEmployee(_ employeeName: String) -> String {
         return employeeData[employeeName] ?? ""
     }
+    func togglePersistenceMode() {
+           persistentMode.toggle()
+           UserDefaults.standard.set(persistentMode, forKey: "PersistenceModeEnabled")
+
+           if persistentMode {
+               scheduleAlarm(at: selectedTime, soundName: alarmNoise)
+           } else {
+               UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+           }
+       }
+
     func scheduleAlarm(at time: Date, soundName: String) {
         let center = UNUserNotificationCenter.current()
-        
+
         let content = UNMutableNotificationContent()
         content.title = "Turn In Time!!"
         content.body = "It's time to turn in!"
         content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
 
-        let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.hour, .minute], from: time)
-
-        var trigger: UNNotificationTrigger
-     
-        let now = Date()
         var scheduledTime = time
+        let now = Date()
         if now > scheduledTime {
-            // Schedule for the next day
+            // If the time has already passed for today, schedule for the next day
             scheduledTime = Calendar.current.date(byAdding: .day, value: 1, to: scheduledTime)!
         }
-        if persistentMode {
-               trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
-           } else {
-               trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.hour, .minute], from: scheduledTime), repeats: false)
-           }
-        let request = UNNotificationRequest(identifier: "timeAlarm", content: content, trigger: trigger)
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: scheduledTime), repeats: true)
+
+        let request = UNNotificationRequest(identifier: "dailyAlarm", content: content, trigger: trigger)
 
         center.add(request) { error in
             if let error = error {
-                print("Error scheduling notification: \(error.localizedDescription)")
+                print("Error scheduling daily notification: \(error.localizedDescription)")
             } else {
-                print("Notification scheduled successfully")
+                print("Daily notification scheduled successfully")
+            }
+        }
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            for request in requests {
+                print("Pending request: \(request.identifier)")
             }
         }
     }
+    func persistentAlarm(soundName: String) {
+        let center = UNUserNotificationCenter.current()
+
+        let content = UNMutableNotificationContent()
+        content.title = "Reminder!"
+        content.body = "Time to check in!"
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+
+        let request = UNNotificationRequest(identifier: "persistentAlarm", content: content, trigger: trigger)
+
+        center.add(request) { error in
+            if let error = error {
+                print("Error scheduling persistent notification: \(error.localizedDescription)")
+            } else {
+                print("Persistent notification scheduled successfully")
+            }
+        }
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            for request in requests {
+                print("Pending request: \(request.identifier)")
+            }
+        }
+    }
+
+    func cancelAlarm() {
+           UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+           isAlarmSet = false
+       }
     // Array holding employee names
     let employeeNames = [
         "Anthony",
