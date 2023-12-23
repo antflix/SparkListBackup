@@ -54,10 +54,15 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
 
     // Logic to handle the response to the daily alarm
-    func handleDailyAlarmResponse() {
-        // Access the shared instance of your DataManager
-        // Check if persistent mode is enabled and trigger a persistent alarm
-    }
+	func handleDailyAlarmResponse() {
+		// Handle the response to the daily alarm
+		// Access the shared instance of your DataManager
+		// Check if persistent mode is enabled and trigger a persistent alarm
+		
+		if dataManager.persistentMode {
+			dataManager.persistentAlarm(soundName: dataManager.alarmNoise)
+		}
+	}
 }
 
 let dataManager = DataManager()
