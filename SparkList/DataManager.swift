@@ -174,21 +174,15 @@ class DataManager: ObservableObject {
         }
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             for request in requests {
-                print("Pending request: \(request.identifier)")
+                print("activated: \(request.identifier)")
             }
         }
     }
-	func stopPersistentNotifications() {
 
-		let center = UNUserNotificationCenter.current()
-			center.removePendingNotificationRequests(withIdentifiers: ["persistentAlarm"])
-			// Optionally, you can reschedule the alarm here without persistent mode if needed
-		print("Persistent notifications stopped")
-
-	}
     func cancelAlarm() {
            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
            isAlarmSet = false
+		print("cancel alarm")
        }
     // Array holding employee names
     let employeeNames = [
