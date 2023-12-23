@@ -4,7 +4,7 @@ import ContactsUI
 import AVFoundation
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
+	let dataManager = DataManager() // Or however you access DataManager
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             for request in requests {
@@ -36,7 +36,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 
     // Handle the notification when the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("Notification will present: \(notification.request.identifier)")
+        print(" \(notification.request.identifier) triggered")
         if notification.request.identifier == "dailyAlarm" {
             handleDailyAlarmResponse()
 
@@ -46,7 +46,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 
     // Handle the user's interaction with the notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("Notification received with identifierasdfasdfasdfasdfasdfasdfa: \(response.notification.request.identifier)")
+        print("\(response.notification.request.identifier) notification has been clicked")
         if response.notification.request.identifier == "dailyAlarm" {
             handleDailyAlarmResponse()
         }
@@ -59,7 +59,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         // Access the shared instance of your DataManager
         // Check if persistent mode is enabled and trigger a persistent alarm
 		print("\(DataManager.shared.persistentMode)")
-		let dataManager = DataManager.shared  // Or however you access DataManager
 		print("Daily Alarm Triggered")
 		// Check if persistent mode is enabled
 		if dataManager.persistentMode {

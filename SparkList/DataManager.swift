@@ -10,222 +10,194 @@ import Foundation
 import SwiftUI
 // Class managing global variables
 class DataManager: ObservableObject {
-    static let shared = DataManager()
-
-    // Published variables storing various data
-    @Published var selectedJobID: String = ""
-    @Published var selectedHours: String = ""
-    @Published var allSMSs: String = ""
-    @Published var allSMSBodies: [String] = []
-    @Published var selectedContacts: [CNContact]? // Define as an optional array
-    @Published var selectedPhoneNumber: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
-    @Published var selectedPhoneNumber2: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber2") ?? ""
-    @Published var employeeData: [String: String] = [:]
-    @Published var isDarkMode: Bool
-    static var selectedContactName: String = "" // Global variable to store selected contact name
-    @Published var selectedContactPhoneNumber = ""
-    @Published var selectedContactPhoneNumber2 = ""
-    @Published var selectedContactName = ""
-    @Published var selectedContactName2 = ""
-    @Published var selectedContact1: CNContact?
-    @Published var selectedContact2: CNContact?
-    @Published var numbersList: String = ""
-    @Published var persistentMode: Bool = UserDefaults.standard.bool(forKey: "persistentMode") // Retrieve persistent mode status
-    @Published var selectedTime: Date {
-           didSet {
-               UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
-           }
-       }
-    @Published var alarmNoise: String = "customAlarm-2.mp3"
-
-    @Published var isAlarmSet: Bool = false
-    
-    
-    init() {
-        self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
-        //         self.selectedContact = DataManager.loadContact()
-        //         self.selectedPhoneNumber = DataManager.loadPhoneNumber()
-        if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
-            selectedTime = savedTime
-            isAlarmSet = true
-        } else {
-            selectedTime = Date()
-        }
-        scheduleAlarm(at: selectedTime, soundName: alarmNoise)
-
-    }
-    
-    func toggleDarkMode() {
-        isDarkMode.toggle()
-        UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
-    }
-    // Dictionary to hold employee hours data
-    
-    // Method to set hours for a given employee name
-    func saveEmployeeHours(name: String, hours: String) {
-        employeeData[name] = hours
-    }
-    
-    // Method to get hours for a given employee name from the dictionary
-    func hoursForEmployee(_ employeeName: String) -> String {
-        return employeeData[employeeName] ?? ""
-    }
-    func togglePersistenceMode() {
-           persistentMode.toggle()
-           UserDefaults.standard.set(persistentMode, forKey: "PersistenceModeEnabled")
-
-           if persistentMode {
-               scheduleAlarm(at: selectedTime, soundName: alarmNoise)
-           } else {
-               UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-           }
-       }
-
-    func scheduleAlarm(at time: Date, soundName: String) {
-        let center = UNUserNotificationCenter.current()
-
-        let content = UNMutableNotificationContent()
-        content.title = "Turn In Time!!"
-        content.body = "It's time to turn in!"
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
+	static let shared = DataManager()
+	
+	// Published variables storing various data
+	@Published var selectedJobID: String = ""
+	@Published var selectedHours: String = ""
+	@Published var allSMSs: String = ""
+	@Published var allSMSBodies: [String] = []
+	@Published var selectedContacts: [CNContact]? // Define as an optional array
+	@Published var selectedPhoneNumber: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber") ?? ""
+	@Published var selectedPhoneNumber2: String = UserDefaults.standard.string(forKey: "CustomPhoneNumber2") ?? ""
+	@Published var employeeData: [String: String] = [:]
+	@Published var isDarkMode: Bool
+	static var selectedContactName: String = "" // Global variable to store selected contact name
+	@Published var selectedContactPhoneNumber = ""
+	@Published var selectedContactPhoneNumber2 = ""
+	@Published var selectedContactName = ""
+	@Published var selectedContactName2 = ""
+	@Published var selectedContact1: CNContact?
+	@Published var selectedContact2: CNContact?
+	@Published var numbersList: String = ""
+	@Published var persistentMode: Bool = UserDefaults.standard.bool(forKey: "persistentMode") // Retrieve persistent mode status
+	@Published var selectedTime: Date {
+		didSet {
+			UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
+		}
+	}
+	@Published var alarmNoise: String = "customAlarm-2.mp3"
+	
+	@Published var isAlarmSet: Bool = false
+	
+	
+	init() {
+		self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+		//         self.selectedContact = DataManager.loadContact()
+		//         self.selectedPhoneNumber = DataManager.loadPhoneNumber()
+		if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
+			selectedTime = savedTime
+			isAlarmSet = true
+		} else {
+			selectedTime = Date()
+		}
+		scheduleAlarm(at: selectedTime, soundName: alarmNoise)
+		
+	}
+	
+	func toggleDarkMode() {
+		isDarkMode.toggle()
+		UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
+	}
+	// Dictionary to hold employee hours data
+	
+	// Method to set hours for a given employee name
+	func saveEmployeeHours(name: String, hours: String) {
+		employeeData[name] = hours
+	}
+	
+	// Method to get hours for a given employee name from the dictionary
+	func hoursForEmployee(_ employeeName: String) -> String {
+		return employeeData[employeeName] ?? ""
+	}
+	func togglePersistenceMode() {
+		persistentMode.toggle()
+		UserDefaults.standard.set(persistentMode, forKey: "PersistenceModeEnabled")
+		
+		if persistentMode {
+			scheduleAlarm(at: selectedTime, soundName: alarmNoise)
+		} else {
+			UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+		}
+	}
+	
+	func scheduleAlarm(at time: Date, soundName: String) {
+		let center = UNUserNotificationCenter.current()
+		
+		let content = UNMutableNotificationContent()
+		content.title = "Turn In Time!!"
+		content.body = "It's time to turn in!"
+		content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
 		let calendar = Calendar.current
 		let nowComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
 		let now = calendar.date(from: nowComponents)!
 		let scheduledTimeComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: time)
 		var scheduledTime = calendar.date(from: scheduledTimeComponents)!
-      
+		
 		if now > scheduledTime {
 			// If the time has already passed for today, schedule for the next day
 			scheduledTime = calendar.date(byAdding: .day, value: 1, to: scheduledTime)!
 		}
 		
-        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: scheduledTime), repeats: true)
-
-        let request = UNNotificationRequest(identifier: "dailyAlarm", content: content, trigger: trigger)
-
-        center.add(request) { error in
-            if let error = error {
-                print("Error scheduling daily notification: \(error.localizedDescription)")
-            } else {
-				print("Daily notification scheduled successfully for \(dataManager.selectedTime)")
-            }
-        }
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-            for request in requests {
-                print("\(request.identifier) has been turn on")
-            }
-        }
-    }
-//	func persistentAlarm(at time: Date, soundName: String) {
-//		let center = UNUserNotificationCenter.current()
-//		
-//		let content = UNMutableNotificationContent()
-//		content.title = "Turn In Time!!"
-//		content.body = "It's time to turn in!"
-//		content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
-//		let calendar = Calendar.current
-//		let nowComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
-//		let now = calendar.date(from: nowComponents)!
-//		let scheduledTimeComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: time)
-//		var scheduledTime = calendar.date(from: scheduledTimeComponents)!
-//		
-//		if now > scheduledTime {
-//			// If the time has already passed for today, schedule for the next day
-//			scheduledTime = calendar.date(byAdding: .day, value: 1, to: scheduledTime)!
-//		}
-//		
-//		let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: scheduledTime), repeats: true)
-//		
-//		let request = UNNotificationRequest(identifier: "dailyAlarm", content: content, trigger: trigger)
-//		
-//		center.add(request) { error in
-//			if let error = error {
-//				print("Error scheduling daily notification: \(error.localizedDescription)")
-//			} else {
-//				print("Daily notification scheduled successfully")
-//			}
-//		}
-//		UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-//			for request in requests {
-//				print("Pending request: \(request.identifier)")
-//			}
-//		}
-//	}
-    func persistentAlarm(soundName: String) {
-        let center = UNUserNotificationCenter.current()
-
-        let content = UNMutableNotificationContent()
-        content.title = "Reminder!"
-        content.body = "Time to check in!"
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
+		let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: scheduledTime), repeats: true)
+		
+		let request = UNNotificationRequest(identifier: "dailyAlarm", content: content, trigger: trigger)
+		
+		center.add(request) { error in
+			if let error = error {
+				print("Error scheduling daily notification: \(error.localizedDescription)")
+			} else {
+				print("dailyAlarm scheduled for \(dataManager.selectedTime)")
+			}
+		}
+		UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+			for request in requests {
+				if request.identifier == "persistentAlarm" {
+					print("dailyAlarm has been verified as activated")
+				}
+				
+			}
+		}
+	}
+	func persistentAlarm(soundName: String) {
+		let center = UNUserNotificationCenter.current()
+		
+		let content = UNMutableNotificationContent()
+		content.title = "Reminder!"
+		content.body = "Time to check in!"
+		content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
 		let calendar = Calendar.current
 		let nowComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
 		let now = calendar.date(from: nowComponents)!
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
-
-        let request = UNNotificationRequest(identifier: "persistentAlarm", content: content, trigger: trigger)
-
-        center.add(request) { error in
-            if let error = error {
-                print("Error scheduling persistent notification: \(error.localizedDescription)")
-            } else {
-                print("Persistent notification scheduled successfully starting \(now)")
-            }
-        }
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-            for request in requests {
-				print("\(request.identifier) has been turn on")
-            }
-        }
-    }
-
-    func cancelAlarm() {
-           UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-           isAlarmSet = false
+		let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+		
+		let request = UNNotificationRequest(identifier: "persistentAlarm", content: content, trigger: trigger)
+		
+		center.add(request) { error in
+			if let error = error {
+				print("Error scheduling persistent notification: \(error.localizedDescription)")
+			} else {
+				print("Persistent notification scheduled successfully, starting at \(now)")
+			}
+		}
+		
+		UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+			for request in requests {
+				if request.identifier == "persistentAlarm" {
+					print("persistentAlarm has been verified as activated")
+				}
+				
+			}
+		}
+	}
+	
+	func cancelAlarm() {
+		UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+		isAlarmSet = false
 		print("cancel alarm")
-       }
-    // Array holding employee names
-    let employeeNames = [
-        "Anthony",
-        "Brandon",
-        "Brandin",
-        "Bennet",
-        "Chris",
-        "Chuck",
-        "David",
-        "Derek",
-        "Dennis",
-        "Jason",
-        "Jesse",
-        "Kevin",
-        // Add other employee names here
-    ]
-    func clearAllSMSData() {
-        allSMSs = "" // Clear the string
-        allSMSBodies = [] // Clear the array
-        
-    }
-  
-
-    func saveSelectedContacts(_ contacts: [CNContact]) {
-        let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: contacts, requiringSecureCoding: false)
-        UserDefaults.standard.set(encodedData, forKey: "selectedContactsKey")
-    }
-    
-    func retrieveSelectedContacts() -> [CNContact]? {
-        if let savedData = UserDefaults.standard.data(forKey: "selectedContactsKey"),
-            let decodedContacts = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, CNContact.self], from: savedData) as? [CNContact] {
-            return decodedContacts
-        }
-        return nil
-    }
-     
-     func deleteSelectedContacts() {
-         UserDefaults.standard.removeObject(forKey: "selectedContactsKey")
-         selectedContacts = nil // Clear the selected contacts
-     }
- }
- 
+	}
+	// Array holding employee names
+	let employeeNames = [
+		"Anthony",
+		"Brandon",
+		"Brandin",
+		"Bennet",
+		"Chris",
+		"Chuck",
+		"David",
+		"Derek",
+		"Dennis",
+		"Jason",
+		"Jesse",
+		"Kevin",
+		// Add other employee names here
+	]
+	func clearAllSMSData() {
+		allSMSs = "" // Clear the string
+		allSMSBodies = [] // Clear the array
+		
+	}
+	
+	
+	func saveSelectedContacts(_ contacts: [CNContact]) {
+		let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: contacts, requiringSecureCoding: false)
+		UserDefaults.standard.set(encodedData, forKey: "selectedContactsKey")
+	}
+	
+	func retrieveSelectedContacts() -> [CNContact]? {
+		if let savedData = UserDefaults.standard.data(forKey: "selectedContactsKey"),
+		   let decodedContacts = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, CNContact.self], from: savedData) as? [CNContact] {
+			return decodedContacts
+		}
+		return nil
+	}
+	
+	func deleteSelectedContacts() {
+		UserDefaults.standard.removeObject(forKey: "selectedContactsKey")
+		selectedContacts = nil // Clear the selected contacts
+	}
+	
+}
 //    
 //    func saveSelectedNumbers() {
 //        UserDefaults.standard.set(selectedPhoneNumber, forKey: "CustomPhoneNumber")
