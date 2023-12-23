@@ -107,7 +107,7 @@ class DataManager: ObservableObject {
             if let error = error {
                 print("Error scheduling daily notification: \(error.localizedDescription)")
             } else {
-                print("Daily notification scheduled successfully")
+				print("Daily notification scheduled successfully for \(dataManager.selectedTime)")
             }
         }
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
@@ -158,7 +158,9 @@ class DataManager: ObservableObject {
         content.title = "Reminder!"
         content.body = "Time to check in!"
         content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
-
+		let calendar = Calendar.current
+		let nowComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+		let now = calendar.date(from: nowComponents)!
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
 
         let request = UNNotificationRequest(identifier: "persistentAlarm", content: content, trigger: trigger)
@@ -167,7 +169,7 @@ class DataManager: ObservableObject {
             if let error = error {
                 print("Error scheduling persistent notification: \(error.localizedDescription)")
             } else {
-                print("Persistent notification scheduled successfully")
+                print("Persistent notification scheduled successfully starting \(now)")
             }
         }
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
