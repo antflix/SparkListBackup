@@ -216,6 +216,7 @@ struct PreViews: View {
             else { return }
             
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+		dataManager.stopPersistentAlarm()
 //		stopPersistentNotifications()
 
         

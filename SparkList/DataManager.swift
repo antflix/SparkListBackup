@@ -154,7 +154,10 @@ class DataManager: ObservableObject {
 			}
 		}
 	}
-	
+	func stopPersistentAlarm() {
+		UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["persistentAlarm"])
+		print("cancel alarm")
+	}
 	func cancelAlarm() {
 		UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
 		isAlarmSet = false
