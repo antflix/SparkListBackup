@@ -50,9 +50,11 @@ class DataManager: ObservableObject {
 			// If selectedTime has a value, set isAlarmSet to true and schedule the alarm
 			self.selectedTime = savedTime
 			self.isAlarmSet = true
+			print("in if statement")
 			scheduleAlarm(at: selectedTime, soundName: alarmNoise)
 		}
 		else {
+			print("in else statement")
 			self.selectedTime = Date()
 		}
 	}
