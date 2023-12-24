@@ -56,6 +56,9 @@ class DataManager: ObservableObject {
 		else {
 			print("in else statement")
 			self.isAlarmSet = false
+			isAlarmSet = false
+			UserDefaults.standard.set(false, forKey: "isAlarmSet")
+			UserDefaults.standard.synchronize()
 			self.selectedTime = Date()
 		}
 	}
