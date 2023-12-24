@@ -119,33 +119,35 @@ class DataManager: ObservableObject {
 	}
 	func persistentAlarm(soundName: String) {
 		print(#function)
-		let center = UNUserNotificationCenter.current()
-		
-		let content = UNMutableNotificationContent()
-		content.title = "WARNING!!"
-		content.body = "Alarm will continue until you turn your time in!"
-		content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
-		let calendar = Calendar.current
-		let nowComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
-		let now = calendar.date(from: nowComponents)!
-		let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
-		
-		let request = UNNotificationRequest(identifier: "persistentAlarm", content: content, trigger: trigger)
-		
-		center.add(request) { error in
-			if let error = error {
-				print("Error scheduling persistent notification: \(error.localizedDescription)")
-			} else {
-				print("Persistent notification scheduled successfully, starting at \(now)")
-			}
-		}
-		
-		UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-			for request in requests {
-				if request.identifier == "persistentAlarm" {
-					print("persistentAlarm has been verified as activated")
+		if !isAlarmSet {
+			let center = UNUserNotificationCenter.current()
+			
+			let content = UNMutableNotificationContent()
+			content.title = "WARNING!!"
+			content.body = "Alarm will continue until you turn your time in!"
+			content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
+			let calendar = Calendar.current
+			let nowComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+			let now = calendar.date(from: nowComponents)!
+			let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+			
+			let request = UNNotificationRequest(identifier: "persistentAlarm", content: content, trigger: trigger)
+			
+			center.add(request) { error in
+				if let error = error {
+					print("Error scheduling persistent notification: \(error.localizedDescription)")
+				} else {
+					print("Persistent notification scheduled successfully, starting at \(now)")
 				}
-				
+			}
+			
+			UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+				for request in requests {
+					if request.identifier == "persistentAlarm" {
+						print("persistentAlarm has been verified as activated")
+					}
+					
+				}
 			}
 		}
 	}
