@@ -34,7 +34,6 @@ struct AlarmSettingView: View {
 					UserDefaults.standard.set(newValue, forKey: "persistentMode")
 					print("persistent mode has changed to \(dataManager.persistentMode)")
 					UserDefaults.standard.synchronize()
-					dataManager.stopPersistentAlarm()
 				}
 				.padding()
             Spacer()
