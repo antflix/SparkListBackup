@@ -31,11 +31,12 @@ class DataManager: ObservableObject {
 	@Published var selectedContact2: CNContact?
 	@Published var numbersList: String = ""
 	@Published var persistentMode: Bool = UserDefaults.standard.bool(forKey: "persistentMode") // Retrieve persistent mode status
-	@Published var selectedTime: Date {
-		didSet {
-			UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
-		}
-	}
+	@Published var selectedTime: Date?
+//	{
+//		didSet {
+//			UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
+//		}
+//	}
 	@Published var alarmNoise: String = "customAlarm-2.mp3"
 	
 	@Published var isAlarmSet: Bool = UserDefaults.standard.bool(forKey: "isAlarmSet")
@@ -45,15 +46,13 @@ class DataManager: ObservableObject {
 		self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
 		//         self.selectedContact = DataManager.loadContact()
 		//         self.selectedPhoneNumber = DataManager.loadPhoneNumber()
-		self.selectedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date ?? Date()
+//		self.selectedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date ?? Date()
 		if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
-			selectedTime = savedTime
+			// If selectedTime has a value, set isAlarmSet to true and schedule the alarm
+			self.selectedTime = savedTime
 			self.isAlarmSet = true
-		} else {
-			selectedTime = Date()
+			scheduleAlarm(at: selectedTime!, soundName: alarmNoise)
 		}
-		scheduleAlarm(at: selectedTime, soundName: alarmNoise)
-		
 	}
 	
 	func toggleDarkMode() {
