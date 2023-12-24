@@ -28,16 +28,17 @@ struct AlarmSettingView: View {
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
-            Toggle("Persistent Mode", isOn: $dataManager.persistentMode)
-                .onChange(of: dataManager.persistentMode) { newValue in
-                    UserDefaults.standard.set(newValue, forKey: "persistentMode")
+			Toggle("Persistent Mode", isOn: $dataManager.persistentMode)
+				.onChange(of: dataManager.persistentMode) { newValue in
+					UserDefaults.standard.set(newValue, forKey: "persistentMode")
 					print("persistent mode has changed to \(dataManager.persistentMode)")
 					UserDefaults.standard.synchronize()
 					print("persistent mode has changed to \(dataManager.persistentMode)")
 					if newValue == false {
 						dataManager.stopPersistentAlarm()
+						dataManager.persistentMode = false
 					}
-                }
+				}
                 .padding()
             Spacer()
             if dataManager.isAlarmSet {
