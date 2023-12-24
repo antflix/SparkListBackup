@@ -115,7 +115,7 @@ class DataManager: ObservableObject {
 		}
 		UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
 			for request in requests {
-				if request.identifier == "persistentAlarm" {
+				if request.identifier == "dailyAlarm" {
 					print("dailyAlarm has been verified as activated")
 				}
 				

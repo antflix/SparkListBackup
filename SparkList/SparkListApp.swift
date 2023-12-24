@@ -8,7 +8,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             for request in requests {
-                print("Pending request: \(request.identifier)")
+                print("Activating: \(request.identifier)")
             }
         }
         // Request notification permissions
