@@ -33,13 +33,9 @@ struct AlarmSettingView: View {
 					UserDefaults.standard.set(newValue, forKey: "persistentMode")
 					print("persistent mode has changed to \(dataManager.persistentMode)")
 					UserDefaults.standard.synchronize()
-					print("persistent mode has changed to \(dataManager.persistentMode)")
-					if newValue == false {
-						dataManager.stopPersistentAlarm()
-						dataManager.persistentMode = false
-					}
+					dataManager.stopPersistentAlarm()
 				}
-                .padding()
+				.padding()
             Spacer()
             if dataManager.isAlarmSet {
                 Text("Alarm is set for \(formattedTime(dataManager.selectedTime))")

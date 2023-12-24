@@ -4,8 +4,8 @@ import ContactsUI
 import AVFoundation
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-	let dataManager = DataManager() // Or however you access DataManager
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+	let dataManager = DataManager.shared // Change this line
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             for request in requests {
                 print("Activating: \(request.identifier)")
@@ -70,8 +70,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
 }
 
-let dataManager = DataManager()
-
+let dataManager = DataManager.shared // Change this line
 @available(iOS 17.0, *)
 @main
 struct SparkListApp: App {

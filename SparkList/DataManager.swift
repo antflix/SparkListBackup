@@ -38,7 +38,7 @@ class DataManager: ObservableObject {
 	}
 	@Published var alarmNoise: String = "customAlarm-2.mp3"
 	
-	@Published var isAlarmSet: Bool = false
+	@Published var isAlarmSet: Bool = UserDefaults.standard.bool(forKey: "isAlarmSet")
 	
 	
 	init() {
@@ -46,13 +46,13 @@ class DataManager: ObservableObject {
 		//         self.selectedContact = DataManager.loadContact()
 		//         self.selectedPhoneNumber = DataManager.loadPhoneNumber()
 		self.selectedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date ?? Date()
-//		if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
-//			selectedTime = savedTime
-//			isAlarmSet = true
-//		} else {
-//			selectedTime = Date()
-//		}
-//		scheduleAlarm(at: selectedTime, soundName: alarmNoise)
+		if let savedTime = UserDefaults.standard.object(forKey: "selectedTime") as? Date {
+			selectedTime = savedTime
+			self.isAlarmSet = true
+		} else {
+			selectedTime = Date()
+		}
+		scheduleAlarm(at: selectedTime, soundName: alarmNoise)
 		
 	}
 	
@@ -76,7 +76,7 @@ class DataManager: ObservableObject {
 	func scheduleAlarm(at time: Date, soundName: String) {
 		print(#function)
 		let center = UNUserNotificationCenter.current()
-		
+		UserDefaults.standard.set(time, forKey: "selectedTime")
 		let content = UNMutableNotificationContent()
 		content.title = "Turn In Time!!"
 	content.body = "It's time to turn in time!"
@@ -150,7 +150,8 @@ class DataManager: ObservableObject {
 	}
 	func cancelAlarm() {
 		UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-		isAlarmSet = false
+		UserDefaults.standard.set(false, forKey: "isAlarmSet") 
+		UserDefaults.standard.synchronize()
 		print("cancel all alarms")
 	}
 	// Array holding employee names
