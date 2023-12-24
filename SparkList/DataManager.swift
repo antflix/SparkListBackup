@@ -81,6 +81,9 @@ class DataManager: ObservableObject {
 	
 	
 	func scheduleAlarm(at time: Date, soundName: String) {
+		print("daily alarm function")
+		print("isAlarmSet: \(isAlarmSet)")
+
 		print(#function)
 		if isAlarmSet {
 		let center = UNUserNotificationCenter.current()
@@ -122,7 +125,9 @@ class DataManager: ObservableObject {
 		}
 	}
 	func persistentAlarm(soundName: String) {
-		print(#function)
+		print("persistent alarm function")
+		print("isAlarmSet: \(isAlarmSet)")
+
 		if isAlarmSet {
 			let center = UNUserNotificationCenter.current()
 			
