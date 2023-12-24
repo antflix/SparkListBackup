@@ -78,6 +78,7 @@ class DataManager: ObservableObject {
 	
 	func scheduleAlarm(at time: Date, soundName: String) {
 		print(#function)
+		if !isAlarmSet {
 		let center = UNUserNotificationCenter.current()
 		UserDefaults.standard.set(time, forKey: "selectedTime")
 		let content = UNMutableNotificationContent()
@@ -106,12 +107,13 @@ class DataManager: ObservableObject {
 				print("dailyAlarm scheduled for \(dataManager.selectedTime)")
 			}
 		}
-		UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-			for request in requests {
-				if request.identifier == "dailyAlarm" {
-					print("dailyAlarm has been verified as activated")
+			UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+				for request in requests {
+					if request.identifier == "dailyAlarm" {
+						print("dailyAlarm has been verified as activated")
+					}
+					
 				}
-				
 			}
 		}
 	}
