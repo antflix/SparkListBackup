@@ -55,6 +55,7 @@ class DataManager: ObservableObject {
 		}
 		else {
 			print("in else statement")
+			self.isAlarmSet = false
 			self.selectedTime = Date()
 		}
 	}
