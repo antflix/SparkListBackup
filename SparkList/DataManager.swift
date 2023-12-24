@@ -79,7 +79,7 @@ class DataManager: ObservableObject {
 	
 	func scheduleAlarm(at time: Date, soundName: String) {
 		print(#function)
-		if !isAlarmSet {
+		if isAlarmSet {
 		let center = UNUserNotificationCenter.current()
 		UserDefaults.standard.set(time, forKey: "selectedTime")
 		let content = UNMutableNotificationContent()
@@ -120,7 +120,7 @@ class DataManager: ObservableObject {
 	}
 	func persistentAlarm(soundName: String) {
 		print(#function)
-		if !isAlarmSet {
+		if isAlarmSet {
 			let center = UNUserNotificationCenter.current()
 			
 			let content = UNMutableNotificationContent()
