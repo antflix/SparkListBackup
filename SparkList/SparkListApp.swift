@@ -61,7 +61,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 		print("\(DataManager.shared.persistentMode)")
 		print("Daily Alarm Triggered")
 		// Check if persistent mode is enabled
-		if dataManager.persistentMode {
+		if dataManager.persistentMode == true {
+			print("persistent mode active and persistent alarm has started ")
 			// Trigger the persistent alarm to start immediately and repeat every 60 seconds
 			dataManager.persistentAlarm(soundName: "customAlarm-2.mp3")
 			
