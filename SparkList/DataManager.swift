@@ -63,6 +63,7 @@ class DataManager: ObservableObject {
 			UserDefaults.standard.set(false, forKey: "isAlarmSet")
 			UserDefaults.standard.synchronize()
 			self.selectedTime = Date()
+			cancelAlarm()
 		}
 	}
 	
