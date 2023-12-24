@@ -31,7 +31,9 @@ struct AlarmSettingView: View {
             Toggle("Persistent Mode", isOn: $dataManager.persistentMode)
                 .onChange(of: dataManager.persistentMode) { newValue in
                     UserDefaults.standard.set(newValue, forKey: "persistentMode")
-					print("persistent mode has changed")
+					print("persistent mode has changed to \(dataManager.persistentMode)")
+					UserDefaults.standard.synchronize()
+					print("persistent mode has changed to \(dataManager.persistentMode)")
                 }
                 .padding()
             Spacer()

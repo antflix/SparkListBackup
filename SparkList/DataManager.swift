@@ -71,17 +71,7 @@ class DataManager: ObservableObject {
 	func hoursForEmployee(_ employeeName: String) -> String {
 		return employeeData[employeeName] ?? ""
 	}
-	func togglePersistenceMode() {
-		print(#function)
-		persistentMode.toggle()
-		UserDefaults.standard.set(persistentMode, forKey: "PersistenceModeEnabled")
-		
-		if persistentMode {
-			scheduleAlarm(at: selectedTime, soundName: alarmNoise)
-		} else {
-			UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-		}
-	}
+	
 	
 	func scheduleAlarm(at time: Date, soundName: String) {
 		print(#function)
