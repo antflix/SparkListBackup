@@ -55,6 +55,9 @@ class DataManager: ObservableObject {
 		}
 		else {
 			print("in else statement")
+			persistentMode = false
+			self.persistentMode = false
+			UserDefaults.standard.set(false, forKey: "persistentMode")
 			self.isAlarmSet = false
 			isAlarmSet = false
 			UserDefaults.standard.set(false, forKey: "isAlarmSet")
